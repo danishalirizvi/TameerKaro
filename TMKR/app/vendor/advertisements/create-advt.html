@@ -1,0 +1,115 @@
+﻿
+<section id="main-container" class="main-container">
+    <div data-ng-init="onInit()" class="container" style="margin-left:15%;margin-right:15%;">
+        <div>
+            <div class="ts-intro">
+                <div id="registerbox" style="margin-top: 10px;"
+                     class="mainbox col-md-12">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <h4>Create Advertisement</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form name="advtForm" class="form-horizontal" method="post" ng-submit="submit()" >
+
+                                <!--Product Type Dropdow-->
+                                <div style="margin-top: 25px" class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-bars"></i>
+                                    </span>
+                                    <select class="form-control form-control-sm" name="PROD_TYPE_ID" ng-model="advt.PROD_TYPE_ID" ng-options="x.ID as x.NME for x in productTypes" required>
+                                        <option value="">-- Select Product Type --</option>
+                                    </select>
+                                </div>
+                                <div class="error" ng-show="(submitted  || advtForm.PROD_TYPE_ID.$dirty)  && advtForm.PROD_TYPE_ID.$invalid">
+                                    <p class="error" ng-show="advtForm.PROD_TYPE_ID.$error.required">
+                                        Product Type is mandatory
+                                    </p>    
+                                </div>
+
+                                <!--Advertisement Description-->
+                                <div style="margin-top: 25px" class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-comment"></i>
+                                    </span>
+                                    <input type="text" class="form-control" name="DSCP" ng-model="advt.DSCP" style="height: 100px" placeholder="Description" required />
+                                </div>
+                                <span ng-show="advtForm.DSCP.$dirty && advtForm.DSCP.$error.required" class="help-block">
+                                    Description is Required
+                                </span>
+
+                                <!--Product Unit Price-->
+                                <div style="margin-top: 25px" class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-money"></i>
+                                    </span>
+                                    <input type="number" class="form-control" name="UNIT_PRICE" ng-model="advt.UNIT_PRICE" min="1" placeholder="Unit Price" required />
+                                </div>
+                                <div class="error" ng-show="(submitted  || advtForm.UNIT_PRICE.$dirty)  && advtForm.UNIT_PRICE.$invalid">
+                                    <p class="error" ng-show="advtForm.UNIT_PRICE.$error.required">
+                                        Unit Price is mandatory
+                                    </p>
+                                </div>
+
+                                <!--Max Order Limit-->
+                                <div style="margin-top: 25px" class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-bars"></i>
+                                    </span>
+                                    <input type="number" class="form-control" name="MAX_ORDR_LIMT" ng-model="advt.MAX_ORDR_LIMT" min="1" placeholder="Max Order Limit" required />
+                                </div>
+                                <div class="error" ng-show="(submitted  || advtForm.MAX_ORDR_LIMT.$dirty)  && advtForm.MAX_ORDR_LIMT.$invalid">
+                                    <p class="error" ng-show="advtForm.MAX_ORDR_LIMT.$error.required">
+                                        Max Limit is mandatory
+                                    </p>
+                                </div>
+
+                                <!--Delivery Availibility-->
+                                <div style="margin-top: 25px" class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-bars"></i>
+                                    </span>
+                                    <select class="form-control form-control-sm" name="DLVRY_AVLB" ng-model="advt.DLVRY_AVLB" ng-options="x.DLVRY_AVLB as x.NME for x in dlvryAlvb" required>
+                                        <option value="">-- Select Delivery Availability --</option>
+                                    </select>
+                                </div>
+                                <div class="error"
+                                     ng-show="(submitted  || advtForm.DLVRY_AVLB.$dirty)  && advtForm.DLVRY_AVLB.$invalid">
+                                    <p class="error" ng-show="advtForm.DLVRY_AVLB.$error.required">
+                                        Delivery Option is mandatory
+                                    </p>
+                                </div>
+
+                                <!--Advertisement Status-->
+                                <div style="margin-top: 25px" class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-bars"></i>
+                                    </span>
+                                    <select class="form-control form-control-sm" name="STUS_NME" ng-model="advt.STUS_NME" ng-options="x.NME as x.NME for x in advtStatus" required>
+                                        <option value="">-- Select Advertisement Status --</option>
+                                    </select>
+                                </div>
+                                <div class="error" ng-show="(submitted  || advtForm.STUS_NME.$dirty)  && advtForm.STUS_NME.$invalid">
+                                    <p class="error" ng-show="advtForm.STUS_NME.$error.required">
+                                        Status is mandatory
+                                    </p>
+                                </div>
+
+                                <!--Button-->
+                                <div style="margin-top: 20px" class="form-group">
+                                    <div class="col-sm-12 controls">
+                                        <input type="submit" id="btn-login" class="btn btn-success" value="Post!" style="float:right" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

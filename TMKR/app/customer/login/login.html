@@ -1,0 +1,93 @@
+﻿<section id="ts-features" class="ts-features">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div id="loginbox" style="margin-top: 10px;"
+                     class="mainbox col-md-12">
+                    <div class="panel panel-info">
+                        
+                        <div class="panel-heading">
+                            <div class="panel-title">Login</div>
+                        </div>
+                        
+                        <div style="padding-top: 30px" class="panel-body">
+                            <form name="form" ng-submit="login()" role="form">
+                                
+                                <!--Username-->
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <i class="fa fa-user"></i>
+                                    <input type="text" name="username" id="username" class="form-control" ng-model="username" required />
+                                    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">*Username is required</span>
+                                </div>
+                                
+                                <!--Password-->
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <i class="fa fa-lock"></i>
+                                    <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
+                                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">*Password is required</span>
+                                </div>
+                                
+                                <!--Login Button-->
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-danger" style="float:right">Login</button>
+                                    <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                                </div>
+                            </form>                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="ts-intro">
+                    <h2 class="into-title">About Us</h2>
+                    <h3 class="into-sub-title">We deliver landmark projects</h3>
+                    <p>
+                        We are rethoric question ran over her cheek When she reached the first hills of the Italic Mountains,
+                        she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village
+                        and the subline of her own road, the Line Lane.
+                    </p>
+                </div><!-- Intro box end -->
+                <div class="gap-20"></div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="ts-service-box">
+                            <span class="ts-service-icon">
+                                <i class="fa fa-trophy"></i>
+                            </span>
+                            <div class="ts-service-box-content">
+                                <h3 class="service-box-title">We've Repution for Excellence</h3>
+                            </div>
+                        </div><!-- Service 1 end -->
+                    </div><!-- col end -->
+
+                    <div class="col-md-6">
+                        <div class="ts-service-box">
+                            <span class="ts-service-icon">
+                                <i class="fa fa-sliders"></i>
+                            </span>
+                            <div class="ts-service-box-content">
+                                <h3 class="service-box-title">We Build Partnerships</h3>
+                            </div>
+                        </div><!-- Service 2 end -->
+                    </div><!-- col end -->
+                </div><!-- Content row 1 end -->
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="ts-service-box">
+                            <span class="ts-service-icon">
+                                <i class="fa fa-thumbs-up"></i>
+                            </span>
+                            <div class="ts-service-box-content">
+                                <h3 class="service-box-title">Guided by Commitment</h3>
+                            </div>
+                        </div><!-- Service 1 end -->
+                    </div><!-- col end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

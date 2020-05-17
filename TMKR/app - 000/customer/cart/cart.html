@@ -1,0 +1,55 @@
+﻿<div class="row mb-5 main-container">
+    <div class="container" style="padding-top:35px">
+        <form action="">
+            <div class="row mb-4" style="padding:0">
+                <div class="form-group col-md-9" style="padding:0">
+                    <input id="exampleFormControlInput5" type="text" ng-model='searchText' placeholder="What're you searching for?" class="form-control form-control-underlined">
+                </div>
+                <div class="form-group col-md-3" style="padding:0">
+                    <button type="submit" class="btn btn-primary rounded-pill btn-block shadow-sm">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<section id="main-container" class="main-container">
+    <div class="container">
+        <div id="isotope" class="isotope">
+            <div class="col-md-4 col-sm-6 col-xs-12 commercial isotope-item" ng-repeat="item in products | filter:searchText " ng-hide="vm.isLoadingCategories" style="padding:5px">
+                <div class="isotope-img-container">
+                    <a class="gallery-popup">
+                        <img class="img-responsive" src={{item.IMG_PATH}} alt="">
+                    </a>
+
+                    <div class="project-item-info">
+                        <div class="project-item-info-content">
+                            <h3 class="project-item-title">
+                                <a href="#">{{item.Prod_Type}}</a>
+                            </h3>
+                            <p class="project-cat">Unit Price = {{item.Unit_Price}} Rs.</p>
+                            <p class="project-cat">ID = {{item.Advt_Id}}</p>
+                            <input type="number" ng-model="item.Quantity" class="quantity" ng-min="1">
+                            <button class="btn-primary" ng-click="ngCart.addItem(item)"><i class="fa fa-plus"></i>Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-left:100px">
+        <h2>Your Cart:</h2>
+        <ul>
+            <li class="animate-repeat" ng-repeat="item in ngCart.getItems() | orderBy:'category'">
+                <span>{{ item.Quantity + ' x ' + item.Prod_Type + ' = ' + ngCart.getCost(item)  }}</span>
+                <button class="btn-danger btn-xs" ng-click="ngCart.removeItemById(item.Advt_Id);">Remove Item</button>
+                </br>
+                </br>
+            </li>
+        </ul>
+        <h3>Total: {{ getTotal() | currency }}</h3>
+        <!--<button class="btn-danger" ng-click="ngCart.ClearCart();">Clear Cart</button>-->
+        <a role="button" class="btn btn-primary" ng-click="ngCart.ClearCart();"> Clear Cart </a>
+        <a role="button" class="btn btn-primary" href="#/cart" ui-sref="cart" ui-sref-active="active"> Go to Cart </a>
+
+    </div>
+</section>

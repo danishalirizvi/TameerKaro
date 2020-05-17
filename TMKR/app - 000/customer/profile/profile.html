@@ -1,0 +1,106 @@
+﻿<section id="ts-features" class="ts-features">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-xs-12 col-md-offset-2">
+                <div class="ts-intro">
+                    <div id="registerbox" style="margin-top: 10px;"
+                         class="mainbox col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title"> Profile </div>
+                            </div>
+                            <div class="panel-body">
+                                <form name="profileForm" class="form-horizontal" method="post" ng-submit="submit()" role="form">
+
+                                    <!--Username Field-->
+                                    <div style="margin-top: 10px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user"></i>
+                                        </span>
+                                        <input type="text" class="form-control" name="USR_NME" ng-model="credentials.USR_NME" placeholder="Username"  />
+                                    </div>
+
+                                    <!--Password Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input type="password" class="form-control" name="password" ng-model="credentials.PSWD" placeholder="Password"  />
+                                    </div>
+
+                                    <!--Confirm Password-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-key fa-fw"></i>
+                                        </span> <input type="password" class="form-control" name="confirmpassword" ng-model="credentials.confirmpassword" placeholder="Confirm Password"  />
+                                    </div>
+
+                                    <!--First Name Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input type="text" class="form-control" name="firstname" ng-model="credentials.FRST_NME" placeholder="Enter First Name"  />
+                                    </div>
+
+                                    <!--Last Name Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span> <input type="text" class="form-control" name="lastname" ng-model="credentials.LAST_NME" placeholder="Enter Last Name" />
+                                    </div>
+
+                                    <!--Phone Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span> <input type="number" class="form-control" name="phone" ng-model="credentials.PHNE" placeholder="Phone" />
+                                    </div>
+
+                                    <!--Email Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span> <input type="email" class="form-control" name="email" ng-model="credentials.EMAIL" placeholder="Email"  />
+                                    </div>
+
+                                    <!--Address Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span> <input type="text" class="form-control" name="address" ng-model="credentials.Address" placeholder="Enter Address"  />
+                                    </div>
+
+                                    <!--City Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span> <input type="text" class="form-control" name="CITY" ng-model="credentials.CITY" placeholder="Enter City Name"  />
+                                    </div>
+
+
+                                    <!--Current Password Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input type="password" class="form-control" name="currentpassword" ng-model="credentials.CRNT_PSWD" placeholder="Current Password"  required/>
+                                    </div>
+
+                                    <!--Save Button-->
+                                    <div style="margin-top: 20px" class="form-group">
+                                        <div class="col-sm-12 controls">
+                                            <input type="submit" id="btn-login" class="btn btn-success" value="Save!" style="float:right" />
+                                        </div>
+                                    </div>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

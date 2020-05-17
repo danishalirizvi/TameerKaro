@@ -1,0 +1,205 @@
+﻿<section id="ts-features" class="ts-features">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-xs-12">
+                <div class="ts-intro">
+                    <h2 class="into-title">About Us</h2>
+                    <h3 class="into-sub-title">We deliver landmark projects</h3>
+                    <p>
+                        We are rethoric question ran over her cheek When she reached the first hills of the Italic Mountains,
+                        she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village
+                        and the subline of her own road, the Line Lane.
+                    </p>
+                </div><!-- Intro box end -->
+                <div class="gap-20"></div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="ts-service-box">
+                            <span class="ts-service-icon">
+                                <i class="fa fa-trophy"></i>
+                            </span>
+                            <div class="ts-service-box-content">
+                                <h3 class="service-box-title">We've Repution for Excellence</h3>
+                            </div>
+                        </div><!-- Service 1 end -->
+                    </div><!-- col end -->
+
+                    <div class="col-md-6">
+                        <div class="ts-service-box">
+                            <span class="ts-service-icon">
+                                <i class="fa fa-sliders"></i>
+                            </span>
+                            <div class="ts-service-box-content">
+                                <h3 class="service-box-title">We Build Partnerships</h3>
+                            </div>
+                        </div><!-- Service 2 end -->
+                    </div><!-- col end -->
+                </div><!-- Content row 1 end -->
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="ts-service-box">
+                            <span class="ts-service-icon">
+                                <i class="fa fa-thumbs-up"></i>
+                            </span>
+                            <div class="ts-service-box-content">
+                                <h3 class="service-box-title">Guided by Commitment</h3>
+                            </div>
+                        </div><!-- Service 1 end -->
+                    </div><!-- col end -->
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xs-12">
+                <div class="ts-intro">
+                    <div id="registerbox" style="margin-top: 10px;"
+                         class="mainbox col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title"> Sign Up </div>
+                            </div>
+                            <div class="panel-body">
+                                <form name="signupForm" class="form-horizontal" method="post" ng-submit="vm.submit()" role="form">
+
+                                    <div class="error" ng-show="{{vm.credentials.PSWD != vm.credentials.confirmpassword}}">
+                                        <p class="error" ng-show="true">
+                                            Passwords do not match
+                                        </p>
+                                    </div>
+
+
+                                    <!--Username Field-->
+                                    <div style="margin-top: 10px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-user"></i>
+                                        </span>
+                                        <input type="text" class="form-control" name="USR_NME" ng-model="vm.credentials.USR_NME" placeholder="Username" required />
+                                    </div>
+                                    <div class="error" ng-show="(vm.submitted  || vm.signupForm.USR_NME.$dirty)  && vm.signupForm.USR_NME.$invalid">
+                                        <p class="error" ng-show="vm.signupForm.USR_NME.$error.required">
+                                            Username is mandatory
+                                        </p>
+                                    </div>
+
+                                    <!--Password Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input type="password" class="form-control" name="password" ng-model="vm.credentials.PSWD" placeholder="Password" required />
+                                    </div>
+                                    <div class="error"
+                                         ng-show="(vm.submitted  || vm.signupForm.PSWD.$dirty)  && vm.signupForm.PSWD.$invalid">
+                                        <p class="error" ng-show="vm.signupForm.PSWD.$error.required">
+                                            Password is mandatory
+                                        </p>
+                                    </div>
+
+                                    <!--Confirm Password-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-key fa-fw"></i>
+                                        </span> <input type="password" class="form-control" name="confirmpassword" ng-model="vm.credentials.confirmpassword" placeholder="Confirm Password" required />
+                                    </div>
+                                    <div class="error" ng-show="(vm.submitted  || vm.signupForm.confirmpassword.$dirty)  && vm.signupForm.confirmpassword.$invalid">
+                                        <p class="error" ng-show="vm.signupForm.confirmpassword.$error.required">
+                                            Confirm Password is mandatory
+                                        </p>
+                                    </div>
+
+                                    <!--First Name Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span>
+                                        <input type="text" class="form-control" name="firstname" ng-model="vm.credentials.FRST_NME" placeholder="Enter First Name" required />
+                                    </div>
+                                    <div class="error" ng-show="(vm.submitted  || vm.signupForm.FRST_NME.$dirty)  && vm.signupForm.FRST_NME.$invalid">
+                                        <p class="error" ng-show="vm.signupForm.FRST_NME.$error.required">
+                                            First Name is mandatory
+                                        </p>
+                                    </div>
+
+                                    <!--Last Name Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span> <input type="text" class="form-control" name="lastname" ng-model="vm.credentials.LAST_NME" placeholder="Enter Last Name" />
+                                    </div>
+                                    <div class="error" ng-show="(vm.submitted  || vm.signupForm.lastame.$dirty)  && vm.signupForm.LAST_NME.$invalid">
+                                        <p class="error" ng-show="vm.signupForm.lastame.$error.required">
+                                            Last Name is mandatory
+                                        </p>
+                                    </div>
+
+                                    <!--Phone Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span> <input type="number" class="form-control" name="phone" ng-model="vm.credentials.PHNE" placeholder="Phone" />
+                                    </div>
+                                    <div class="error" ng-show="(vm.submitted  || vm.signupForm.PHNE.$dirty)  && vm.signupForm.PHNE.$invalid">
+                                        <p class="error" ng-show="vm.signupForm.PHNE.$error.required">
+                                            Phone is mandatory
+                                        </p>
+                                    </div>
+
+                                    <!--Email Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span> <input type="email" class="form-control" name="email" ng-model="vm.credentials.EMAIL" placeholder="Email" required />
+                                    </div>
+                                    <div class="error" ng-show="(vm.submitted  || vm.signupForm.EMAIL.$dirty)  && vm.signupForm.EMAIL.$invalid">
+                                        <p class="error" ng-show="vm.signupForm.EMAIL.$error.required">
+                                            Email is mandatory
+                                        </p>
+                                    </div>
+
+                                    <!--Address Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span> <input type="text" class="form-control" name="address" ng-model="vm.credentials.Address" placeholder="Enter Address" required />
+                                    </div>
+                                    <div class="error" ng-show="(vm.submitted  || vm.signupForm.Address.$dirty)  && vm.signupForm.Address.$invalid">
+                                        <p class="error" ng-show="vm.signupForm.lastame.$error.required">
+                                            Address is mandatory
+                                        </p>
+                                    </div>
+
+                                    <!--City Field-->
+                                    <div style="margin-top: 25px" class="input-group">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-lock"></i>
+                                        </span> <input type="text" class="form-control" name="CITY" ng-model="vm.credentials.CITY" placeholder="Enter City Name" required />
+                                    </div>
+                                    <div class="error" ng-show="(vm.submitted  || vm.signupForm.CITY.$dirty)  && vm.signupForm.CITY.$invalid">
+                                        <p class="error" ng-show="vm.signupForm.CITY.$error.required">
+                                            Address is mandatory
+                                        </p>
+                                    </div>
+
+                                  
+                                    <!--Register Button-->
+                                    <div style="margin-top: 20px" class="form-group">
+                                        <div class="col-sm-12 controls">
+                                            <input type="submit" ng-disabled="{{vm.credentials.PSWD != vm.credentials.confirmpassword}}" id="btn-login" class="btn btn-success" value="Register!" style="float:right" />
+                                        </div>
+                                    </div>
+                                    <p ng-show="error" class="error">
+                                        The password you entered is incorrect.
+                                        Please try again (make sure your caps lock is off).
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
