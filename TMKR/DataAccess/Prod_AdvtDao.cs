@@ -42,9 +42,42 @@ namespace TMKR.DataAccess
 
                                     left join Product_Type pt on p.PROD_TYPE_ID = pt.ID
                                     left join Vendor v on p.VNDR_ID = v.ID
-                                    left join Images i on p.ID = i.FId";
+                                    left join Images i on p.ID = i.FId
+                                    where p.STUS_NME = 'Visible'";
 
                 return Conn.Query<Prod_AdvtModel>(query).ToList();
+            }
+        }
+
+        public void updateAdvt(ActiveAdvtModel advtVM)
+        {
+            using (Conn)
+            {
+                string query = @"UPDATE Prod_Advt
+                                SET 
+                                    PROD_TYPE_ID = @PROD_TYPE_ID
+                                   ,DSCP = @DSCP
+                                   ,UNIT_PRICE = @UNIT_PRICE
+                                   ,MAX_ORDR_LIMT = @MAX_ORDR_LIMT
+                                   ,DLVRY_AVLB = @DLVRY_AVLB
+                                   ,STUS_NME = @STUS_NME
+                                    WHERE ID = @ID";
+
+
+                Conn.Execute(query, new { PROD_TYPE_ID = advtVM.PROD_TYPE_ID, DSCP = advtVM.DSCP, UNIT_PRICE = advtVM.UNIT_PRICE, MAX_ORDR_LIMT = advtVM.MAX_ORDR_LIMT, DLVRY_AVLB = advtVM.DLVRY_AVLB, STUS_NME = advtVM.STUS_NME, ID = advtVM.ID });
+            }
+        }
+
+        public ActiveAdvtModel GetProd_Advt(int advtId)
+        {
+            using (Conn)
+            {
+                string query = @"select 
+                    p.ID,p.PROD_TYPE_ID,pt.NME,p.DSCP,p.UNIT_PRICE,p.MAX_ORDR_LIMT,p.DLVRY_AVLB,p.POST_DATE,p.STUS_NME 
+                    from Prod_Advt p 
+                    left join Product_Type pt on pt.ID = p.PROD_TYPE_ID  where p.ID =" + advtId;
+
+                return Conn.QueryFirstOrDefault<ActiveAdvtModel>(query);
             }
         }
 
@@ -54,7 +87,7 @@ namespace TMKR.DataAccess
             using (Conn)
             {
                 string query = @"select 
-                    pt.NME,p.DSCP,p.UNIT_PRICE,p.MAX_ORDR_LIMT,p.DLVRY_AVLB,p.POST_DATE,p.STUS_NME 
+                    p.ID,pt.NME,p.DSCP,p.UNIT_PRICE,p.MAX_ORDR_LIMT,p.DLVRY_AVLB,p.POST_DATE,p.STUS_NME 
                     from Prod_Advt p 
                     left join Product_Type pt on pt.ID = p.PROD_TYPE_ID  where VNDR_ID =" + vndrId;
 

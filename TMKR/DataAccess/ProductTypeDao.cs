@@ -20,12 +20,12 @@ namespace TMKR.DataAccess
             }
         }
 
-        public List<ProductType> GetProductTypes()
+        public List<ProductTypeModel> GetProductTypes()
         {
             using (Conn)
             {
                 string sql = "SELECT * FROM Product_Type";
-                List<ProductType> productTypes = Conn.Query<ProductType>(sql).ToList();
+                List<ProductTypeModel> productTypes = Conn.Query<ProductTypeModel>(sql).ToList();
                 return productTypes; //Conn.Execute(query);
             }
         }

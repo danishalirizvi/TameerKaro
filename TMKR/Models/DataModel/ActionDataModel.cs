@@ -5,9 +5,10 @@ using System.Web;
 
 namespace TMKR.Models.DataModel
 {
-    public class LoginCredentials
+    public class ActionDataModel
     {
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public int id { get; set; }
+
+        public string action { get; set; }
     }
 }

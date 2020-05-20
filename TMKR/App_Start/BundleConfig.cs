@@ -95,6 +95,8 @@ namespace TMKR
                 //vendor services
                 "~/app/vendor/services/vendor-service.js",
 
+                "~/app/vendor/services/advtfactory.js",
+
                 //vendor controller
                 //"~/app/vendor/root-controller.js",
                 "~/app/vendor/advertisements/create-advt-controller.js",
@@ -104,7 +106,8 @@ namespace TMKR
                 "~/app/vendor/logout/logout-controller.js",
                 "~/app/vendor/activeAdvts/advts-controller.js",
                 "~/app/vendor/profile/profile-controller.js",
-                "~/app/vendor/profiledetail/profiledetail-controller.js"
+                "~/app/vendor/profiledetail/profiledetail-controller.js",
+                "~/app/vendor/editadvt/editadvt-controller.js"
 
                 ));
 

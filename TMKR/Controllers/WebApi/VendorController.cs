@@ -18,7 +18,7 @@ namespace TMKR.Controllers.WebApi
         Purchase_OrderManager purchaseOrderManager = new Purchase_OrderManager();
 
         [HttpPost]
-        public HttpResponseMessage Login([FromBody]LoginCredentials loginVm)
+        public HttpResponseMessage Login([FromBody]LoginCredentialsModel loginVm)
         {
             //vendorManager.resetPass();
             if (loginVm != null && !string.IsNullOrEmpty(loginVm.Username))
@@ -52,7 +52,7 @@ namespace TMKR.Controllers.WebApi
         {
             try
             {
-                List<ProductType> prodtypes = prodAdvtManager.getProductTypes();
+                List<ProductTypeModel> prodtypes = prodAdvtManager.getProductTypes();
                 return Request.CreateResponse(HttpStatusCode.OK, prodtypes.ToArray());
             }
             catch (Exception)
@@ -60,7 +60,6 @@ namespace TMKR.Controllers.WebApi
                 return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
             }
         }
-
 
 
         [HttpGet]
@@ -95,39 +94,20 @@ namespace TMKR.Controllers.WebApi
         {
             try
             {
-                List<PurchaseOrderModel> purchaseOrders = purchaseOrderManager.PurchaseOrderList(vndrId);
-                List<PurchaseOrderParentModel> result = new List<PurchaseOrderParentModel>();
-                var groupedPO = purchaseOrders.GroupBy(t => new { t.CART_ID, t.CustomerID });
-                foreach (var group in groupedPO)
-                {
-                    PurchaseOrderParentModel parentModel = new PurchaseOrderParentModel();
-                    parentModel.FirstName = group.FirstOrDefault().FirstName;
-                    parentModel.Phone = group.FirstOrDefault().PHNE;
-                    parentModel.SHPNG_ADRS = group.FirstOrDefault().SHPNG_ADRS;
-                    parentModel.Total = group.Sum(t => t.ItemAmount);
-                    parentModel.STATUS = group.FirstOrDefault().STATUS;
+                PurchaseOrderTypesModel result = new PurchaseOrderTypesModel();
 
-                    parentModel.purchaseorderdetail = new List<PurchaseOrderChildModel>();
-                    foreach (var item in group) {
-                        PurchaseOrderChildModel child = new PurchaseOrderChildModel();
-                        child.ProdName = item.ProductName;
-                        child.Quantity = item.Quantity;
-                        child.Status = item.STATUS;
-                        child.Unit_Price = item.UnitPrice;
-                        child.TotalAmount = item.UnitPrice * item.Quantity;
-                        child.ID = item.PurchaseOrderId;
-                        parentModel.purchaseorderdetail.Add(child);
-                    }
+                result.New = purchaseOrderManager.GetPurchaseOrdersNew(vndrId);
 
-                    result.Add(parentModel);
-                }
+                result.Accepted = purchaseOrderManager.GetPurchaseOrdersOld(vndrId, "Accepted");
+
+                result.Rejected = purchaseOrderManager.GetPurchaseOrdersOld(vndrId, "Rejected");
 
                 return Request.CreateResponse(HttpStatusCode.OK, result);
             }
             catch (Exception)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
-            }          
+            }
         }
 
         [HttpGet]
@@ -139,7 +119,7 @@ namespace TMKR.Controllers.WebApi
 
                 List<PurchaseOrderChildModel> purchaseOrdersChild = purchaseOrderManager.GetPurchaseOrdersChild(vndrId);
 
-                Purchase_Order purchaseOrders = new Purchase_Order();
+                Purchase_OrderModel purchaseOrders = new Purchase_OrderModel();
 
                 purchaseOrders.parent = purchaseOrdersParent;
 
@@ -154,7 +134,6 @@ namespace TMKR.Controllers.WebApi
             }
         }
 
-
         [HttpGet]
         public HttpResponseMessage GetActiveAdvts(int vndrId)
         {
@@ -163,6 +142,21 @@ namespace TMKR.Controllers.WebApi
                 List<ActiveAdvtModel> prodAdvts = prodAdvtManager.getProdAdvts(vndrId);
 
                 return Request.CreateResponse(HttpStatusCode.OK, prodAdvts);
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
+            }
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetAdvt(int advtId)
+        {
+            try
+            {
+                ActiveAdvtModel prodAdvt = prodAdvtManager.getProdAdvt(advtId);
+
+                return Request.CreateResponse(HttpStatusCode.OK, prodAdvt);
             }
             catch (Exception)
             {
@@ -187,6 +181,46 @@ namespace TMKR.Controllers.WebApi
             {
                 return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
             }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage OrderAction(ActionDataModel data)
+        {
+            if (data != null)
+            {
+                purchaseOrderManager.OrderStatus(data);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UpdateAdvt([FromBody]ActiveAdvtModel advtVM)
+        {
+            if (advtVM != null)
+            {
+                prodAdvtManager.updateAdvt(advtVM);
+                return Request.CreateResponse(HttpStatusCode.OK, "Advertisement Saved Successfully");
+            }
+            return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
+        }
+
+        //Update Profile WEB API Call
+        [HttpPost]
+        public HttpResponseMessage UpdateProfile([FromBody]VendorModel vendorVm)
+        {
+            if (vendorVm != null && vendorManager.ValidatePassword(vendorVm))
+            {
+                if (vendorVm.PSWD != null)
+                {
+                    vendorVm.PSWD = PasswordHasher.HashPassword(vendorVm.PSWD);
+                }
+                VendorModel vendor = vendorManager.Update(vendorVm);
+
+                return Request.CreateResponse(HttpStatusCode.OK, vendor);
+
+            }
+            return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Password Incorrect");
         }
 
         public static void ConfigureRoutes(HttpConfiguration config)
@@ -230,6 +264,26 @@ namespace TMKR.Controllers.WebApi
                 "ValidateVendorUsername",
                 "api/vendor/validateUsername",
                 new { controller = "Vendor", action = "validateUsername" });
+
+            config.Routes.MapHttpRoute(
+                "OrderAction",
+                "api/vendor/orderaction",
+                new { controller = "Vendor", action = "OrderAction" });
+
+            config.Routes.MapHttpRoute(
+                "GetAdvt",
+                "api/vendor/{advtId}/advtdetail",
+                new { controller = "Vendor", action = "GetAdvt" });
+
+            config.Routes.MapHttpRoute(
+                "UpdateAdvertisement",
+                "api/vendor/updateAdvt",
+                new { controller = "Vendor", action = "UpdateAdvt" });
+
+            config.Routes.MapHttpRoute(
+                "UpdateVendorProfile",
+                "api/vendor/updatevendorprofile",
+                new { controller = "Vendor", action = "UpdateProfile" });
         }
     }
 }

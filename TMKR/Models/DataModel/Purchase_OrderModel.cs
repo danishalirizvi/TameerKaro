@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TMKR.Models.DataModel
 {
-    public class Purchase_Order
+    public class Purchase_OrderModel
     {
         public List<PurchaseOrderParentModel> parent { get; set; }
 

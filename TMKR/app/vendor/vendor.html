@@ -115,26 +115,30 @@
                         <div class="collapse navbar-collapse navbar-responsive-collapse">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a ui-sref="vendor.home" ui-sref-active="active">
+                                    <a href ng-click="validateNav('Vendor', 'vendor.home', true)" ui-sref-active="active">
+                                        <!--<a ui-sref="vendor.home" ui-sref-active="active">-->
                                         Home
                                     </a>
                                 </li>
 
 
                                 <li>
-                                    <a ui-sref="vendor.createAdd" ui-sref-active="active">
+                                    <a href ng-click="validateNav('Vendor', 'vendor.createAdd', false)" ui-sref-active="active">
+                                        <!--<a ui-sref="vendor.createAdd" ui-sref-active="active">-->
                                         Create Advertisement
                                     </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="vendor.purchaseOrder" ui-sref-active="active">
-                                        Purchase Orders
-                                    </a>
+                                    <a href ng-click="validateNav('Vendor', 'vendor.purchaseOrder', false)" ui-sref-active="active">
+                                        <!--<a ui-sref="vendor.purchaseOrder" ui-sref-active="active">-->
+                                            Purchase Orders
+                                        </a>
                                 </li>
                                 <li>
-                                    <a ui-sref="vendor.activeadvts" ui-sref-active="active">
-                                        Active Adverisements
-                                    </a>
+                                    <a href ng-click="validateNav('Vendor', 'vendor.activeadvts', false)" ui-sref-active="active">
+                                        <!--<a ui-sref="vendor.activeadvts" ui-sref-active="active">-->
+                                            Active Adverisements
+                                        </a>
                                 </li>
                                 <li>
                                     <a ui-sref="vendor.profiledetails" ui-sref-active="active">
@@ -149,10 +153,6 @@
 
                     </div><!-- Site Navbar inner end -->
 
-                </div>
-
-                <div class="col-sm-2">
-                    hhhh
                 </div>
                 <!--/ Col end -->
             </div>

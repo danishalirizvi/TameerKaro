@@ -17,9 +17,9 @@ namespace TMKR.Managers
             return prod_AdvtDao.GetProd_Advts();
         }
 
-        public List<ProductType> getProductTypes()
+        public List<ProductTypeModel> getProductTypes()
         {
-            List<ProductType> list = productTypeDao.GetProductTypes();
+            List<ProductTypeModel> list = productTypeDao.GetProductTypes();
             return list;
         }
 
@@ -38,6 +38,16 @@ namespace TMKR.Managers
         public List<ActiveAdvtModel> getProdAdvts(int vndrId)
         {
             return prod_AdvtDao.GetProd_Advts(vndrId);
+        }
+
+        public ActiveAdvtModel getProdAdvt(int advtId)
+        {
+            return prod_AdvtDao.GetProd_Advt(advtId);
+        }
+
+        public void updateAdvt(ActiveAdvtModel advtVM)
+        {
+            prod_AdvtDao.updateAdvt(advtVM);
         }
     }
 }

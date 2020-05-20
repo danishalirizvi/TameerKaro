@@ -13,7 +13,7 @@ namespace TMKR.Managers
         CustomerDao customerDao = new CustomerDao();
 
         //User Login
-        public CustomerModel Login(LoginCredentials credentials)
+        public CustomerModel Login(LoginCredentialsModel credentials)
         {
             CustomerModel customer = customerDao.ValidateUser(credentials);
             if (customer != null)
@@ -35,9 +35,14 @@ namespace TMKR.Managers
         }
 
         //Profile Update
-        public void Update(CustomerProfileModel customerVm)
+        public CustomerModel Update(CustomerProfileModel customerVm)
         {
             customerDao.update(customerVm);
+
+            customerDao.updateAddress(customerVm);
+
+            CustomerModel customer = customerDao.GetUser(customerVm.ID);
+            return customer;
         }
 
         public bool ValidatePassword(CustomerProfileModel customerVm)

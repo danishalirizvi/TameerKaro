@@ -32,7 +32,7 @@ namespace TMKR.DataAccess
             }
         }
 
-        public void addCartItems(List<CartItem> items)
+        public void addCartItems(List<CartItemModel> items)
         {
             using (Conn)
             {
@@ -42,13 +42,13 @@ namespace TMKR.DataAccess
             }
         }
 
-        public List<CartItem> GetCartItems(int id)
+        public List<CartItemModel> GetCartItems(int id)
         {
             using (Conn)
             {
                 string query = @"SELECT * from Cart_Item where CART_ID = @CART_ID";
 
-                return Conn.Query<CartItem>(query, new { CART_ID = id }).ToList();
+                return Conn.Query<CartItemModel>(query, new { CART_ID = id }).ToList();
             }
         }
     }

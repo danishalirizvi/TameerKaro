@@ -7,6 +7,8 @@ namespace TMKR.Models.DataModel
 {
     public class ActiveAdvtModel
     {
+        public int ID { get; set; }
+        public int PROD_TYPE_ID { get; set; }
         public string NME { get; set; }
         public string DSCP { get; set; }
         public int? UNIT_PRICE { get; set; }

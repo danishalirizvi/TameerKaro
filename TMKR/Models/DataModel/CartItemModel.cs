@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TMKR.Models.DataModel
 {
-    public class CartItem
+    public class CartItemModel
     {
         public int ID { get; set; }
         public int PROD_ADVT_ID { get; set; }

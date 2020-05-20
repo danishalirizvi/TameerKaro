@@ -1,17 +1,18 @@
 ﻿(function () {
-    //'use strict';
+    'use strict';
 
     angular
         .module('app.vendor')
         .service('VendorService', VendorService);
 
-    VendorService.$inject = ['$http', 'API_URL', '$timeout'];
+    VendorService.$inject = ['$http', 'API_URL'];
 
-    function VendorService($http, API_URL, $timeout) {
+    function VendorService($http, API_URL) {
         var serviceurl = API_URL + '/vendor/getProdTypes';
         var createAdvtURL = API_URL + '/vendor/createAdvt';
         //var purchaseOrdersURL = API_URL + '/vendor/getPurchaseOrders';
         var advtStatusURL = API_URL + '/vendor/getAdvtStatus';
+        var updateAdvtURL = API_URL + '/vendor/updateAdvt';
         
 
         this.getProductTypes = function (successCallback, errorCallback) {
@@ -67,7 +68,7 @@
         };
 
         this.createAdvt = function (advt, successCase, errorCase) {
-            $http.post(createAdvtURL, JSON.stringify(advt), { timeout: 60000 })
+            $http.post(createAdvtURL, JSON.stringify(advt))
               .success(function (response) {
                   if (typeof successCase === 'function') {
                       successCase(response);
@@ -79,5 +80,21 @@
                   }
               });
         };
+
+        this.updateAdvt = function (advt, successCase, errorCase) {
+            $http.post(updateAdvtURL, JSON.stringify(advt))
+              .success(function (response) {
+                  if (typeof successCase === 'function') {
+                      successCase(response);
+                  }
+              })
+              .error(function (response) {
+                  if (typeof errorCase === 'function') {
+                      errorCase(response);
+                  }
+              });
+        };
+
+
     }
 })();

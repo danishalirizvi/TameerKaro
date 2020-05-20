@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using TKDR.Web.Helpers;
 using TMKR.Models.DataModel;
+using System;
 
 namespace TMKR.DataAccess
 {
@@ -47,13 +48,62 @@ namespace TMKR.DataAccess
         }
 
 
-        public VendorModel ValidateUser(LoginCredentials loginVm)
+        public VendorModel ValidateUser(LoginCredentialsModel loginVm)
         {
             using (Conn)
             {
                 string query = "SELECT Vendor.ID,FRST_NME,LAST_NME,EMAIL,PHNE,BSNS_NME,USR_NME,PSWD,Address,CITY FROM Vendor left join Address on USER_ID = Vendor.ID where USR_NME = @USR_NME and Type ='Vendor'";
 
                 return Conn.QueryFirstOrDefault<VendorModel>(query, new { USR_NME = loginVm.Username });
+            }
+        }
+
+        public void update(VendorModel vendorVm)
+        {
+            string query = null;
+
+            if (vendorVm.PSWD != null)
+            {
+                query = @"UPDATE Vendor SET FRST_NME = @FRST_NME, LAST_NME = @LAST_NME, EMAIL = @EMAIL, PHNE = @PHNE, USR_NME = @USR_NME, PSWD = @PSWD WHERE ID = @ID";
+
+                Conn.Execute(query, new { vendorVm.FRST_NME, vendorVm.LAST_NME, vendorVm.EMAIL, vendorVm.PHNE, vendorVm.USR_NME, vendorVm.PSWD, vendorVm.ID });
+            }
+            else
+            {
+                query = @"UPDATE Vendor SET FRST_NME = @FRST_NME, LAST_NME = @LAST_NME, EMAIL = @EMAIL, PHNE = @PHNE, USR_NME = @USR_NME WHERE ID = @ID";
+
+                Conn.Execute(query, new { vendorVm.FRST_NME, vendorVm.LAST_NME, vendorVm.EMAIL, vendorVm.PHNE, vendorVm.USR_NME, vendorVm.ID });
+            }
+        }
+
+        public VendorModel GetUser(int id)
+        {
+            using (Conn)
+            {
+                string query = @"SELECT Vendor.ID,FRST_NME,LAST_NME,EMAIL,PHNE,USR_NME,PSWD,Address,CITY FROM Vendor
+                                left join Address on USER_ID = Vendor.ID WHERE Vendor.ID = @ID";
+
+                return Conn.QueryFirstOrDefault<VendorModel>(query, new { ID = id });
+            }
+        }
+
+        public void updateAddress(VendorModel vendorVm)
+        {
+            using (Conn)
+            {
+                string query = @"UPDATE Address SET Address = @Address, CITY = @CITY WHERE ID = @ID";
+
+                Conn.Execute(query, new { vendorVm.Address, vendorVm.CITY, vendorVm.ID });
+            }
+        }
+
+        public VendorModel getPassword(int id)
+        {
+            using (Conn)
+            {
+                string query = @"SELECT * FROM Vendor WHERE ID = @ID";
+
+                return Conn.QueryFirstOrDefault<VendorModel>(query, new { @ID = id });
             }
         }
 

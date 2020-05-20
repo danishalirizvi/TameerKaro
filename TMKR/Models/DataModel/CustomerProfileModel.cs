@@ -15,7 +15,7 @@ namespace TMKR.Models.DataModel
 
         public string EMAIL { get; set; }
 
-        public int PHNE { get; set; }
+        public long PHNE { get; set; }
 
         public string USR_NME { get; set; }
 

@@ -74,7 +74,7 @@
                             <div class="info-box">
                                 <div class="info-box-content">
                                     <p class="info-box-title">Call Us</p>
-                                    <p class="info-box-subtitle">(+92) 345 68 7895</p>
+                                    <p class="info-box-subtitle">(+92) 300 12 34 567</p>
                                 </div>
                             </div>
                         </li>
@@ -112,25 +112,29 @@
                         <div class="collapse navbar-collapse navbar-responsive-collapse">
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a ui-sref="customer.home" ui-sref-active="active">
+                                    <a ng-click="validateNav('Customer', 'customer.home', true)" ui-sref-active="active">
+                                        <!--<a ui-sref="customer.home" ui-sref-active="active">-->
                                         Home
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a ui-sref="customer.materialEstimate" ui-sref-active="active">
+                                    <a ng-click="validateNav('Customer', 'customer.materialEstimate', true)" ui-sref-active="active">
+                                        <!--<a ui-sref="customer.materialEstimate" ui-sref-active="active">-->
                                         Material Estimate
                                     </a>
                                 </li>
 
                                 <li>
-                                    <a ui-sref="customer.costEstimate" ui-sref-active="active">
+                                    <a ng-click="validateNav('Customer', 'customer.costEstimate', true)" ui-sref-active="active">
+                                        <!--<a ui-sref="customer.costEstimate" ui-sref-active="active">-->
                                         Cost Estimate
                                     </a>
                                 </li>
 
-                                <li ng-if="customerusername">
-                                    <a ui-sref="customer.shopping" ui-sref-active="active">
+                                <li>
+                                    <a ng-click="validateNav('Customer', 'customer.shopping', false)" ui-sref-active="active">
+                                        <!--<a ui-sref="customer.shopping" ui-sref-active="active">-->
                                         Place Order
                                     </a>
                                 </li>
@@ -151,13 +155,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-
-
-            <div class="search-block" style="display: none;">
-                <input type="text" class="form-control" placeholder="Type what you want and enter">
-                <span class="search-close">&times;</span>
             </div>
         </div>
     </nav>

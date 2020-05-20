@@ -7,6 +7,8 @@ namespace TMKR.Models.DataModel
 {
     public class PurchaseOrderParentModel
     {
+        public int CART_ID { get; set; }
+
         public string FirstName { get; set; }
 
         public long Phone { get; set; }

@@ -60,7 +60,7 @@
                         <label for="addressCurrent">Address(Current)</label>
                         <input type="radio" id="addressCurrent" ng-model="addressType" value="addressCurrent">
                         <!--<input type="radio" name="addressType" ng-model="addressType" value="addressCurrent" style="float:right" checked>-->
-                        <input type="text" name="addressCurrent" class="form-control" ng-model="ngCart.$cart.user.Address" required ng-disabled="addressType!='addressCurrent'" />
+                        <input type="text" name="addressCurrent" class="form-control" ng-model="ngCart.$cart.user.Address" required ng-disabled="addressType!='addressCurrent'" readonly />
                         <span ng-show="form.addressCurrent.$dirty && form.addressCurrent.$error.required" class="help-block">Address is required</span>
                     </div>
                 </div>

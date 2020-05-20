@@ -27,7 +27,8 @@
                                 <td style="width:50px" ng-if="!item.DLVRY_AVLB">No</td>
                                 <td>{{item.POST_DATE}}</td>
                                 <td>{{item.STUS_NME}}</td>
-                                <td><button class="btn-primary btn-xs">Edit</button></td>
+                                <!--<td><a ui-sref="vendor.editadvts({ advtId: {{item.ID}} })">Edit</a></td>-->
+                                <td><button class="btn-primary btn-xs" style="padding-top:5px;padding-bottom:1px;" ui-sref="vendor.editadvts({ advtId: {{item.ID}} })">Edit</button></td>
                             </tr>
                         </tbody>
                     </table>

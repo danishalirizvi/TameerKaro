@@ -26,5 +26,7 @@ namespace TMKR.Models.DataModel
         public string Address { get; set; }
 
         public string CITY { get; set; }
+
+        public string CRNT_PSWD { get; set; }
     }
 }

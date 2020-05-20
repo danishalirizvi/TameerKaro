@@ -19,7 +19,7 @@ namespace TMKR.DataAccess
         }
 
         //User Validation
-        public CustomerModel ValidateUser(LoginCredentials credentials)
+        public CustomerModel ValidateUser(LoginCredentialsModel credentials)
         {
             using (Conn)
             {
@@ -30,6 +30,16 @@ namespace TMKR.DataAccess
             }
         }
 
+        public CustomerModel GetUser(int id)
+        {
+            using (Conn)
+            {
+                string query = @"SELECT Customer.ID,FRST_NME,LAST_NME,EMAIL,PHNE,USR_NME,PSWD,Address,CITY FROM Customer
+                                left join Address on USER_ID = Customer.ID WHERE Customer.ID = @ID";
+
+                return Conn.QueryFirstOrDefault<CustomerModel>(query, new { ID = id });
+            }
+        }
 
         //User Insertion
         public int Insert(CustomerModel customerVm)
@@ -39,6 +49,16 @@ namespace TMKR.DataAccess
                 string query = "INSERT INTO Customer(FRST_NME, LAST_NME, EMAIL, PHNE, USR_NME, PSWD) VALUES(@FRST_NME, @LAST_NME, @EMAIL, @PHNE, @USR_NME, @PSWD) SELECT CAST(SCOPE_IDENTITY() as int)";
                 var id = Conn.Query<int>(query, new { customerVm.FRST_NME, customerVm.LAST_NME, customerVm.EMAIL, customerVm.PHNE, customerVm.USR_NME, customerVm.PSWD }).Single();
                 return id;
+            }
+        }
+
+        public void updateAddress(CustomerProfileModel customerVm)
+        {
+            using (Conn)
+            {
+                string query = @"UPDATE Address SET Address = @Address, CITY = @CITY WHERE ID = @ID";
+
+                Conn.Execute(query, new { customerVm.Address, customerVm.CITY, customerVm.ID });
             }
         }
 

@@ -20,7 +20,7 @@ namespace TMKR.Controllers.WebApi
 
         //Login WEB API Call
         [HttpPost]
-        public HttpResponseMessage Login([FromBody]LoginCredentials credentials)
+        public HttpResponseMessage Login([FromBody]LoginCredentialsModel credentials)
         {
             if (credentials != null && !string.IsNullOrEmpty(credentials.Username))
             {
@@ -59,11 +59,9 @@ namespace TMKR.Controllers.WebApi
                 {
                     customerVm.PSWD = PasswordHasher.HashPassword(customerVm.PSWD);
                 }
-                
+                CustomerModel customer = customerManager.Update(customerVm);
 
-                customerManager.Update(customerVm);
-
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.OK, customer);
 
             }
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Password Incorrect");
@@ -88,7 +86,7 @@ namespace TMKR.Controllers.WebApi
 
         //Save Cart WEB API Call
         [HttpPost]
-        public HttpResponseMessage SaveCart([FromBody]Cart cart)
+        public HttpResponseMessage SaveCart([FromBody]ShoppingCartModel cart)
         {
             if (cart != null && cart.user != null && cart.items != null && cart.items.Any())
             {
@@ -140,8 +138,8 @@ namespace TMKR.Controllers.WebApi
                 new { controller = "Customer", action = "SaveCart" });
 
             config.Routes.MapHttpRoute(
-                "UpdateProfile",
-                "api/customer/updateprofile",
+                "UpdateCustomerProfile",
+                "api/customer/updatecustomerprofile",
                 new { controller = "Customer", action = "UpdateProfile" });
 
             config.Routes.MapHttpRoute(

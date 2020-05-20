@@ -3,9 +3,9 @@
     angular
         .module('app.vendor')
         .controller('ActiveAdvtsContoller', ActiveAdvtsContoller)
-    ActiveAdvtsContoller.$inject = ['$scope', '$http', 'AuthenticationService'];
+    ActiveAdvtsContoller.$inject = ['$scope', '$state', '$http', 'AuthenticationService', 'Advertisement'];
 
-    function ActiveAdvtsContoller($scope, $http, AuthenticationService) {
+    function ActiveAdvtsContoller($scope, $state, $http, AuthenticationService, Advertisement) {
 
         $scope.advts = [];
 
@@ -22,6 +22,13 @@
             })
             .error(function (response) {
                 
+            });
+        }
+
+        $scope.editadvt = function (advt) {
+            Advertisement.advt = advt;
+            $state.go("vendor.editadvts", {
+                customerid:advt.ID
             });
         }
     }

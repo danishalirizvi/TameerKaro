@@ -5,9 +5,9 @@ using System.Web;
 
 namespace TMKR.Models.DataModel
 {
-    public class Cart
+    public class ShoppingCartModel
     {
-        public List<CartItems> items { get; set; }
+        public List<CartItemsModel> items { get; set; }
         public CustomerModel user { get; set; }
         public string ShippingAddress { get; set; }
     }

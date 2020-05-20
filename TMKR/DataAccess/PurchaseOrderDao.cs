@@ -50,20 +50,60 @@ namespace TMKR.DataAccess
             }
         }
 
-        internal List<PurchaseOrderModel> PurchaseOrderList(int vendorId)
+        public void UpdateOrderStatus(ActionDataModel data)
+        {
+            string query = @"update Purchase_Order set STATUS = @STATUS
+                            from Purchase_Order p
+                            left join Cart_Item c on c.ID = p.ID
+                            left join Shopping_Cart s on s.ID = c.CART_ID
+                            where s.ID = @ID";
+
+            Conn.Execute(query, new { STATUS = data.action, ID = data.id });
+        }
+
+        public List<PurchaseOrderModel> PurchaseOrderList(int vendorId, string type)
         {
             using (Conn)
             {
-                string query = @"SELECT  p.ID as PurchaseOrderId, pt.NME as ProductName, c.QUNT as Quantity, 
+                string query = null;
+                if (type == "New")
+                {
+                    query = @"SELECT  p.ID as PurchaseOrderId, pt.NME as ProductName, c.QUNT as Quantity, 
                         c.UNIT_PRCE as UnitPrice, cus.FRST_NME as FirstName, cus.PHNE, c.AMNT as ItemAmount, p.STATUS, p.SHPNG_ADRS, 
                         c.CART_ID, cus.ID as CustomerID from Purchase_Order p
                         LEFT JOIN Cart_Item c on p.CART_ITEM_ID = c.ID
                         LEFT JOIN Customer cus on p.CSTMR_ID = cus.ID
                         LEFT JOIN Prod_Advt pa on c.PROD_ADVT_ID = pa.ID
                         LEFT JOIN Product_Type pt on pa.PROD_TYPE_ID = pt.ID 
-                        WHERE p.VNDR_ID = @VNDR_ID AND STATUS != @STATUS";
-                
-                return Conn.Query<PurchaseOrderModel>(query, new { VNDR_ID = vendorId, STATUS = "Rejected" }).ToList();
+                        WHERE p.VNDR_ID = @VNDR_ID AND STATUS != @STATUS AND STATUS != @STATUS1";
+
+                    return Conn.Query<PurchaseOrderModel>(query, new { VNDR_ID = vendorId, STATUS = "Rejected", STATUS1 = "Accepted" }).ToList();
+                } else if (type == "Accepted") {
+                    query = @"SELECT  p.ID as PurchaseOrderId, pt.NME as ProductName, c.QUNT as Quantity, 
+                        c.UNIT_PRCE as UnitPrice, cus.FRST_NME as FirstName, cus.PHNE, c.AMNT as ItemAmount, p.STATUS, p.SHPNG_ADRS, 
+                        c.CART_ID, cus.ID as CustomerID from Purchase_Order p
+                        LEFT JOIN Cart_Item c on p.CART_ITEM_ID = c.ID
+                        LEFT JOIN Customer cus on p.CSTMR_ID = cus.ID
+                        LEFT JOIN Prod_Advt pa on c.PROD_ADVT_ID = pa.ID
+                        LEFT JOIN Product_Type pt on pa.PROD_TYPE_ID = pt.ID 
+                        WHERE p.VNDR_ID = @VNDR_ID AND STATUS = @STATUS";
+
+                    return Conn.Query<PurchaseOrderModel>(query, new { VNDR_ID = vendorId, STATUS = "Accepted" }).ToList();
+                } else if (type == "Rejected") {
+                    query = @"SELECT  p.ID as PurchaseOrderId, pt.NME as ProductName, c.QUNT as Quantity, 
+                        c.UNIT_PRCE as UnitPrice, cus.FRST_NME as FirstName, cus.PHNE, c.AMNT as ItemAmount, p.STATUS, p.SHPNG_ADRS, 
+                        c.CART_ID, cus.ID as CustomerID from Purchase_Order p
+                        LEFT JOIN Cart_Item c on p.CART_ITEM_ID = c.ID
+                        LEFT JOIN Customer cus on p.CSTMR_ID = cus.ID
+                        LEFT JOIN Prod_Advt pa on c.PROD_ADVT_ID = pa.ID
+                        LEFT JOIN Product_Type pt on pa.PROD_TYPE_ID = pt.ID 
+                        WHERE p.VNDR_ID = @VNDR_ID AND STATUS = @STATUS";
+
+                    return Conn.Query<PurchaseOrderModel>(query, new { VNDR_ID = vendorId, STATUS = "Rejected"}).ToList();
+                }
+                else {
+                    return null;
+                }
             }
         }
 

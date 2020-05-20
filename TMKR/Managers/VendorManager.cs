@@ -21,7 +21,7 @@ namespace TMKR.Managers
         }
 
 
-        public VendorModel Login(LoginCredentials loginVm)
+        public VendorModel Login(LoginCredentialsModel loginVm)
         {
             VendorModel vendorVm = vendordao.ValidateUser(loginVm);
             if (vendorVm != null)
@@ -54,5 +54,24 @@ namespace TMKR.Managers
             return vendordao.CheckUsername(username);
         }
 
+        public bool ValidatePassword(VendorModel vendorVm)
+        {
+            string password = vendordao.getPassword(vendorVm.ID).PSWD;
+            if (PasswordHasher.ValidatePassword(vendorVm.CRNT_PSWD, password))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public VendorModel Update(VendorModel vendorVm)
+        {
+            vendordao.update(vendorVm);
+
+            vendordao.updateAddress(vendorVm);
+
+            VendorModel vendor = vendordao.GetUser(vendorVm.ID);
+            return vendor;
+        }
     }
 }

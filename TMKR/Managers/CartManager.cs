@@ -18,9 +18,9 @@ namespace TMKR.Managers
             return shopping_CartDao.createCart(userId, total);
         }
 
-        public void createPurchaseOrders(int cartid, Cart cart)
+        public void createPurchaseOrders(int cartid, ShoppingCartModel cart)
         {
-            List<CartItem> items = shopping_CartDao.GetCartItems(cartid);
+            List<CartItemModel> items = shopping_CartDao.GetCartItems(cartid);
 
             List<PurchaseOrder> orders = new List<PurchaseOrder>();
             
@@ -54,11 +54,11 @@ namespace TMKR.Managers
         }
 
 
-        public void addCartItems(Cart cart)
+        public void addCartItems(ShoppingCartModel cart)
         {
             int totalAmount = 0;
 
-            List<CartItem> items = new List<CartItem>();
+            List<CartItemModel> items = new List<CartItemModel>();
 
 
             foreach (var item in cart.items)
@@ -66,7 +66,7 @@ namespace TMKR.Managers
                 var itemAmount = item.Unit_Price * item.Quantity;
                 totalAmount += itemAmount;
 
-                CartItem cartItem = new CartItem();
+                CartItemModel cartItem = new CartItemModel();
 
                 cartItem.AMNT = item.Quantity * item.Unit_Price;
                 cartItem.PROD_ADVT_ID = item.Advt_Id;

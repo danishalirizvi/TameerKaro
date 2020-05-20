@@ -10,28 +10,35 @@
     function VendorProfileController($scope, $http, $state, AuthenticationService) {
         $scope.credentials = {};
         $scope.profileForm = {};
+        $scope.error = false;
+        $scope.submitted = false;
 
         $scope.user = AuthenticationService.getUserObject('cookievendor');
 
+        $scope.user.PSWD = null;
         $scope.credentials = $scope.user;
-
+        $scope.credentials.confirmpassword = null;
         $scope.credentials.CRNT_PSWD = null;
 
         //when the form is submitted
         $scope.submit = function () {
-            $scope.credentials;
-            if (!profileForm.$invalid) {
-                $http.post('/api/customer/updateprofile', JSON.stringify($scope.credentials))
+            $scope.submitted = true;
+            if (!$scope.profileForm.$invalid && $scope.credentials.PSWD === $scope.credentials.confirmpassword) {
+                $http.post('/api/vendor/updatevendorprofile', JSON.stringify($scope.credentials))
                 .success(function (response) {
-                    AuthenticationService.setCredentials($scope.credentials.USR_NME, $scope.credentials.PSWD, $scope.credentials, 'cookievendor');
+                    AuthenticationService.setCredentials(response.USR_NME, response.PSWD, response, 'cookievendor');
                     alert('Success');
-                    $state.go('customer.profiledetails');
+                    $scope.submitted = false;
+                    $state.go('vendor.profiledetails');
                 })
                 .error(function (response) {
+                    $scope.submitted = false;
                     alert(JSON.stringify(response));
                 });
             } else {
-                vm.error = true;
+                $scope.submitted = false;
+                $scope.error = true;
+                alert('Passwords don not match');
                 return;
             }
         };

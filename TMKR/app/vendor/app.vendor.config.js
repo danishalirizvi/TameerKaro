@@ -35,30 +35,36 @@
                 controller: "CreateAdvertisementController",
                 portal: "vendor"
             })
-           .state("vendor.purchaseOrder", {
-               url: "/purchaseOrder",
-               templateUrl: "app/vendor/purchaseorders/purchase-order.html",
-               controller: "PurchaseOrderController",
-               portal: "vendor"
-           })
-           .state("vendor.activeadvts", {
-               url: "/activeadvertisements",
-               templateUrl: "app/vendor/activeAdvts/advts.html",
-               controller: "ActiveAdvtsContoller",
-               portal: "vendor"
-           })
-           .state("vendor.profile", {
-               url: "/profile",
-               templateUrl: "app/vendor/profile/profile.html",
-               controller: "VendorProfileController",
-               portal: "vendor"
-           })
-           .state("vendor.profiledetails", {
-               url: "/profiledetails",
-               templateUrl: "app/vendor/profiledetail/profiledetails.html",
-               controller: "VendorProfileDetailController",
-               portal: "vendor"
-           });
+            .state("vendor.purchaseOrder", {
+                url: "/purchaseOrder",
+                templateUrl: "app/vendor/purchaseorders/purchase-order.html",
+                controller: "PurchaseOrderController",
+                portal: "vendor"
+            })
+            .state("vendor.activeadvts", {
+                url: "/activeadvertisements",
+                templateUrl: "app/vendor/activeAdvts/advts.html",
+                controller: "ActiveAdvtsContoller",
+                portal: "vendor"
+            })
+            .state("vendor.profile", {
+                url: "/profile",
+                templateUrl: "app/vendor/profile/profile.html",
+                controller: "VendorProfileController",
+                portal: "vendor"
+            })
+            .state("vendor.profiledetails", {
+                url: "/profiledetails",
+                templateUrl: "app/vendor/profiledetail/profiledetails.html",
+                controller: "VendorProfileDetailController",
+                portal: "vendor"
+            })
+            .state("vendor.editadvts", {
+                url: "/editadvertisement?advtId",
+                templateUrl: "app/vendor/editadvt/editadvt.html",
+                controller: "EdirtAdvtController",
+                portal: "vendor"
+            });
 
         }]);
 
@@ -68,6 +74,7 @@
             function ($rootScope, $state, AuthenticationService) {
                 $rootScope.$on('$stateChangeStart',
                     function (event, toState, toParams, fromState, fromParams, error) {
+
                         var vendorusername = AuthenticationService.getUsername('cookievendor');
                         if ((typeof toState.portal != 'undefined') &&
                         (typeof fromState.portal != 'undefined') &&
