@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
     angular.module('app')
-      .controller('RootController', ['$scope', 'AuthenticationService', '$state',
-    function ($scope, AuthenticationService, $state) {
+      .controller('RootController', ['$scope', 'AuthenticationService', '$state', '$modal',
+    function ($scope, AuthenticationService, $state, $modal) {
 
         $scope.customerusername = null;
         $scope.vendorusername = null;
@@ -13,13 +13,26 @@
         }
         else if (cookieName === 'cookievendor') {
             $scope.vendorusername = AuthenticationService.getUsername(cookieName);
+        } else {
+            $scope.customerusername = null;
+            $scope.vendorusername = null;
+        }
+
+        var customerNameFromCookie = function () {
+            var activeUser = AuthenticationService.checkUserType();
+            if (activeUser === 'cookiecustomer') {
+                return AuthenticationService.getUsername(activeUser);
+            }
+            else if (activeUser === 'cookievendor') {
+                return AuthenticationService.getUsername(activeUser);
+            }
         }
 
         $scope.validateNav = function (userType, state, perm) {
-
-            if ($scope.customerusername == null && $scope.vendorusername == null) {
+            var userName = customerNameFromCookie();
+            if (typeof userName === 'undefined') {
                 if (!perm) {
-                    alert('Login to Proceed A');
+                    $scope.showErrorLoginAlert();
                 } else {
                     $state.go(state);
                 }
@@ -27,5 +40,28 @@
                 $state.go(state);
             }
         }
+
+        $scope.showErrorLoginAlert = function () {
+            $modal.open({
+                templateUrl: 'app/popup/error-alert.html',
+                controller: function ($scope, $modalInstance) {
+                    $scope.submit = function () {
+                        $log.log('Submiting user info.');
+                        $log.log($scope.selected);
+                        $modalInstance.dismiss('cancel');
+                    }
+                    $scope.cancel = function () {
+                        $modalInstance.dismiss('cancel');
+                    };
+                },
+                resolve: {
+                    //user: function () {
+                    //    return $scope.selected;
+                    //}
+                }
+            });
+        }
+
+
     }]);
 })();

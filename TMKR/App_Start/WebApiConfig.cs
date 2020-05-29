@@ -15,6 +15,7 @@ namespace TMKR
 
             CustomerController.ConfigureRoutes(config);
             VendorController.ConfigureRoutes(config);
+            FilesController.ConfigureRoutes(config);
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

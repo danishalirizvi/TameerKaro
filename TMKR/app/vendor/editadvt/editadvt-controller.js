@@ -65,7 +65,7 @@
 
         $scope.showSuccessAlert = function () {
             $modal.open({
-                templateUrl: 'app/vendor/advertisements/success-alert.html',
+                templateUrl: 'app/vendor/editadvt/success-alert.html',
                 controller: function ($scope, $modalInstance) {
                     $scope.submit = function () {
                         $log.log('Submiting user info.');

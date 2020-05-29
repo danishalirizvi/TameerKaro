@@ -64,15 +64,15 @@ namespace TMKR.DataAccess
 
             if (vendorVm.PSWD != null)
             {
-                query = @"UPDATE Vendor SET FRST_NME = @FRST_NME, LAST_NME = @LAST_NME, EMAIL = @EMAIL, PHNE = @PHNE, USR_NME = @USR_NME, PSWD = @PSWD WHERE ID = @ID";
+                query = @"UPDATE Vendor SET FRST_NME = @FRST_NME, LAST_NME = @LAST_NME, EMAIL = @EMAIL, PHNE = @PHNE, BSNS_NME = @BSNS_NME, USR_NME = @USR_NME, PSWD = @PSWD WHERE ID = @ID";
 
-                Conn.Execute(query, new { vendorVm.FRST_NME, vendorVm.LAST_NME, vendorVm.EMAIL, vendorVm.PHNE, vendorVm.USR_NME, vendorVm.PSWD, vendorVm.ID });
+                Conn.Execute(query, new { vendorVm.FRST_NME, vendorVm.LAST_NME, vendorVm.EMAIL, vendorVm.PHNE, vendorVm.BSNS_NME, vendorVm.USR_NME, vendorVm.PSWD, vendorVm.ID });
             }
             else
             {
-                query = @"UPDATE Vendor SET FRST_NME = @FRST_NME, LAST_NME = @LAST_NME, EMAIL = @EMAIL, PHNE = @PHNE, USR_NME = @USR_NME WHERE ID = @ID";
+                query = @"UPDATE Vendor SET FRST_NME = @FRST_NME, LAST_NME = @LAST_NME, EMAIL = @EMAIL, PHNE = @PHNE, BSNS_NME = @BSNS_NME, USR_NME = @USR_NME WHERE ID = @ID";
 
-                Conn.Execute(query, new { vendorVm.FRST_NME, vendorVm.LAST_NME, vendorVm.EMAIL, vendorVm.PHNE, vendorVm.USR_NME, vendorVm.ID });
+                Conn.Execute(query, new { vendorVm.FRST_NME, vendorVm.LAST_NME, vendorVm.EMAIL, vendorVm.PHNE, vendorVm.BSNS_NME, vendorVm.USR_NME, vendorVm.ID });
             }
         }
 
@@ -80,7 +80,7 @@ namespace TMKR.DataAccess
         {
             using (Conn)
             {
-                string query = @"SELECT Vendor.ID,FRST_NME,LAST_NME,EMAIL,PHNE,USR_NME,PSWD,Address,CITY FROM Vendor
+                string query = @"SELECT Vendor.ID,FRST_NME,LAST_NME,EMAIL,PHNE,BSNS_NME,USR_NME,PSWD,Address,CITY FROM Vendor
                                 left join Address on USER_ID = Vendor.ID WHERE Vendor.ID = @ID";
 
                 return Conn.QueryFirstOrDefault<VendorModel>(query, new { ID = id });

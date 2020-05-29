@@ -54,7 +54,7 @@
 
         function successSubmit(response) {
             $scope.showSuccessAlert();
-            $state.go("vendor.home");
+            $state.go("vendor.activeadvts");
         }
 
         function errorSubmit(response) {

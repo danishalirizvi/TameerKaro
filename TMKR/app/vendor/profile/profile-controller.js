@@ -5,9 +5,9 @@
         .module('app.vendor')
         .controller('VendorProfileController', VendorProfileController);
 
-    VendorProfileController.$inject = ['$scope', '$http', '$state', 'AuthenticationService'];
+    VendorProfileController.$inject = ['$scope', '$http', '$state', 'AuthenticationService', '$modal'];
 
-    function VendorProfileController($scope, $http, $state, AuthenticationService) {
+    function VendorProfileController($scope, $http, $state, AuthenticationService, $modal) {
         $scope.credentials = {};
         $scope.profileForm = {};
         $scope.error = false;
@@ -27,7 +27,7 @@
                 $http.post('/api/vendor/updatevendorprofile', JSON.stringify($scope.credentials))
                 .success(function (response) {
                     AuthenticationService.setCredentials(response.USR_NME, response.PSWD, response, 'cookievendor');
-                    alert('Success');
+                    $scope.showSuccessAlert();
                     $scope.submitted = false;
                     $state.go('vendor.profiledetails');
                 })
@@ -38,10 +38,53 @@
             } else {
                 $scope.submitted = false;
                 $scope.error = true;
-                alert('Passwords don not match');
+                $scope.showErrorLoginAlert();
                 return;
             }
         };
+
+
+        $scope.showSuccessAlert = function () {
+            $modal.open({
+                templateUrl: 'app/vendor/profile/success-alert.html',
+                controller: function ($scope, $modalInstance) {
+                    $scope.submit = function () {
+                        $log.log('Submiting user info.');
+                        $log.log($scope.selected);
+                        $modalInstance.dismiss('cancel');
+                    }
+                    $scope.cancel = function () {
+                        $modalInstance.dismiss('cancel');
+                    };
+                },
+                resolve: {
+                    //user: function () {
+                    //    return $scope.selected;
+                    //}
+                }
+            });
+        }
+
+        $scope.showErrorLoginAlert = function () {
+            $modal.open({
+                templateUrl: 'app/vendor/profile/error-alert.html',
+                controller: function ($scope, $modalInstance) {
+                    $scope.submit = function () {
+                        $log.log('Submiting user info.');
+                        $log.log($scope.selected);
+                        $modalInstance.dismiss('cancel');
+                    }
+                    $scope.cancel = function () {
+                        $modalInstance.dismiss('cancel');
+                    };
+                },
+                resolve: {
+                    //user: function () {
+                    //    return $scope.selected;
+                    //}
+                }
+            });
+        }
 
     }
 })();

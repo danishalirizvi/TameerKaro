@@ -81,12 +81,24 @@
                     portal: "customer"
                 })
 
-                 .state("customer.checkout", {
-                     url: "/checkout",
-                     templateUrl: "app/cart/summary.html",
-                     controller: "CheckOutController",
-                     portal: "customer"
-                 });
+                .state("customer.checkout", {
+                    url: "/checkout",
+                    templateUrl: "app/cart/summary.html",
+                    controller: "CheckOutController",
+                    portal: "customer"
+                })
+                .state("customer.image", {
+                    url: "/image",
+                    templateUrl: "app/customer/image/index.html",
+                    controller: "FileUploadController",
+                    portal: "customer"
+                })
+                .state("customer.uploader", {
+                    url: "/uploader",
+                    templateUrl: "app/customer/uploader/home/home.html",
+                    controller: "HomeCtrl",
+                    portal: "customer"
+                });
         }]);
 
     angular

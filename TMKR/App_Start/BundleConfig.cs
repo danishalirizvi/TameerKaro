@@ -26,9 +26,12 @@ namespace TMKR
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/style.css",
+                      "~/Content/styleadvt.css",
+                      "~/Content/iconstyle.css",
                       "~/Content/responsive.css",
                       "~/Content/font-awesome.min.css",
-                      "~/Content/animate.css"                       
+                      "~/Content/animate.css",
+                      "~/App/directives/loading-spinner.css"                       
                       ));
 
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
@@ -47,8 +50,16 @@ namespace TMKR
                 "~/Scripts/angular-animate.js",
                 "~/Scripts/angular-cookies.js",
                 "~/Scripts/angular-ui-router.js",
+                
+                "~/Scripts/ng-file-upload-shim.js",
+                "~/Scripts/ng-file-upload.js",
+
+                "~/app/customer/uploader/directives/loading-spinner.js",
+                
+
                 "~/Scripts/angular-ui/ui-bootstrap.js",
-                "~/Scripts/angular-ui/ui-bootstrap-tpls.js"            
+                "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
+                "~/Scripts/main.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
@@ -77,7 +88,6 @@ namespace TMKR
                 "~/app/customer/services/prod-advt-service.js",
 
                 //customer controllers
-                //"~/app/customer/root-controller.js",
                 "~/app/customer/login/login-controller.js",
                 "~/app/customer/register/register-controller.js",
                 "~/app/customer/logout/logout-controller.js",
@@ -107,7 +117,17 @@ namespace TMKR
                 "~/app/vendor/activeAdvts/advts-controller.js",
                 "~/app/vendor/profile/profile-controller.js",
                 "~/app/vendor/profiledetail/profiledetail-controller.js",
-                "~/app/vendor/editadvt/editadvt-controller.js"
+                "~/app/vendor/editadvt/editadvt-controller.js",
+
+
+                "~/app/customer/image/controller.js",
+                "~/app/customer/image/directive.js",
+                "~/app/customer/image/services.js",
+
+
+
+                "~/app/customer/uploader/home/home.js",
+                "~/app/customer/uploader/services/fileService.js"
 
                 ));
 

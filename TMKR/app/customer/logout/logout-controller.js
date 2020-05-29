@@ -8,8 +8,7 @@ angular.module('app.customer')
 
         AuthenticationService.clearCredentials('cookiecustomer');
 
-        parentController.isUserLoggedIn = false;
-        parentController.customerusername = '';
+        parentController.customerusername = null;
         $window.localStorage.clear();
         $state.go("customer.home");
     }]
