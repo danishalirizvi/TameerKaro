@@ -2,17 +2,10 @@
 
     "use strict";
 
-    /**
-     * @ngdoc function
-     * @name webApiSample.controller:HomeCtrl
-     * @description
-     * # HomeCtrl
-     * Controller of the webApiSample
-     */
     angular
       .module("app.customer")
       .controller("HomeCtrl", ["$window",
-        "fileService", "Upload", function ($window, fileService, Upload) {
+        "fileService", "Upload", "$scope", function ($window, fileService, Upload, $scope) {
 
             var apiUrl = '/api/file/add';
 
@@ -21,7 +14,7 @@
             //Variables
             vm.photos = [];
             vm.files = [];
-            vm.previewPhoto = {};
+            vm.previewPhoto = null;
             vm.spinner = {
                 active: true
             };
@@ -69,6 +62,15 @@
 
                       setPreviewPhoto();
                   });
+            }
+
+            $scope.SelectFile = function (e) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $scope.PreviewImage = e.target.result;
+                    $scope.$apply();
+                };
+                reader.readAsDataURL(e.target.files[0]);
             }
 
             //Set scope 

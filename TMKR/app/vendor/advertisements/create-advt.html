@@ -12,8 +12,17 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <form name="advtForm" class="form-horizontal" method="post" ng-submit="submit()" >
+                            <form name="advtForm" class="form-horizontal" method="post" ng-submit="uploadPic(picFile)" >
 
+                                <!--Image-->
+                                <img ng-show="picFile" ngf-thumbnail="picFile" class="thumb" style="height:200px;width:200px">
+                                <div style="margin-top: 25px" class="input-group">
+                                    <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" ngf-model-invalid="errorFile">
+                                </div>
+                                <i ng-show="advtForm.file.$error.maxSize">
+                                    File too large
+                                    {{errorFile.size / 1000000|number:1}}MB: max 2M
+                                </i>
                                 <!--Product Type Dropdow-->
                                 <div style="margin-top: 25px" class="input-group">
                                     <span class="input-group-addon">

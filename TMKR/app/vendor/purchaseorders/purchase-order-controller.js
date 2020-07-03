@@ -24,7 +24,7 @@
         var data = {};
 
         $scope.onInit = function () {
-            VendorService.getPurchaseOrders(AuthenticationService.getLoginVndrId('cookievendor'), onSuccess, onFailed);
+            VendorService.getPurchaseOrders(AuthenticationService.getLoginUserId('cookievendor'), onSuccess, onFailed);
         }
 
         function onSuccess(response) {

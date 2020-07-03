@@ -59,9 +59,7 @@ angular.module('app')
           };
 
           this.clearCredentials = function (cookieName) {
-              //alert('Credential Cookie is flushing');
               removeCredentials(cookieName);
-
           };
 
           this.getUsername = function (cookieName) {
@@ -74,7 +72,7 @@ angular.module('app')
               return credentials === null ? false : true;
           };
 
-          this.getLoginVndrId = function (cookieName) {
+          this.getLoginUserId = function (cookieName) {
               var credentials = retrieveCredentials(cookieName);
               return credentials === null ? null : credentials.user.ID;
           };

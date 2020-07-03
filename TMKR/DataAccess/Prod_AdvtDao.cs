@@ -49,6 +49,18 @@ namespace TMKR.DataAccess
             }
         }
 
+        public void addImagePath(ProdAdvertisementModel advtVM)
+        {
+            using (Conn)
+            {
+                string query = @"INSERT INTO Images 
+                    (Path,FId,Type) 
+                    VALUES (@Path,@FId,@Type)";
+
+                Conn.Execute(query, new { advtVM.Path, FId = advtVM.ID, Type = "Advertisement" });
+            }
+        }
+
         public void updateAdvt(ActiveAdvtModel advtVM)
         {
             using (Conn)
@@ -95,17 +107,17 @@ namespace TMKR.DataAccess
             }
         }
 
-        public bool Insert(ProdAdvertisementModel model)
+        public int Insert(ProdAdvertisementModel model)
         {
 
             using (Conn)
             {
                 string query = @"INSERT INTO Prod_Advt 
                     (PROD_TYPE_ID,DSCP,VNDR_ID,UNIT_PRICE,MAX_ORDR_LIMT,DLVRY_AVLB,POST_DATE,STUS_NME) 
-                    VALUES (@PROD_TYPE_ID,@DSCP,@VNDR_ID,@UNIT_PRICE,@MAX_ORDR_LIMT,@DLVRY_AVLB,@POST_DATE,@STUS_NME)";
+                    VALUES (@PROD_TYPE_ID,@DSCP,@VNDR_ID,@UNIT_PRICE,@MAX_ORDR_LIMT,@DLVRY_AVLB,@POST_DATE,@STUS_NME) SELECT CAST(SCOPE_IDENTITY() as int)";
 
-                Conn.Execute(query, new { model.PROD_TYPE_ID, model.DSCP, model.VNDR_ID, model.UNIT_PRICE, model.MAX_ORDR_LIMT, model.DLVRY_AVLB, model.POST_DATE, model.STUS_NME });
-                return true;
+                var id = Conn.Query<int>(query, new { model.PROD_TYPE_ID, model.DSCP, model.VNDR_ID, model.UNIT_PRICE, model.MAX_ORDR_LIMT, model.DLVRY_AVLB, model.POST_DATE, model.STUS_NME }).Single();
+                return id;
             }
         }
     }

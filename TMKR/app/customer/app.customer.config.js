@@ -87,16 +87,16 @@
                     controller: "CheckOutController",
                     portal: "customer"
                 })
-                .state("customer.image", {
-                    url: "/image",
-                    templateUrl: "app/customer/image/index.html",
-                    controller: "FileUploadController",
-                    portal: "customer"
-                })
                 .state("customer.uploader", {
                     url: "/uploader",
                     templateUrl: "app/customer/uploader/home/home.html",
                     controller: "HomeCtrl",
+                    portal: "customer"
+                })
+                .state("customer.orders", {
+                    url: "/orders",
+                    templateUrl: "app/customer/orders/orders.html",
+                    controller: "OrderController",
                     portal: "customer"
                 });
         }]);
@@ -124,6 +124,7 @@
         if (!AuthenticationService.isAuthenticated('cookiecustomer')) {
             var returnUrl = $location.path();
             $state.go('customer.login');
+            alert('Login to Proceed');
         }
     }
 })();

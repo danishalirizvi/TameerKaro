@@ -10,7 +10,7 @@
         $scope.advts = [];
 
         $scope.onInit = function () {
-            var vndrId = AuthenticationService.getLoginVndrId('cookievendor');
+            var vndrId = AuthenticationService.getLoginUserId('cookievendor');
             var config = {
                 method: 'GET',
                 url: '/api/vendor/' + vndrId +'/activeAdts' 

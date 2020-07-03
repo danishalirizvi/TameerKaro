@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using TKDR.Web.Helpers;
+using TMKR.Helpers;
 using TMKR.Managers;
 using TMKR.Models.DataModel;
+using TMKR.Models.ViewModel;
 
 namespace TMKR.Controllers.WebApi
 {
@@ -16,6 +21,7 @@ namespace TMKR.Controllers.WebApi
         CustomerManager customerManager = new CustomerManager();
         Prod_AdvtManager prodAdvtManager = new Prod_AdvtManager();
         Purchase_OrderManager purchaseOrderManager = new Purchase_OrderManager();
+        private readonly string workingFolder = HttpRuntime.AppDomainAppPath + @"\Resources\images";
 
         [HttpPost]
         public HttpResponseMessage Login([FromBody]LoginCredentialsModel loginVm)
@@ -33,7 +39,6 @@ namespace TMKR.Controllers.WebApi
             }
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
         }
-
 
         [HttpPost]
         public HttpResponseMessage Register([FromBody]VendorModel vendorVM)
@@ -61,7 +66,6 @@ namespace TMKR.Controllers.WebApi
             }
         }
 
-
         [HttpGet]
         public HttpResponseMessage GetAdvtStatus()
         {
@@ -76,18 +80,27 @@ namespace TMKR.Controllers.WebApi
             }
         }
 
-
         [HttpPost]
         public HttpResponseMessage CreateAdvt([FromBody]ProdAdvertisementModel advtVM)
         {
+
             if (advtVM != null)
             {
-                prodAdvtManager.advtPost(advtVM);
+                var id = prodAdvtManager.advtPost(advtVM);
+                advtVM.ID = id;
+                if (advtVM.Path != null)
+                {
+                    prodAdvtManager.addImagePath(advtVM);
+                }
+                else
+                {
+                    advtVM.Path = "../../../images/default.jpg";
+                    prodAdvtManager.addImagePath(advtVM);
+                }
                 return Request.CreateResponse(HttpStatusCode.OK, "Advertisement Saved Successfully");
             }
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
         }
-
 
         [HttpGet]
         public HttpResponseMessage GetPurchaseOrders(int vndrId)
@@ -127,7 +140,7 @@ namespace TMKR.Controllers.WebApi
 
                 return Request.CreateResponse(HttpStatusCode.OK, purchaseOrders);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
@@ -155,6 +168,8 @@ namespace TMKR.Controllers.WebApi
             try
             {
                 ActiveAdvtModel prodAdvt = prodAdvtManager.getProdAdvt(advtId);
+
+                prodAdvt.ImagePath = prodAdvtManager.getImagePath(advtId);
 
                 return Request.CreateResponse(HttpStatusCode.OK, prodAdvt);
             }
@@ -200,12 +215,12 @@ namespace TMKR.Controllers.WebApi
             if (advtVM != null)
             {
                 prodAdvtManager.updateAdvt(advtVM);
+                prodAdvtManager.updateAdvtPic(advtVM);
                 return Request.CreateResponse(HttpStatusCode.OK, "Advertisement Saved Successfully");
             }
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
         }
-
-        //Update Profile WEB API Call
+        
         [HttpPost]
         public HttpResponseMessage UpdateProfile([FromBody]VendorModel vendorVm)
         {
@@ -221,6 +236,36 @@ namespace TMKR.Controllers.WebApi
 
             }
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Password Incorrect");
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UpdateProfilePic([FromBody]ProfilePicModel photo)
+        {
+
+            if (photo != null)
+            {
+                photo.Action = "Update";
+
+                vendorManager.ProfilePic(photo);
+
+                return Request.CreateResponse(HttpStatusCode.OK, "Picture Updated Successfully");
+            }
+            return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetProfilePicPath(int vendorid)
+        {
+            try
+            {
+                string Path = vendorManager.getPrfilePicPath(vendorid);
+
+                return Request.CreateResponse(HttpStatusCode.OK, Path);
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
+            }
         }
 
         public static void ConfigureRoutes(HttpConfiguration config)
@@ -284,6 +329,16 @@ namespace TMKR.Controllers.WebApi
                 "UpdateVendorProfile",
                 "api/vendor/updatevendorprofile",
                 new { controller = "Vendor", action = "UpdateProfile" });
+
+            config.Routes.MapHttpRoute(
+                "UpdateVendorProfilePic",
+                "api/vendor/updatevendorprofilepic",
+                new { controller = "Vendor", action = "UpdateProfilePic" });
+
+            config.Routes.MapHttpRoute(
+                "GetVendorProfilePicPath",
+                "api/vendor/getVendorProfilePicPath/{vendorid}",
+                new { controller = "Vendor", action = "GetProfilePicPath" });
         }
     }
 }

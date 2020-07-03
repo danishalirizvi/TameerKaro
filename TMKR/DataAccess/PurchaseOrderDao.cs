@@ -107,6 +107,25 @@ namespace TMKR.DataAccess
             }
         }
 
+        public List<OrderModel> OrderList(int Id, string type)
+        {
+            using (Conn)
+            {
+                string query = @"SELECT p.ID as PurchaseOrderID, pt.NME as Product, c.QUNT as Quantity, 
+						c.UNIT_PRCE as UnitPrice, c.AMNT as ItemAmount, p.STATUS, p.SHPNG_ADRS, 
+                        c.CART_ID,v.FRST_NME as VendorName, v.ID as VendorId, v.PHNE as VendorPhone, v.EMAIL as VendorEmail from Purchase_Order p
+                        LEFT JOIN Cart_Item c on p.CART_ITEM_ID = c.ID
+                        LEFT JOIN Customer cus on p.CSTMR_ID = cus.ID
+                        LEFT JOIN Prod_Advt pa on c.PROD_ADVT_ID = pa.ID
+                        LEFT JOIN Product_Type pt on pa.PROD_TYPE_ID = pt.ID
+						LEFT JOIN Vendor v on v.ID = p.VNDR_ID
+                        WHERE p.CSTMR_ID = @CSTMR_ID AND STATUS = @STATUS";
+
+                    return Conn.Query<OrderModel>(query, new { CSTMR_ID =Id, STATUS = type }).ToList();
+                
+            }
+        }
+
         public List<PurchaseOrderChildModel> GetPurchaseOrdersChild(int id)
         {
             using (Conn)

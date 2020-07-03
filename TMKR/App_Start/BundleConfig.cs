@@ -129,6 +129,10 @@ namespace TMKR
                 "~/app/customer/uploader/home/home.js",
                 "~/app/customer/uploader/services/fileService.js"
 
+
+                ,
+                "~/app/customer/pic/pic.js",
+                "~/app/customer/orders/orders-controller.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/customer").Include(

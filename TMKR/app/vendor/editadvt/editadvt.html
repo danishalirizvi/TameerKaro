@@ -12,7 +12,19 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <form name="advtForm" class="form-horizontal" method="post" ng-submit="submit()" >
+                            <form name="advtForm" class="form-horizontal" method="post">
+
+                                <!--Image-->
+                                
+                                <div style="margin-top: 25px" class="input-group">
+                                    <img ng-show="!picFile" src={{advt.ImagePath}} alt="stack photo" class="img" style="width:250px;height:250px">
+                                    <img ng-show="picFile" ngf-thumbnail="picFile" class="thumb" style="width:250px;height:250px">
+                                    <label ng-show="!picFile" style="width:250px;text-align:center;" class="btn btn-primary">
+                                        Update Picture
+                                        <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" style="display: none;">
+                                    </label>
+                                    <button ng-click="picFile=null" ng-show="picFile" class="btn btn-primary" style="width:250px">Cancel</button>
+                                </div>
 
                                 <!--Product Type Dropdow-->
                                 <div style="margin-top: 25px" class="input-group">
@@ -100,7 +112,7 @@
                                 <!--Button-->
                                 <div style="margin-top: 20px" class="form-group">
                                     <div class="col-sm-12 controls">
-                                        <input type="submit" id="btn-login" class="btn btn-success" value="Post!" style="float:right" />
+                                        <input type="submit" ng-click="uploadpic(picFile)" class="btn btn-success" value="Post!" style="float:right" />
                                     </div>
                                 </div>
                             </form>

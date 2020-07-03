@@ -1,4 +1,4 @@
-﻿<section id="ts-features" class="ts-features">
+﻿<section data-ng-init="onInit()" id="ts-features" class="ts-features">
     <div class="container">
         <div class="jumbotron">
             <div>
@@ -6,7 +6,14 @@
             </div>
             <div class="row">
                 <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
-                    <img src="../../../images/a.png" alt="stack photo" class="img" style="width:250px;height:250px">
+                    <img ng-show="!picFile" src={{picpath}} alt="stack photo" class="img" style="width:250px;height:250px">
+                    <img ng-show="picFile" ngf-thumbnail="picFile" class="thumb" style="width:250px;height:250px">
+                    <label ng-show="!picFile" style="width:250px;text-align:center;" class="btn btn-primary">
+                        Update Picture
+                        <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" style="display: none;">
+                    </label>
+                    <button ng-click="uploadPic(picFile)" ng-show="picFile" class="btn btn-primary" style="width:250px">Save</button>
+                    <button ng-click="picFile=null" ng-show="picFile" class="btn btn-primary" style="width:250px">Cancel</button>
                 </div>
                 <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
                     <div class="container" style="border-bottom:2px solid #ffb600">
@@ -17,7 +24,6 @@
                         <li><p><span class="glyphicon glyphicon-earphone one" style="width:50px;"></span>{{user.PHNE}}</p></li>
                         <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span>{{user.EMAIL}}</p></li>
                         <li><p><span class="glyphicon glyphicon-map-marker one" style="width:50px;"></span>{{user.CITY}}</p></li>
-                        <li><p><span class="glyphicon glyphicon-new-window one" style="width:50px;"></span><a href="#">www.example.com</p></a>
                     </ul>
                 </div>
             </div>

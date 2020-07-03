@@ -5,9 +5,9 @@
         .module('app.vendor')
         .controller('CreateAdvertisementController', CreateAdvertisementController);
 
-    CreateAdvertisementController.$inject = ['$scope', '$http', '$state', 'VendorService', 'AuthenticationService', '$modal'];
+    CreateAdvertisementController.$inject = ['$scope', '$http', '$state', 'VendorService', 'AuthenticationService', '$modal', 'Upload', '$timeout'];
 
-    function CreateAdvertisementController($scope, $http, $state, VendorService, AuthenticationService, $modal) {
+    function CreateAdvertisementController($scope, $http, $state, VendorService, AuthenticationService, $modal, Upload, $timeout) {
 
         $scope.advt = {};
         $scope.advtForm = {};
@@ -40,14 +40,19 @@
             alert('Failure DropDown Fill 2');
         }
 
-        $scope.submit = function () {
-            var venderid = AuthenticationService.getLoginVndrId('cookievendor');
+        $scope.submit = function (photo) {
+            var venderid = AuthenticationService.getLoginUserId('cookievendor');
             if (!venderid) {
                 $scope.showErrorLoginAlert();
                 alert("Kindly Login To Proceed!!");
                 return;
             } else {
                 $scope.advt.VNDR_ID = venderid;
+                if (photo === undefined || photo === null) {
+                    $scope.advt.Path = null;
+                } else {
+                    $scope.advt.Path = photo.Path;
+                }
                 VendorService.createAdvt($scope.advt, successSubmit, errorSubmit);
             }
         }
@@ -101,6 +106,31 @@
                     //}
                 }
             });
+        }
+
+        $scope.uploadPic = function (file) {
+            if (file === undefined || file === null) {
+                alert('File undefined');
+                $scope.submit();
+            }
+            else {
+                file.upload = Upload.upload({
+                    url: '/api/file/add',
+                    data: { file: file},
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        $scope.submit(response.data.Photo);
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    // Math.min is to fix IE which reports 200% sometimes
+                    file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                });
+            }
         }
     }
 })();

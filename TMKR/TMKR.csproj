@@ -162,6 +162,8 @@
     <Content Include="app\customer\login\login.html" />
     <Content Include="app\customer\logout\logout-controller.js" />
     <Content Include="app\customer\material-estimate\material-estimate.html" />
+    <Content Include="app\customer\orders\orders-controller.js" />
+    <Content Include="app\customer\orders\orders.html" />
     <Content Include="app\customer\profiledetail\profiledetail-controller.js" />
     <Content Include="app\customer\profiledetail\profiledetails.html" />
     <Content Include="app\customer\profile\profile-controller.js" />
@@ -270,6 +272,7 @@
     <Content Include="images\clients\testimonial3.png" />
     <Content Include="images\controls.png" />
     <Content Include="images\crossword.png" />
+    <Content Include="images\default.jpg" />
     <Content Include="images\Final.png" />
     <Content Include="images\footer-logo.png" />
     <Content Include="images\icon-image\fact1.png" />
@@ -369,6 +372,11 @@
     <Compile Include="Controllers\WebApi\CustomerController.cs" />
     <Compile Include="Controllers\WebApi\FilesController.cs" />
     <Compile Include="Helpers\CustomMultipartFormDataStreamProvider.cs" />
+    <Compile Include="Models\DataModel\OrderChildModel.cs" />
+    <Compile Include="Models\DataModel\OrderModel.cs" />
+    <Compile Include="Models\DataModel\OrderParentModel.cs" />
+    <Compile Include="Models\DataModel\OrderTypesModel.cs" />
+    <Compile Include="Models\DataModel\ProfilePicModel.cs" />
     <Compile Include="Models\ViewModel\PhotoActionResult.cs" />
     <Compile Include="Models\ViewModel\PhotoViewModel.cs" />
     <Compile Include="Controllers\WebApi\VendorController.cs" />

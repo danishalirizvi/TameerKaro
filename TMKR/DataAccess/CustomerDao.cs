@@ -25,7 +25,7 @@ namespace TMKR.DataAccess
             {
                 string query = @"SELECT Customer.ID,FRST_NME,LAST_NME,EMAIL,PHNE,USR_NME,PSWD,Address,CITY FROM Customer
                                 left join Address on USER_ID = Customer.ID WHERE USR_NME = @Username";
-                
+
                 return Conn.QueryFirstOrDefault<CustomerModel>(query, new { credentials.Username });
             }
         }
@@ -106,18 +106,42 @@ namespace TMKR.DataAccess
             catch (Exception)
             {
                 return false;
-            }            
+            }
         }
 
-    public void InsertAddress(CustomerModel customerVm)
-    {
-        using (Conn)
+        public void InsertAddress(CustomerModel customerVm)
         {
-            string query = "INSERT INTO Address (USER_ID, Address, CITY, Type) VALUES (@USER_ID, @Address, @CITY, @Type)";
-            Conn.Execute(query, new { USER_ID = customerVm.ID, customerVm.Address, customerVm.CITY, Type = "Customer" });
+            using (Conn)
+            {
+                string query = "INSERT INTO Address (USER_ID, Address, CITY, Type) VALUES (@USER_ID, @Address, @CITY, @Type)";
+                Conn.Execute(query, new { USER_ID = customerVm.ID, customerVm.Address, customerVm.CITY, Type = "Customer" });
+            }
+        }
+
+        public string getprofilepicpath(int id)
+        {
+            using (Conn)
+            {
+                string query = @"SELECT Path FROM Images WHERE FId = @FId AND Type = @Type";
+
+                return Conn.QueryFirstOrDefault<string>(query, new { FId = id, Type = "Customer" });
+            }
+        }
+
+        public void profilePic(ProfilePicModel photo)
+        {
+            if (photo.Action == "Update")
+            {
+                string query = @"UPDATE Images SET Path = @Path WHERE FId = @FId AND Type = @Type";
+
+                Conn.Execute(query, new { Path = photo.Path, FId = photo.Id, Type = "Customer" });
+            }
+            else if (photo.Action == "Create")
+            {
+                string query = "INSERT INTO Images (Path, FId, Type) VALUES (@Path, @FId, @Type)";
+
+                Conn.Execute(query, new { Path = photo.Path, FId = photo.Id, Type = photo.Type });
+            }
         }
     }
-
-
-}
 }

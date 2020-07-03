@@ -76,6 +76,32 @@ namespace TMKR.DataAccess
             }
         }
 
+        public string getpicpath(int id, string type)
+        {
+            using (Conn)
+            {
+                string query = @"SELECT Path FROM Images WHERE FId = @FId AND Type = @Type";
+
+                return Conn.QueryFirstOrDefault<string>(query, new { FId = id, Type = type });
+            }
+        }
+
+        public void Pic(ProfilePicModel photo)
+        {
+            if (photo.Action == "Update")
+            {
+                string query = @"UPDATE Images SET Path = @Path WHERE FId = @FId AND Type = @Type";
+
+                Conn.Execute(query, new { Path = photo.Path, FId = photo.Id, Type = photo.Type });
+            }
+            else if(photo.Action == "Create")
+            {
+                string query = "INSERT INTO Images (Path, FId, Type) VALUES (@Path, @FId, @Type)";
+
+                Conn.Execute(query, new { Path = photo.Path, FId = photo.Id, Type = photo.Type });
+            }
+        }
+
         public VendorModel GetUser(int id)
         {
             using (Conn)

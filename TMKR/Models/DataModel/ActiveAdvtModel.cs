@@ -16,5 +16,6 @@ namespace TMKR.Models.DataModel
         public bool? DLVRY_AVLB { get; set; }
         public DateTime? POST_DATE { get; set; }
         public string STUS_NME { get; set; }
+        public string ImagePath { get; set; }
     }
 }

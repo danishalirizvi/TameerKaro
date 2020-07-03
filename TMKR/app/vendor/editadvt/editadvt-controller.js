@@ -3,9 +3,9 @@
     angular
         .module('app.vendor')
         .controller('EdirtAdvtController', EdirtAdvtController);
-    EdirtAdvtController.$inject = ['$scope', '$state', 'Advertisement', '$stateParams', 'VendorService', '$http', '$modal'];
+    EdirtAdvtController.$inject = ['$scope', '$state', 'Advertisement', '$stateParams', 'VendorService', '$http', '$modal', 'Upload', '$timeout'];
 
-    function EdirtAdvtController($scope, $state, Advertisement, $stateParams, VendorService, $http, $modal) {
+    function EdirtAdvtController($scope, $state, Advertisement, $stateParams, VendorService, $http, $modal, Upload, $timeout) {
 
         $scope.advt = {};
         $scope.productTypes = [];
@@ -50,7 +50,10 @@
             });
         }
 
-        $scope.submit = function () {
+        $scope.submit = function (photo) {
+            if (photo != undefined || photo != null) {
+                $scope.advt.ImagePath = photo.Path;
+            } 
             VendorService.updateAdvt($scope.advt, successSubmit, errorSubmit);
         }
 
@@ -105,7 +108,30 @@
             });
         }
 
+        $scope.uploadpic = function (file) {
+            if (file === undefined || file === null) {
+                alert('old pic');
+                $scope.submit();
+            }
+            else {
+                file.upload = Upload.upload({
+                    url: '/api/file/add',
+                    data: { file: file },
+                });
 
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        $scope.submit(response.data.Photo);
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    // Math.min is to fix IE which reports 200% sometimes
+                    file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                });
+            }
+        }
 
 
     }

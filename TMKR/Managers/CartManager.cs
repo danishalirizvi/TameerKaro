@@ -23,10 +23,10 @@ namespace TMKR.Managers
             List<CartItemModel> items = shopping_CartDao.GetCartItems(cartid);
 
             List<PurchaseOrder> orders = new List<PurchaseOrder>();
-            
+
             if (items.Any() && cart.user != null)
             {
-                 foreach (var item in items)
+                foreach (var item in items)
                 {
                     PurchaseOrder po = new PurchaseOrder()
                     {
@@ -52,7 +52,6 @@ namespace TMKR.Managers
                 purchaseOrderDao.InsertPurchaseOrder(orders);
             }
         }
-
 
         public void addCartItems(ShoppingCartModel cart)
         {
@@ -84,6 +83,52 @@ namespace TMKR.Managers
             shopping_CartDao.addCartItems(items);
 
             createPurchaseOrders(cartid, cart);
+        }
+
+        public List<OrderModel> PurchaseOrderList(int Id, string type)
+        {
+            var orders = purchaseOrderDao.OrderList(Id, type);
+            return orders;
+        }
+
+        public List<OrderParentModel> GetOrders(int Id, string type)
+        {
+            List<OrderModel> ordersAll = PurchaseOrderList(Id, type);
+
+            List<OrderParentModel> result = new List<OrderParentModel>();
+
+            var orders = ordersAll.GroupBy(t => new { t.CART_ID, t.VendorId });
+
+            foreach (var order in orders)
+            {
+                OrderParentModel parentorder = new OrderParentModel()
+                {
+                    CART_ID = order.FirstOrDefault().CART_ID,
+                    VendorName = order.FirstOrDefault().VendorName,
+                    VendorPhone = order.FirstOrDefault().VendorPhone,
+                    SHPNG_ADRS = order.FirstOrDefault().SHPNG_ADRS,
+                    Total = order.Sum(t => t.ItemAmount),
+                    STATUS = order.FirstOrDefault().STATUS,
+                    VendorEmail = order.FirstOrDefault().VendorEmail,
+
+                };
+                parentorder.orderdetail = new List<OrderChildModel>();
+
+                foreach (var item in order)
+                {
+                    OrderChildModel child = new OrderChildModel()
+                    {
+                        ProdName = item.Product,
+                        Quantity = item.Quantity,
+                        Unit_Price = item.UnitPrice,
+                        TotalAmount = item.UnitPrice * item.Quantity,
+                        ID = item.PurchaseOrderId
+                    };
+                    parentorder.orderdetail.Add(child);
+                }
+                result.Add(parentorder);
+            }
+            return result;
         }
     }
 }

@@ -85,4 +85,12 @@
                         }
                     });
             }]);
+    authentication.$inject = ['$q', '$location', 'AuthenticationService', '$state'];
+
+    function authentication($q, $location, AuthenticationService) {
+        if (!AuthenticationService.isAuthenticated('cookievendor')) {
+            var returnUrl = $location.path();
+            $state.go('vendor.login');
+        }
+    }
 })();

@@ -32,6 +32,15 @@ namespace TMKR.Managers
             int user_id = customerDao.Insert(customerVm);
             customerVm.ID = user_id;
             customerDao.InsertAddress(customerVm);
+
+            ProfilePicModel photo = new ProfilePicModel();
+
+            photo.Id = user_id;
+            photo.Path = "../../../images/a.png";
+            photo.Type = "Vendor";
+            photo.Action = "Create";
+
+            ProfilePic(photo);
         }
 
         //Profile Update
@@ -58,5 +67,16 @@ namespace TMKR.Managers
         public bool checkUsername(string username) {
             return customerDao.CheckUsername(username);
         }
+
+        public string getPrfilePicPath(int id)
+        {
+            return customerDao.getprofilepicpath(id);
+        }
+
+        public void ProfilePic(ProfilePicModel photo)
+        {
+            customerDao.profilePic(photo);
+        }
+
     }
 }

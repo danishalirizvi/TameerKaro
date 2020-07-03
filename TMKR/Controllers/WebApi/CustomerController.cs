@@ -48,7 +48,6 @@ namespace TMKR.Controllers.WebApi
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
         }
 
-
         //Update Profile WEB API Call
         [HttpPost]
         public HttpResponseMessage UpdateProfile([FromBody]CustomerProfileModel customerVm)
@@ -66,7 +65,6 @@ namespace TMKR.Controllers.WebApi
             }
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Password Incorrect");
         }
-
 
         //Get Products WEB API Call
         [HttpGet]
@@ -114,6 +112,60 @@ namespace TMKR.Controllers.WebApi
             }
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetProfilePicPath(int customerid)
+        {
+            try
+            {
+                string Path = customerManager.getPrfilePicPath(customerid);
+
+                return Request.CreateResponse(HttpStatusCode.OK, Path);
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
+            }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage UpdateProfilePic([FromBody]ProfilePicModel photo)
+        {
+
+            if (photo != null)
+            {
+                photo.Action = "Update";
+
+                customerManager.ProfilePic(photo);
+
+                return Request.CreateResponse(HttpStatusCode.OK, "Picture Updated Successfully");
+            }
+            return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
+        }
+
+
+        [HttpGet]
+        public HttpResponseMessage GetOrders(int Id)
+        {
+            try
+            {
+                OrderTypesModel result = new OrderTypesModel();
+
+                result.Pending = cartManager.GetOrders(Id, "Pending");
+
+                result.Accepted = cartManager.GetOrders(Id, "Accepted");
+
+                result.Rejected = cartManager.GetOrders(Id, "Rejected");
+
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
+            }
+        }
+
+
+
         //WebApi Route Configuration
         public static void ConfigureRoutes(HttpConfiguration config)
         {
@@ -146,6 +198,21 @@ namespace TMKR.Controllers.WebApi
                 "ValidateCustomerUsername",
                 "api/customer/validateUsername",
                 new { controller = "Customer", action = "validateUsername" });
+
+            config.Routes.MapHttpRoute(
+                "GetCustomerProfilePicPath",
+                "api/customer/getCustomerProfilePicPath/{customerid}",
+                new { controller = "Customer", action = "GetProfilePicPath" });
+
+            config.Routes.MapHttpRoute(
+                "UpdateCustomerProfilePic",
+                "api/customer/updatecustomerprofilepic",
+                new { controller = "Customer", action = "UpdateProfilePic" });
+
+            config.Routes.MapHttpRoute(
+                "GetOrder",
+                "api/customer/{Id}/getOrders",
+                new { controller = "Customer", action = "GetOrders" });
         }
 
     }

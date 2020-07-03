@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 
 namespace TMKR.Models.DataModel
@@ -24,5 +25,7 @@ namespace TMKR.Models.DataModel
         public DateTime? POST_DATE { get; set; }
         
         public string STUS_NME { get; set; }
+
+        public string Path { get; set; }
     }
 }

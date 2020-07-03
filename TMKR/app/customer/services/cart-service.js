@@ -3,7 +3,7 @@
 
     angular
         .module('app.customer')
-        .service('ngCart', ['$rootScope', '$window', 'ngCartItem', 'store', '$cookies', '$http', '$state', '$modal',
+        .service('ngCart', ['$rootScope', '$window', 'ngCartItem', 'store', '$cookies', '$http', '$state', '$modal', 
             function ($rootScope, $window, ngCartItem, store, $cookies, $http, $state, $modal) {
 
                 this.init = function () {
@@ -90,6 +90,9 @@
                         $rootScope.$broadcast('ngCart:itemAdded', newItem);
                     }
                     $rootScope.$broadcast('ngCart:change', {});
+                    product.Quantity = null;
+                    //$scope.item.Quantity = null;
+
                 };
 
                 this.getItemById = function (itemId) {
@@ -206,6 +209,7 @@
                 this.$save = function () {
                     return store.set('cart', JSON.stringify(this.getCart()));
                 }
+
 
             }])
 })();

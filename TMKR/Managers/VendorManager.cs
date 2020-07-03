@@ -9,14 +9,28 @@ namespace TMKR.Managers
     {
         VendorDao vendordao = new VendorDao();
 
-        public bool Create(VendorModel vendorVm) {
+        public bool Create(VendorModel vendorVm)
+        {
             int user_id = vendordao.Insert(vendorVm);
+
             vendorVm.ID = user_id;
+
             vendordao.InsertAddress(vendorVm);
+
+            ProfilePicModel photo = new ProfilePicModel();
+
+            photo.Id = user_id;
+            photo.Path = "../../../images/a.png";
+            photo.Type = "Vendor";
+            photo.Action = "Create";
+
+            ProfilePic(photo);
+
             return true;
         }
 
-        public void resetPass() {
+        public void resetPass()
+        {
             vendordao.resetPass();
         }
 
@@ -34,16 +48,19 @@ namespace TMKR.Managers
             return null;
         }
 
-        public void updateProfile(VendorModel model, int id ){
-            vendordao.UpdateProfile(model,id);
+        public void updateProfile(VendorModel model, int id)
+        {
+            vendordao.UpdateProfile(model, id);
         }
 
-        public bool validateUsername(string username) {
+        public bool validateUsername(string username)
+        {
             if (vendordao.ValidateUserName(username))
             {
                 return true;
             }
-            else {
+            else
+            {
                 return false;
             }
         }
@@ -72,6 +89,16 @@ namespace TMKR.Managers
 
             VendorModel vendor = vendordao.GetUser(vendorVm.ID);
             return vendor;
+        }
+
+        public void ProfilePic(ProfilePicModel photo)
+        {
+            vendordao.Pic(photo);
+        }
+
+        public string getPrfilePicPath(int id)
+        {
+            return vendordao.getpicpath(id,"Vendor");
         }
     }
 }

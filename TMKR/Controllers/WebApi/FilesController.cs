@@ -36,7 +36,8 @@ namespace TMKR.Controllers.WebApi
                         Name = fi.Name,
                         Created = fi.CreationTime,
                         Modified = fi.LastWriteTime,
-                        Size = fi.Length / 1024
+                        Size = fi.Length / 1024,
+                        Path = @"..\..\..\Resources\images\" + fi.Name
                     })
                     .ToList();
             });
@@ -104,21 +105,20 @@ namespace TMKR.Controllers.WebApi
                 //await Request.Content.ReadAsMultipartAsync(provider);
                 await Task.Run(async () => await Request.Content.ReadAsMultipartAsync(provider));
 
-                var photos = new List<PhotoViewModel>();
-
-                foreach (var file in provider.FileData)
+                var file = provider.FileData.FirstOrDefault();
+                var fileInfo = new FileInfo(file.LocalFileName);
+                var photo = new PhotoViewModel
                 {
-                    var fileInfo = new FileInfo(file.LocalFileName);
+                    Name = fileInfo.Name,
+                    Created = fileInfo.CreationTime,
+                    Modified = fileInfo.LastWriteTime,
+                    Size = fileInfo.Length / 1024
+                };
 
-                    photos.Add(new PhotoViewModel
-                    {
-                        Name = fileInfo.Name,
-                        Created = fileInfo.CreationTime,
-                        Modified = fileInfo.LastWriteTime,
-                        Size = fileInfo.Length / 1024
-                    });
-                }
-                return Ok(new { Message = "Photos uploaded ok", Photos = photos });
+                photo.Path = string.IsNullOrEmpty(photo.Name) ? null : @"../../../Resources/images/" + photo.Name;
+
+
+                return Ok(new { Message = "Photos uploaded ok", Photo = photo });
             }
             catch (Exception ex)
             {
