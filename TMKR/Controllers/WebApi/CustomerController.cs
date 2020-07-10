@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,7 +17,7 @@ namespace TMKR.Controllers.WebApi
         VendorManager vendorManager = new VendorManager();
         Prod_AdvtManager prod_AdvtManager = new Prod_AdvtManager();
         CartManager cartManager = new CartManager();
-
+        Purchase_OrderManager purchsaeordermanager = new Purchase_OrderManager();
 
         //Login WEB API Call
         [HttpPost]
@@ -39,7 +40,7 @@ namespace TMKR.Controllers.WebApi
         [HttpPost]
         public HttpResponseMessage Register([FromBody]CustomerModel customerVm)
         {
-             if (customerVm != null)
+            if (customerVm != null)
             {
                 customerVm.PSWD = PasswordHasher.HashPassword(customerVm.PSWD);
                 customerManager.Create(customerVm);
@@ -82,6 +83,23 @@ namespace TMKR.Controllers.WebApi
 
         }
 
+
+        [HttpGet]
+        public HttpResponseMessage GetProduct(int advtid)
+        {
+            try
+            {
+                Prod_AdvtModel prodAdvt = prod_AdvtManager.getProduct(advtid);
+
+                return Request.CreateResponse(HttpStatusCode.OK, prodAdvt);
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
+            }
+        }
+
+
         //Save Cart WEB API Call
         [HttpPost]
         public HttpResponseMessage SaveCart([FromBody]ShoppingCartModel cart)
@@ -101,7 +119,8 @@ namespace TMKR.Controllers.WebApi
             try
             {
                 valid = customerManager.checkUsername(username);
-                if (!valid) {
+                if (!valid)
+                {
                     valid = vendorManager.checkUsername(username);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, valid);
@@ -164,7 +183,14 @@ namespace TMKR.Controllers.WebApi
             }
         }
 
+        [HttpPost]
+        public HttpResponseMessage CancelOrder(List<OrderChildModel> orders)
+        {
+            
+            purchsaeordermanager.CancelOrder(orders);
 
+            return Request.CreateErrorResponse(HttpStatusCode.OK, "Order Cancelled Succcessfully");
+        }
 
         //WebApi Route Configuration
         public static void ConfigureRoutes(HttpConfiguration config)
@@ -213,6 +239,16 @@ namespace TMKR.Controllers.WebApi
                 "GetOrder",
                 "api/customer/{Id}/getOrders",
                 new { controller = "Customer", action = "GetOrders" });
+
+            config.Routes.MapHttpRoute(
+                "GetProdAdvt",
+                "api/customer/getProdAdvt/{AdvtId}",
+                new { controller = "Customer", action = "GetProduct" });
+
+            config.Routes.MapHttpRoute(
+                "CancelOrder",
+                "api/customer/cancelorder",
+                new { controller = "Customer", action = "CancelOrder" });
         }
 
     }

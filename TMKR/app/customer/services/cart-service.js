@@ -8,9 +8,6 @@
 
                 this.init = function () {
                     this.$cart = {
-                        shipping: null,
-                        taxRate: null,
-                        tax: null,
                         items: [],
                         user: {},
                         ShippingAddress: null
@@ -54,45 +51,42 @@
                     });
                 };
 
-
-                this.MissingPopup = function () {
+                this.MissingPopup = function (errorMessage) {
                     $modal.open({
                         templateUrl: 'app/customer/cart/error-alert.html',
                         controller: function ($scope, $modalInstance) {
+                            $scope.message = errorMessage;
                             $scope.submit = function () {
-                                $log.log('Submiting user info.');
-                                $log.log($scope.selected);
                                 $modalInstance.dismiss('cancel');
                             }
                             $scope.cancel = function () {
                                 $modalInstance.dismiss('cancel');
                             };
-                        },
-                        resolve: {
-                            //user: function () {
-                            //    return $scope.selected;
-                            //}
                         }
                     });
                 };
 
                 this.addItem = function (product) {
-                    var inCart = this.getItemById(product.Advt_Id);
-                    if (typeof inCart === 'object') {
-                        if (!(product.Quantity) || !(product.Unit_Price)) { alert("Enter Product Quantity or Unit Price Not Available"); return; }
-                        inCart.setQuantity(product.Quantity, false);
-                        $rootScope.$broadcast('ngCart:itemUpdated', inCart);
+                    if (product.Quantity <= 0 || product.Quantity == null || product.Quantity == undefined) {
+                        this.MissingPopup('Product Quantity must be Positive');
+                    } else if (product.Quantity > product.Order_Limit) {
+                        this.MissingPopup('Max Limit for Order Placement is ' + product.Order_Limit);
                     } else {
-                        var prod = JSON.stringify(product);
-                        if (!(product.Quantity) || !(product.Unit_Price)) { alert("Enter Product Quantity or Unit Price Not Available"); return; }
-                        var newItem = new ngCartItem(product.Advt_Id, product.Prod_Type, product.Unit_Price, product.Quantity, product.VNDR_ID, prod);
-                        this.$cart.items.push(newItem);
-                        $rootScope.$broadcast('ngCart:itemAdded', newItem);
+                        var inCart = this.getItemById(product.Advt_Id);
+                        if (typeof inCart === 'object') {
+                            if (!(product.Quantity) || !(product.Unit_Price)) { alert("Enter Product Quantity or Unit Price Not Available"); return; }
+                            inCart.setQuantity(product.Quantity, false);
+                            $rootScope.$broadcast('ngCart:itemUpdated', inCart);
+                        } else {
+                            var prod = JSON.stringify(product);
+                            if (!(product.Quantity) || !(product.Unit_Price)) { alert("Enter Product Quantity or Unit Price Not Available"); return; }
+                            var newItem = new ngCartItem(product.Advt_Id, product.Prod_Type, product.Unit_Price, product.Quantity, product.VNDR_ID, prod);
+                            this.$cart.items.push(newItem);
+                            $rootScope.$broadcast('ngCart:itemAdded', newItem);
+                        }
                     }
                     $rootScope.$broadcast('ngCart:change', {});
                     product.Quantity = null;
-                    //$scope.item.Quantity = null;
-
                 };
 
                 this.getItemById = function (itemId) {
@@ -209,7 +203,6 @@
                 this.$save = function () {
                     return store.set('cart', JSON.stringify(this.getCart()));
                 }
-
 
             }])
 })();

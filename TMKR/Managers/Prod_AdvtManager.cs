@@ -73,5 +73,15 @@ namespace TMKR.Managers
             
             vendorDao.Pic(photo);
         }
+
+        public Prod_AdvtModel getProduct(int advtid)
+        {
+            return prod_AdvtDao.GetProdAdvt(advtid);
+        }
+
+        public void deleteAdvt(int advtId)
+        {
+            prod_AdvtDao.DeleteAdvt(advtId);
+        }
     }
 }

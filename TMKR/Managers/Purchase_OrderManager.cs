@@ -84,6 +84,7 @@ namespace TMKR.Managers
                     child.Unit_Price = item.UnitPrice;
                     child.TotalAmount = item.UnitPrice * item.Quantity;
                     child.ID = item.PurchaseOrderId;
+                    child.Unit = item.Unit;
                     parentModel.purchaseorderdetail.Add(child);
                 }
 
@@ -119,6 +120,7 @@ namespace TMKR.Managers
                     child.Unit_Price = item.UnitPrice;
                     child.TotalAmount = item.UnitPrice * item.Quantity;
                     child.ID = item.PurchaseOrderId;
+                    child.Unit = item.Unit;
                     parentModel.purchaseorderdetail.Add(child);
                 }
 
@@ -130,6 +132,15 @@ namespace TMKR.Managers
         public void updateStatus(int purchaseOrderId, string v)
         {
             purchaseOrderDao.UpdateOrderStatus(purchaseOrderId,v);
+        }
+
+        public void CancelOrder(List<OrderChildModel> orders)
+        {
+            foreach (OrderChildModel order in orders) {
+
+                purchaseOrderDao.CancelOrder(order.ID);
+            }
+            
         }
     }
 }

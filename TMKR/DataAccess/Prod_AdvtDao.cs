@@ -37,13 +37,14 @@ namespace TMKR.DataAccess
 	                                p.UNIT_PRICE as Unit_Price,
 	                                p.MAX_ORDR_LIMT as Order_Limit,
 	                                p.DLVRY_AVLB,
-	                                i.Path as IMG_PATH
+	                                i.Path as IMG_PATH,
+                                    pt.Unit
 	                                from Prod_Advt p
 
                                     left join Product_Type pt on p.PROD_TYPE_ID = pt.ID
                                     left join Vendor v on p.VNDR_ID = v.ID
                                     left join Images i on p.ID = i.FId
-                                    where p.STUS_NME = 'Visible'";
+                                    where p.STUS_NME = 'Visible' AND p.Active = 'True' ";
 
                 return Conn.Query<Prod_AdvtModel>(query).ToList();
             }
@@ -73,10 +74,24 @@ namespace TMKR.DataAccess
                                    ,MAX_ORDR_LIMT = @MAX_ORDR_LIMT
                                    ,DLVRY_AVLB = @DLVRY_AVLB
                                    ,STUS_NME = @STUS_NME
-                                    WHERE ID = @ID";
+                                    WHERE ID = @ID AND Active = 'True' ";
 
 
                 Conn.Execute(query, new { PROD_TYPE_ID = advtVM.PROD_TYPE_ID, DSCP = advtVM.DSCP, UNIT_PRICE = advtVM.UNIT_PRICE, MAX_ORDR_LIMT = advtVM.MAX_ORDR_LIMT, DLVRY_AVLB = advtVM.DLVRY_AVLB, STUS_NME = advtVM.STUS_NME, ID = advtVM.ID });
+            }
+        }
+
+        public  void DeleteAdvt(int advtId)
+        {
+            using (Conn)
+            {
+                string query = @"UPDATE Prod_Advt
+                                SET 
+                                   Active = @Active
+                                    WHERE ID = @ID";
+
+
+                Conn.Execute(query, new { Active = false, ID = advtId });
             }
         }
 
@@ -87,7 +102,7 @@ namespace TMKR.DataAccess
                 string query = @"select 
                     p.ID,p.PROD_TYPE_ID,pt.NME,p.DSCP,p.UNIT_PRICE,p.MAX_ORDR_LIMT,p.DLVRY_AVLB,p.POST_DATE,p.STUS_NME 
                     from Prod_Advt p 
-                    left join Product_Type pt on pt.ID = p.PROD_TYPE_ID  where p.ID =" + advtId;
+                    left join Product_Type pt on pt.ID = p.PROD_TYPE_ID  where p.ID =" + advtId + " AND p.Active = 'True' ";
 
                 return Conn.QueryFirstOrDefault<ActiveAdvtModel>(query);
             }
@@ -98,12 +113,17 @@ namespace TMKR.DataAccess
 
             using (Conn)
             {
-                string query = @"select 
-                    p.ID,pt.NME,p.DSCP,p.UNIT_PRICE,p.MAX_ORDR_LIMT,p.DLVRY_AVLB,p.POST_DATE,p.STUS_NME 
-                    from Prod_Advt p 
-                    left join Product_Type pt on pt.ID = p.PROD_TYPE_ID  where VNDR_ID =" + vndrId;
 
-                return Conn.Query<ActiveAdvtModel>(query).ToList();
+                string query = @"select 
+                    p.ID,pt.NME,p.DSCP,p.UNIT_PRICE,p.MAX_ORDR_LIMT,p.DLVRY_AVLB,p.POST_DATE,p.STUS_NME,pt.Unit
+                    from Prod_Advt p 
+                    left join Product_Type pt on pt.ID = p.PROD_TYPE_ID  where VNDR_ID =" + vndrId + " AND p.Active = 'True' ";
+
+                
+
+                List<ActiveAdvtModel> a = Conn.Query<ActiveAdvtModel>(query).ToList();
+
+                return a;
             }
         }
 
@@ -118,6 +138,32 @@ namespace TMKR.DataAccess
 
                 var id = Conn.Query<int>(query, new { model.PROD_TYPE_ID, model.DSCP, model.VNDR_ID, model.UNIT_PRICE, model.MAX_ORDR_LIMT, model.DLVRY_AVLB, model.POST_DATE, model.STUS_NME }).Single();
                 return id;
+            }
+        }
+
+        public Prod_AdvtModel GetProdAdvt(int advtId)
+        {
+            using (Conn)
+            {
+                string query = @"select 
+	                                pa.ID as Advt_Id,
+	                                pt.NME as Prod_Type,
+	                                pa.DSCP as Advt_Dscp,
+	                                pa.VNDR_ID,
+	                                v.FRST_NME as VNDR_Name,
+	                                pa.UNIT_PRICE as Unit_Price,
+	                                pa.MAX_ORDR_LIMT as Order_Limit,
+	                                pa.DLVRY_AVLB,
+	                                i.Path as IMG_PATH,
+                                    pt.Unit
+
+	                                from Prod_Advt pa
+	                                left join Product_Type pt on pt.ID = pa.PROD_TYPE_ID
+	                                left join Vendor v on v.ID = pa.VNDR_ID
+	                                left join Images i on i.FId = pa.ID and i.Type = 'Advertisement'
+	                                where pa.ID = "+ advtId + " AND pa.Active = 'True' ";
+
+                return Conn.QueryFirstOrDefault<Prod_AdvtModel>(query);
             }
         }
     }

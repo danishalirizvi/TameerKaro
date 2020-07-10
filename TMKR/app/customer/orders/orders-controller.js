@@ -39,22 +39,18 @@
               });
         }
 
-        $scope.orderAction = function (id, action) {
-
-            data.id = id;
-            data.action = action;
-
-            alert(JSON.stringify(data));
-
-            $http.post('/api/vendor/orderaction', JSON.stringify(data))
+        $scope.cancelorder = function (orders,index) {
+            var order = orders[index].orderdetail;
+            $http.post('/api/customer/cancelorder', order)
                 .success(function (response) {
-                    alert('Success');
                     $scope.onInit();
                 })
                 .error(function (response) {
                     alert('Error');
                 });
         }
+
+
     }
 })();
 

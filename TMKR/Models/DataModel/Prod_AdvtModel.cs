@@ -26,5 +26,7 @@ namespace TMKR.Models.DataModel
         public int Quantity { get; set; }
 
         public string IMG_PATH { get; set; }
+
+        public string Unit { get; set; }
     }
 }

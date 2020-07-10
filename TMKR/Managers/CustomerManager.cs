@@ -77,6 +77,5 @@ namespace TMKR.Managers
         {
             customerDao.profilePic(photo);
         }
-
     }
 }

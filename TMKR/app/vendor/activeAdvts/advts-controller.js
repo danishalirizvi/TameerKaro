@@ -25,10 +25,27 @@
             });
         }
 
-        $scope.editadvt = function (advt) {
-            Advertisement.advt = advt;
-            $state.go("vendor.editadvts", {
-                customerid:advt.ID
+        //$scope.editadvt = function (advt) {
+        //    Advertisement.advt = advt;
+        //    $state.go("vendor.editadvts", {
+        //        advtId:advt.ID
+        //    });
+        //}
+
+        $scope.deleteadvts = function (advtId) {
+            
+            var config = {
+                method: 'POST',
+                url: '/api/vendor/deleteAdvt/'+ advtId
+            };
+
+            $http(config)
+            .success(function (response) {
+                alert(JSON.stringify(response));
+                $scope.onInit();
+            })
+            .error(function (response) {
+                alert('Error');
             });
         }
     }

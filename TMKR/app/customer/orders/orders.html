@@ -17,7 +17,7 @@
                     <button class="btn-primary" ng-click="setactive('Accepted')" style="padding-top:3px;padding-bottom:3px;">Accepted</button>
                     <button class="btn-primary" ng-click="setactive('Rejected')" style="padding-top:3px;padding-bottom:3px;">Rejected</button>
                     <div ng-show="active == 'Pending'">
-                        <div class="panel-heading"><h3>New</h3></div>
+                        <div class="panel-heading"><h3>Pending</h3></div>
                         <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
                             <thead>
                                 <tr>
@@ -31,15 +31,15 @@
                                 </tr>
                             </thead>
                             <tbody ng-repeat="order in ordersparent.Pending">
-                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" ng-click="show = !show">
-                                    <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" >
+                                    <td><button class="btn btn-default btn-xs" ng-click="show = !show"><span class="glyphicon glyphicon-eye-open"></span></button></td>
                                     <td>{{order.VendorName}}</td>
                                     <td>{{order.VendorPhone}}</td>
                                     <td>{{order.VendorEmail}}</td>
                                     <td style="max-width: 120px;">{{order.SHPNG_ADRS}}</td>
                                     <td>{{order.STATUS}}</td>
                                     <td>{{order.Total}}</td>
-                                    <td style="width:60px"><button class="btn-danger" style="padding-top:3px;padding-bottom:3px;" >Cancel</button></td>
+                                    <td style="width:60px"><button class="btn-danger" ng-click="cancelorder(ordersparent.Pending,$index)" style="padding-top:3px;padding-bottom:3px;" >Cancel</button></td>
                                 </tr>
                                 <tr ng-show="show">
                                     <th>&nbsp;</th>
@@ -77,8 +77,8 @@
                                 </tr>
                             </thead>
                             <tbody ng-repeat="order in ordersparent.Accepted">
-                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" ng-click="show = !show">
-                                    <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+                                    <td><button class="btn btn-default btn-xs" ng-click="show = !show"><span class="glyphicon glyphicon-eye-open"></span></button></td>
                                     <td>{{order.VendorName}}</td>
                                     <td>{{order.VendorPhone}}</td>
                                     <td>{{order.VendorEmail}}</td>
@@ -122,8 +122,8 @@
                                 </tr>
                             </thead>
                             <tbody ng-repeat="order in ordersparent.Rejected">
-                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" ng-click="show = !show">
-                                    <td><button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+                                    <td><button class="btn btn-default btn-xs" ng-click="show = !show"><span class="glyphicon glyphicon-eye-open"></span></button></td>
                                     <td>{{order.VendorName}}</td>
                                     <td>{{order.VendorPhone}}</td>
                                     <td>{{order.VendorEmail}}</td>

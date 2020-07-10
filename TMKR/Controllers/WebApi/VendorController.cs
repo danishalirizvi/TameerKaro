@@ -153,7 +153,6 @@ namespace TMKR.Controllers.WebApi
             try
             {
                 List<ActiveAdvtModel> prodAdvts = prodAdvtManager.getProdAdvts(vndrId);
-
                 return Request.CreateResponse(HttpStatusCode.OK, prodAdvts);
             }
             catch (Exception)
@@ -220,7 +219,7 @@ namespace TMKR.Controllers.WebApi
             }
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
         }
-        
+
         [HttpPost]
         public HttpResponseMessage UpdateProfile([FromBody]VendorModel vendorVm)
         {
@@ -266,6 +265,15 @@ namespace TMKR.Controllers.WebApi
             {
                 return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
             }
+        }
+
+        [HttpPost]
+        public HttpResponseMessage DeleteAdvt(int advtId)
+        {
+
+            prodAdvtManager.deleteAdvt(advtId);
+
+            return Request.CreateErrorResponse(HttpStatusCode.OK, "Advertisement Deleted Successfully");
         }
 
         public static void ConfigureRoutes(HttpConfiguration config)
@@ -339,6 +347,11 @@ namespace TMKR.Controllers.WebApi
                 "GetVendorProfilePicPath",
                 "api/vendor/getVendorProfilePicPath/{vendorid}",
                 new { controller = "Vendor", action = "GetProfilePicPath" });
+
+            config.Routes.MapHttpRoute(
+                "DeleteAdvertisement",
+                "api/vendor/deleteAdvt/{advtId}",
+                new { controller = "Vendor", action = "DeleteAdvt" });
         }
     }
 }

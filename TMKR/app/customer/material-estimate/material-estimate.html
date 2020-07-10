@@ -1,23 +1,86 @@
 ﻿<section id="main-container" class="main-container">
     <div class="container">
-        <h1>Material Estimate</h1>
         <div class="col-lg-12" style="padding-top:15px">
             <div class="panel panel-default">
-                <div class="panel-heading"><h3>Object Store</h3></div>
+                <div class="panel-heading"><h3>Material Estimation</h3></div>
                 <div class="panel-body">
                     <form name="" class="form-horizontal" method="post" ng-submit="" role="form">
-                        <div style="margin-top: 10px" class="col-md-6">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class=""></i>
-                                </span>
-                                <input type="text" class="form-control" name="" ng-model="" placeholder="Project Name" required />
+                        <div class="col-sm-12" style="min-height:500px;padding:5px">
+
+                            <div class="col-sm-12" style="min-height:50px;height:auto;padding:5px">
+                                <div class="col-sm-6" >
+                                    <div class="col-sm-5">
+                                        Covered Area (sq.ft):
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <input type="number" class="quantity" ng-model="coveredarea" ng-min="1" placeholder="Enter Covered Area">  sq.ft.
+                                    </div>
+                                </div>
+                                <div class="col-sm-6" >
+                                    <div class="col-sm-5">
+                                        Structure Height (ft) :
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <input type="number" class="quantity" ng-model="height" ng-min="1" placeholder="Enter Structure Height">  ft.
+                                    </div>
+                                </div>
                             </div>
-                            <div style="margin-top: 10px" class="input-group col-md-3">
-                                <input type="text" class="form-control" name="" ng-model="" placeholder="Project Name" required />
+
+                            <div class="col-sm-12" ng-repeat="wall in walls" style="min-height:80px;height:auto;padding:5px">
+                                <h5>Wall#{{$index+1}}</h5>
+                                <div class="col-sm-5">
+                                    <div class="col-sm-4">
+                                        Length (ft):
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="number" ng-model="wall.length" class="quantity" ng-min="1" placeholder="Enter Length">  ft.
+                                    </div>
+                                </div>
+                                <div class="col-sm-5">
+                                    <div class="col-sm-4">
+                                        Multiplier : 
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="number" ng-model="wall.multiplier" class="quantity" ng-min="1" placeholder="Enter Number of Similar Walls">  Walls.
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="btn-primary" ng-click="removeWall($index)">Remove</button>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12" style="padding:10px">
+                                <button class="btn-primary" ng-click="addWall()">Add Wall</button>
+                                <button class="btn-primary" ng-click="reset()">Reset</button>
+                            </div>
+
+                            <div class="col-sm-12" style="min-height:60px;height:auto;padding:5px;margin-top:30px">
+                                <button class="btn-primary" ng-click="results = true" style="float:right">Caculate Estimate</button>
+                            </div>
+
+                            <div ng-show="results">
+                                <div class="panel-heading"><h3>Results</h3></div>
+                                <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Index</th>
+                                            <th>Length</th>
+                                            <th>Multiplier</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="wall in walls">
+                                        <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" ng-click="show = !show">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{wall.length}} ft(s)</td>
+                                            <td>{{wall.multiplier}} wall(s)</td>
+                                            <td>{{wall.length*wall.multiplier*height}} (sq.ft)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
-                        
                     </form>
                 </div>
             </div>

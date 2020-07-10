@@ -161,9 +161,12 @@
     <Content Include="app\customer\login\login-controller.js" />
     <Content Include="app\customer\login\login.html" />
     <Content Include="app\customer\logout\logout-controller.js" />
+    <Content Include="app\customer\material-estimate\material-estimate-controller.js" />
     <Content Include="app\customer\material-estimate\material-estimate.html" />
     <Content Include="app\customer\orders\orders-controller.js" />
     <Content Include="app\customer\orders\orders.html" />
+    <Content Include="app\customer\product\product.html" />
+    <Content Include="app\customer\product\product-controller.js" />
     <Content Include="app\customer\profiledetail\profiledetail-controller.js" />
     <Content Include="app\customer\profiledetail\profiledetails.html" />
     <Content Include="app\customer\profile\profile-controller.js" />

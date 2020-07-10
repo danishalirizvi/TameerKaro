@@ -18,6 +18,8 @@
         $scope.advtStatus = [];
         $scope.dlvryAlvb = [{ 'DLVRY_AVLB': 1, 'NME': 'Yes' }, { 'DLVRY_AVLB': 0, 'NME': 'No' }];
 
+        $scope.unit = [];
+
 
         $scope.onInit = function () {
             VendorService.getProductTypes(onSuccess, onFailed);
@@ -26,6 +28,9 @@
 
         function onSuccess(response) {
             $scope.productTypes = response;
+            angular.forEach($scope.productTypes, function (value, key) {
+                $scope.unit.push(value.Unit);
+            });
         }
 
         function onFailed(response) {

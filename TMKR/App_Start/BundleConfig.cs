@@ -95,6 +95,8 @@ namespace TMKR
                 "~/app/customer/cartdetail/cartdetail-controller.js",
                 "~/app/customer/profile/profile-controller.js",
                 "~/app/customer/profiledetail/profiledetail-controller.js",
+                "~/app/customer/product/product-controller.js",
+                "~/app/customer/material-estimate/material-estimate-controller.js",
 
 
                 //vendor

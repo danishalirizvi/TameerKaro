@@ -56,6 +56,9 @@
                                     </span>
                                     <input type="number" class="form-control" name="UNIT_PRICE" ng-model="advt.UNIT_PRICE" min="1" placeholder="Unit Price" required />
                                 </div>
+                                <div ng-show="advt.PROD_TYPE_ID" >
+                                    <h5 class="text-warning" style="float:right">\per {{unit[advt.PROD_TYPE_ID-1]}}</h5>
+                                </div>
                                 <div class="error" ng-show="(submitted  || advtForm.UNIT_PRICE.$dirty)  && advtForm.UNIT_PRICE.$invalid">
                                     <p class="error" ng-show="advtForm.UNIT_PRICE.$error.required">
                                         Unit Price is mandatory
@@ -68,6 +71,9 @@
                                         <i class="fa fa-bars"></i>
                                     </span>
                                     <input type="number" class="form-control" name="MAX_ORDR_LIMT" ng-model="advt.MAX_ORDR_LIMT" min="1" placeholder="Max Order Limit" required />
+                                </div>
+                                <div ng-show="advt.PROD_TYPE_ID">
+                                    <h5 class="text-warning" style="float:right">{{unit[advt.PROD_TYPE_ID-1]}}(s)</h5>
                                 </div>
                                 <div class="error" ng-show="(submitted  || advtForm.MAX_ORDR_LIMT.$dirty)  && advtForm.MAX_ORDR_LIMT.$invalid">
                                     <p class="error" ng-show="advtForm.MAX_ORDR_LIMT.$error.required">

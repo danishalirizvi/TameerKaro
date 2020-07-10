@@ -22,6 +22,7 @@
                     <div style="float:right">
                         <a role="button" class="btn btn-primary" ng-click="ngCart.ClearCart();"> Clear Cart </a>
                         <a role="button" class="btn btn-primary" ui-sref="customer.cart" ui-sref-active="active"> Go to Cart </a>
+
                     </div>
                 </div>
             </div>
@@ -29,13 +30,14 @@
         <div class="row featured__filter">
             <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat" ng-repeat="item in products | filter:searchText " ng-hide="vm.isLoadingCategories">
                 <div class="featured__item">
-                    <div class="featured__item__pic set-bg" style="background-image: url('{{item.IMG_PATH}}');">
+                    <div class="featured__item__pic set-bg" style="background-image: url('{{item.IMG_PATH}}');"  ui-sref="customer.product({ advtId: {{item.Advt_Id}} })">
                     </div>
                     <div class="featured__item__text">
                         <h6><a href="#">{{item.Prod_Type}}</a></h6>
-                        <h5>{{item.Unit_Price}}.00 Rs\.</h5>
+                        <h5>Rs.{{item.Unit_Price}} per {{item.Unit}}</h5>
                         <input type="number" ng-model="item.Quantity" ng-init="item.Quantity = null" class="quantity" ng-min="1" placeholder="Enter Quantity">
-                        <button class="btn-primary" style="margin-top: 10px;margin-bottom: 10px;" ng-click="(item.Quantity > 0 && item.Quantity < item.Order_Limit) ? ngCart.addItem(item) : ngCart.MissingPopup()"><i class="fa fa-plus"></i>Add to Cart</button>
+                        <!--<button class="btn-primary" style="margin-top: 10px;margin-bottom: 10px;" ng-click="(item.Quantity > 0 && item.Quantity < item.Order_Limit) ? ngCart.addItem(item) : ngCart.MissingPopup()"><i class="fa fa-plus"></i>Add to Cart</button>-->
+                        <button class="btn-primary" style="margin-top: 10px;margin-bottom: 10px;" ng-click="ngCart.addItem(item)"><i class="fa fa-plus"></i>Add to Cart</button>
                         <h6><a href="#">By: {{item.VNDR_Name}}</a></h6>
                     </div>
                 </div>

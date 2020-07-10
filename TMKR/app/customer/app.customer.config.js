@@ -65,6 +65,7 @@
                 .state("customer.materialEstimate", {
                     url: "/estimates",
                     templateUrl: "app/customer/material-estimate/material-estimate.html",
+                    controller: "MaterialEstimate",
                     portal: "customer"
                 })
 
@@ -97,6 +98,12 @@
                     url: "/orders",
                     templateUrl: "app/customer/orders/orders.html",
                     controller: "OrderController",
+                    portal: "customer"
+                })
+                .state("customer.product", {
+                    url: "/product?advtId",
+                    templateUrl: "app/customer/product/product.html",
+                    controller: "ProductController",
                     portal: "customer"
                 });
         }]);

@@ -18,5 +18,7 @@ namespace TMKR.Models.DataModel
         public double TotalAmount { get; set; }
 
         public string Status { get; set; }
+
+        public string Unit { get; set; }
     }
 }

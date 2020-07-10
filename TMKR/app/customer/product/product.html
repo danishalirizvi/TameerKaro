@@ -1,0 +1,88 @@
+﻿<style>
+    .cntrvert {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+</style>
+<section class="page-section light product-detal-main-wrapper">
+    <div data-ng-init="onInit()" class="container">
+        <div class="col-sm-5">
+            <img src={{advt.IMG_PATH}} style="max-height:600px;" class="cntrvert">
+            <div class="add-buy-wrapper no-padding">
+                <span ng-click="ngCart.addItem(advt)" class="btn btn-add-to cart btn-purchase-custom cntrvert" style="width:50%; font-size:20px">
+                    <i class="fa fa-shopping-cart"></i>
+                    Add To Cart
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-7" style="padding:5px">
+            <div class="col-sm-12" style="padding:0px;padding-bottom:10px">
+                <h2 class="product-title"><span>{{advt.Prod_Type}}</span></h2>
+            </div>
+            <div class="col-sm-12" style="padding:10px">
+                Description: {{advt.Advt_Dscp}}
+            </div>
+            <div class="col-sm-6" style="padding:10px">
+                Unit Price: {{advt.Unit_Price}} per {{advt.Unit}}
+            </div>
+            <div class="col-sm-6" style="padding:10px">
+                Quantity: <input type="number" ng-model="advt.Quantity" ng-init="advt.Quantity = null" class="quantity" ng-min="1" placeholder="Enter Quantity">
+            </div>
+            <div class="col-sm-6" style="padding:10px">
+                Seller: {{advt.VNDR_Name}}
+            </div>
+            <div class="col-sm-6" style="padding:10px">
+                Contact: +92-300-1234567
+            </div>
+            <div class="col-sm-6" style="padding:10px">
+                Max Order Limit: {{advt.Order_Limit}}
+            </div>
+            <div class="col-sm-6" style="padding:10px">
+                Delivery: {{advt.DLVRY_AVLB}}
+            </div>
+        </div>
+        <!--<div class="container-fluid padding-50">
+            <div class="row product-single">
+                <div class="col-md-5 col-sm-12 col-xs-12 img-section-custom">
+                    <div class="row">
+                        <div class="col-md-10 col-sm-10 col-xs-10 zoom main-image-show no-padding">
+                            <div class="col-sm-12 main-image-big">
+                                <div class="main-image-big-inner zoom">
+                                    <div class="zm-wrap"><img class="img-responsive main-img zoom main-image-zoom-custom" id="set_image" src={{advt.IMG_PATH}} style="max-height:500px" alt=""></div>
+                                </div>
+                            </div>
+
+                            <div class="add-buy-wrapper no-padding">
+                                <span class="btn btn-add-to cart btn-purchase-custom" style="width:100%; font-size:20px">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    Add To Cart
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-12 col-xs-12 product-detail-custom no-padding">
+                    <div>
+                        <h2 class="product-title"><span>{{advt.Prod_Type}}</span></h2>
+                    </div>
+                    <div style="padding-top:30px">
+                        Description: {{advt.Advt_Dscp}}
+                    </div>
+                    <div style="padding-top:30px">
+                        Seller: {{advt.VNDR_Name}}
+                    </div>
+                    <div style="padding-top:30px">
+                        Unit Price: {{advt.Unit_Price}}
+                    </div>
+                    <div style="padding-top:30px">
+                        Max Order Limit: {{advt.Order_Limit}}
+                    </div>
+                    <div style="padding-top:30px">
+                        Delivery: {{advt.DLVRY_AVLB}}
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</section>

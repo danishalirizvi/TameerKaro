@@ -18,5 +18,6 @@ namespace TMKR.Models.DataModel
         public string SHPNG_ADRS { get; set; }
         public int CART_ID { get; set; }
         public int CustomerID { get; set; }
+        public string Unit { get; set; }
     }
 }

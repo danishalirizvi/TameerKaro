@@ -22,13 +22,14 @@
                                 <td>{{item.NME}}</td>
                                 <td style="width:350px">{{item.DSCP}}</td>
                                 <td>{{item.UNIT_PRICE}}</td>
-                                <td>{{item.MAX_ORDR_LIMT}}</td>
+                                <td>{{item.MAX_ORDR_LIMT}} {{item.Unit}}(s)</td>
                                 <td style="width:50px" ng-if="item.DLVRY_AVLB">Yes</td>
                                 <td style="width:50px" ng-if="!item.DLVRY_AVLB">No</td>
                                 <td>{{item.POST_DATE}}</td>
                                 <td>{{item.STUS_NME}}</td>
                                 <!--<td><a ui-sref="vendor.editadvts({ advtId: {{item.ID}} })">Edit</a></td>-->
                                 <td><button class="btn-primary btn-xs" style="padding-top:5px;padding-bottom:1px;" ui-sref="vendor.editadvts({ advtId: {{item.ID}} })">Edit</button></td>
+                                <td><button class="btn-danger btn-xs" style="padding-top:5px;padding-bottom:1px;" ng-click="deleteadvts(item.ID)">Delete</button></td>
                             </tr>
                         </tbody>
                     </table>

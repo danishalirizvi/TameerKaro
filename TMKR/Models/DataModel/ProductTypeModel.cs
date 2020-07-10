@@ -14,5 +14,6 @@ namespace TMKR.Models.DataModel
         public string DSCP { get; set; }
 
         public int EXT_CODE { get; set; }
+        public string Unit { get; set; }
     }
 }
