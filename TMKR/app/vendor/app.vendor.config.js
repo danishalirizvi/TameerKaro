@@ -33,37 +33,55 @@
                 url: "/createAdd",
                 templateUrl: "app/vendor/advertisements/create-advt.html",
                 controller: "CreateAdvertisementController",
-                portal: "vendor"
+                portal: "vendor",
+                resolve: {
+                    authentication: authentication
+                }
             })
             .state("vendor.purchaseOrder", {
                 url: "/purchaseOrder",
                 templateUrl: "app/vendor/purchaseorders/purchase-order.html",
                 controller: "PurchaseOrderController",
-                portal: "vendor"
+                portal: "vendor",
+                resolve: {
+                    authentication: authentication
+                }
             })
             .state("vendor.activeadvts", {
                 url: "/activeadvertisements",
                 templateUrl: "app/vendor/activeAdvts/advts.html",
                 controller: "ActiveAdvtsContoller",
-                portal: "vendor"
+                portal: "vendor",
+                resolve: {
+                    authentication: authentication
+                }
             })
             .state("vendor.profile", {
                 url: "/profile",
                 templateUrl: "app/vendor/profile/profile.html",
                 controller: "VendorProfileController",
-                portal: "vendor"
+                portal: "vendor",
+                resolve: {
+                    authentication: authentication
+                }
             })
             .state("vendor.profiledetails", {
                 url: "/profiledetails",
                 templateUrl: "app/vendor/profiledetail/profiledetails.html",
                 controller: "VendorProfileDetailController",
-                portal: "vendor"
+                portal: "vendor",
+                resolve: {
+                    authentication: authentication
+                }
             })
             .state("vendor.editadvts", {
                 url: "/editadvertisement?advtId",
                 templateUrl: "app/vendor/editadvt/editadvt.html",
                 controller: "EdirtAdvtController",
-                portal: "vendor"
+                portal: "vendor",
+                resolve: {
+                    authentication: authentication
+                }
             });
 
         }]);
@@ -93,4 +111,5 @@
             $state.go('vendor.login');
         }
     }
+
 })();

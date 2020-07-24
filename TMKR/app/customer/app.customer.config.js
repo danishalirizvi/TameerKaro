@@ -98,7 +98,10 @@
                     url: "/orders",
                     templateUrl: "app/customer/orders/orders.html",
                     controller: "OrderController",
-                    portal: "customer"
+                    portal: "customer",
+                    resolve: {
+                        authentication: authentication
+                    }
                 })
                 .state("customer.product", {
                     url: "/product?advtId",
@@ -131,7 +134,7 @@
         if (!AuthenticationService.isAuthenticated('cookiecustomer')) {
             var returnUrl = $location.path();
             $state.go('customer.login');
-            alert('Login to Proceed');
+
         }
     }
 })();

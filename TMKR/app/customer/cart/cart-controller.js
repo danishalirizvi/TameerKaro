@@ -7,7 +7,7 @@
             $rootScope.$on('ngCart:change', function () {
                 ngCart.$save();
             });
-
+            
             if (angular.isObject(store.get('cart'))) {
                 ngCart.$restore(store.get('cart'));
                 //$window.localStorage.clear();

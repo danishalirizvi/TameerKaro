@@ -75,7 +75,7 @@ namespace TMKR.DataAccess
                         LEFT JOIN Customer cus on p.CSTMR_ID = cus.ID
                         LEFT JOIN Prod_Advt pa on c.PROD_ADVT_ID = pa.ID
                         LEFT JOIN Product_Type pt on pa.PROD_TYPE_ID = pt.ID 
-                        WHERE p.VNDR_ID = @VNDR_ID AND STATUS != @STATUS AND STATUS != @STATUS1 AND Active = 'True'";
+                        WHERE p.VNDR_ID = @VNDR_ID AND STATUS != @STATUS AND STATUS != @STATUS1 AND p.Active = 1";
 
                     return Conn.Query<PurchaseOrderModel>(query, new { VNDR_ID = vendorId, STATUS = "Rejected", STATUS1 = "Accepted" }).ToList();
                 }
@@ -88,7 +88,7 @@ namespace TMKR.DataAccess
                         LEFT JOIN Customer cus on p.CSTMR_ID = cus.ID
                         LEFT JOIN Prod_Advt pa on c.PROD_ADVT_ID = pa.ID
                         LEFT JOIN Product_Type pt on pa.PROD_TYPE_ID = pt.ID 
-                        WHERE p.VNDR_ID = @VNDR_ID AND STATUS = @STATUS AND Active = 'True'";
+                        WHERE p.VNDR_ID = @VNDR_ID AND STATUS = @STATUS AND p.Active = 1";
 
                     return Conn.Query<PurchaseOrderModel>(query, new { VNDR_ID = vendorId, STATUS = "Accepted" }).ToList();
                 }
@@ -101,7 +101,7 @@ namespace TMKR.DataAccess
                         LEFT JOIN Customer cus on p.CSTMR_ID = cus.ID
                         LEFT JOIN Prod_Advt pa on c.PROD_ADVT_ID = pa.ID
                         LEFT JOIN Product_Type pt on pa.PROD_TYPE_ID = pt.ID 
-                        WHERE p.VNDR_ID = @VNDR_ID AND STATUS = @STATUS AND Active = 'True'";
+                        WHERE p.VNDR_ID = @VNDR_ID AND STATUS = @STATUS AND p.Active = 'True'";
 
                     return Conn.Query<PurchaseOrderModel>(query, new { VNDR_ID = vendorId, STATUS = "Rejected" }).ToList();
                 }
