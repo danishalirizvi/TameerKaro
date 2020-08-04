@@ -22,42 +22,40 @@
                             <thead>
                                 <tr>
                                     <th>&nbsp;</th>
-                                    <th>Vendor</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
+                                    <th>Cart ID</th>
                                     <th>Address</th>
-                                    <th>Status</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody ng-repeat="order in ordersparent.Pending">
                                 <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" >
                                     <td><button class="btn btn-default btn-xs" ng-click="show = !show"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-                                    <td>{{order.VendorName}}</td>
-                                    <td>{{order.VendorPhone}}</td>
-                                    <td>{{order.VendorEmail}}</td>
+                                    <td>{{order.CART_ID}}</td>
                                     <td style="max-width: 120px;">{{order.SHPNG_ADRS}}</td>
-                                    <td>{{order.STATUS}}</td>
                                     <td>{{order.Total}}</td>
-                                    <td style="width:60px"><button class="btn-danger" ng-click="cancelorder(ordersparent.Pending,$index)" style="padding-top:3px;padding-bottom:3px;" >Cancel</button></td>
+                                    <td style="width:60px"><button class="btn-danger" ng-click="cancelorder(order.CART_ID)" style="padding-top:3px;padding-bottom:3px;" >Cancel</button></td>
+                                    <!--<td style="width:60px"><button class="btn-danger" ng-click="cancelorder(ordersparent.Pending,$index)" style="padding-top:3px;padding-bottom:3px;" >Cancel</button></td>-->
                                 </tr>
                                 <tr ng-show="show">
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <td>&nbsp;</td>
+                                    <th>Vendor</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
                                     <th>Product</th>
                                     <th>Quantity</th>
                                     <th>Unit Price</th>
                                     <th>Total</th>
+                                    <th>Status</th>
                                 </tr>
                                 <tr ng-show="show" ng-repeat="orders in order.orderdetail">
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
+                                    <td>{{orders.VendorName}}</td>
+                                    <td>{{orders.VendorPhone}}</td>
+                                    <td>{{orders.VendorEmail}}</td>
                                     <td>{{orders.ProdName}}</td>
                                     <td>{{orders.Quantity}}</td>
                                     <td>{{orders.Unit_Price}}</td>
                                     <td>{{orders.TotalAmount}}</td>
+                                    <td>{{orders.STATUS}}</td>
+                                    <td style="width:60px"><button class="btn-danger" ng-click="cancelorderitem(orders.ID)" style="padding-top:3px;padding-bottom:3px;">Cancel</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -68,41 +66,37 @@
                             <thead>
                                 <tr>
                                     <th>&nbsp;</th>
-                                    <th>Customer</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
+                                    <th>Cart ID</th>
                                     <th>Address</th>
-                                    <th>Status</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody ng-repeat="order in ordersparent.Accepted">
                                 <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
                                     <td><button class="btn btn-default btn-xs" ng-click="show = !show"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-                                    <td>{{order.VendorName}}</td>
-                                    <td>{{order.VendorPhone}}</td>
-                                    <td>{{order.VendorEmail}}</td>
+                                    <td>{{order.CART_ID}}</td>
                                     <td style="max-width: 120px;">{{order.SHPNG_ADRS}}</td>
-                                    <td>{{order.STATUS}}</td>
                                     <td>{{order.Total}}</td>
                                 </tr>
                                 <tr ng-show="show">
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <td>&nbsp;</td>
+                                    <th>Vendor</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
                                     <th>Product</th>
                                     <th>Quantity</th>
                                     <th>Unit Price</th>
                                     <th>Total</th>
+                                    <th>Status</th>
                                 </tr>
                                 <tr ng-show="show" ng-repeat="orders in order.orderdetail">
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
+                                    <td>{{orders.VendorName}}</td>
+                                    <td>{{orders.VendorPhone}}</td>
+                                    <td>{{orders.VendorEmail}}</td>
                                     <td>{{orders.ProdName}}</td>
                                     <td>{{orders.Quantity}}</td>
                                     <td>{{orders.Unit_Price}}</td>
                                     <td>{{orders.TotalAmount}}</td>
+                                    <td>{{orders.STATUS}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -113,41 +107,37 @@
                             <thead>
                                 <tr>
                                     <th>&nbsp;</th>
-                                    <th>Customer</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
+                                    <th>Cart ID</th>
                                     <th>Address</th>
-                                    <th>Status</th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody ng-repeat="order in ordersparent.Rejected">
                                 <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
                                     <td><button class="btn btn-default btn-xs" ng-click="show = !show"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-                                    <td>{{order.VendorName}}</td>
-                                    <td>{{order.VendorPhone}}</td>
-                                    <td>{{order.VendorEmail}}</td>
+                                    <td>{{order.CART_ID}}</td>
                                     <td style="max-width: 120px;">{{order.SHPNG_ADRS}}</td>
-                                    <td>{{order.STATUS}}</td>
                                     <td>{{order.Total}}</td>
                                 </tr>
                                 <tr ng-show="show">
-                                    <th>&nbsp;</th>
-                                    <th>&nbsp;</th>
-                                    <td>&nbsp;</td>
+                                    <th>Vendor</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
                                     <th>Product</th>
                                     <th>Quantity</th>
                                     <th>Unit Price</th>
                                     <th>Total</th>
+                                    <th>Status</th>
                                 </tr>
                                 <tr ng-show="show" ng-repeat="orders in order.orderdetail">
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                    <td>&nbsp;</td>
+                                    <td>{{orders.VendorName}}</td>
+                                    <td>{{orders.VendorPhone}}</td>
+                                    <td>{{orders.VendorEmail}}</td>
                                     <td>{{orders.ProdName}}</td>
                                     <td>{{orders.Quantity}}</td>
                                     <td>{{orders.Unit_Price}}</td>
                                     <td>{{orders.TotalAmount}}</td>
+                                    <td>{{orders.STATUS}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -162,9 +152,3 @@
         </div>
     </div>
 </section>
-
-
-
-
-
-

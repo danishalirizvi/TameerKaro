@@ -5,12 +5,9 @@ namespace TMKR
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-            //            "~/Scripts/jquery-{version}.js"));
-
+           
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
             //            "~/Scripts/jquery.validate*"));
 
@@ -30,14 +27,10 @@ namespace TMKR
                       "~/Content/iconstyle.css",
                       "~/Content/responsive.css",
                       "~/Content/font-awesome.min.css",
-                      "~/Content/animate.css",
-                      "~/App/directives/loading-spinner.css"                       
+                      "~/Content/animate.css"                 
                       ));
 
-            //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-            //            "~/Scripts/jquery.unobtrusive*",
-            //            "~/Scripts/jquery.validate*"));
-
+           
             bundles.Add(new ScriptBundle("~/bundles/default").Include(
                 "~/Scripts/jquery-{version}.js",
                 "~/Scripts/bootstrap.js",
@@ -50,13 +43,8 @@ namespace TMKR
                 "~/Scripts/angular-animate.js",
                 "~/Scripts/angular-cookies.js",
                 "~/Scripts/angular-ui-router.js",
-                
                 "~/Scripts/ng-file-upload-shim.js",
                 "~/Scripts/ng-file-upload.js",
-
-                "~/app/customer/uploader/directives/loading-spinner.js",
-                
-
                 "~/Scripts/angular-ui/ui-bootstrap.js",
                 "~/Scripts/angular-ui/ui-bootstrap-tpls.js",
                 "~/Scripts/main.js"
@@ -75,6 +63,22 @@ namespace TMKR
 
                 //app controllers
                 "~/app/root-controller.js",
+
+
+                //admin
+                "~/app/admin/app.admin.js",
+                "~/app/admin/app.admin.config.js",
+                "~/app/admin/app.admin.constants.js",
+
+                //admin services
+
+                //customer controllers
+                "~/app/admin/login/login-controller.js",
+                "~/app/admin/logout/logout-controller.js",
+                "~/app/admin/customers/customers-controller.js",
+                "~/app/admin/vendors/vendors-controller.js",
+                "~/app/admin/advts/advts-controller.js",
+                "~/app/admin/orders/orders-controller.js",
 
                 //customer
                 "~/app/customer/app.customer.js",
@@ -97,6 +101,7 @@ namespace TMKR
                 "~/app/customer/profiledetail/profiledetail-controller.js",
                 "~/app/customer/product/product-controller.js",
                 "~/app/customer/material-estimate/material-estimate-controller.js",
+                "~/app/customer/orders/orders-controller.js",
 
 
                 //vendor
@@ -106,11 +111,9 @@ namespace TMKR
 
                 //vendor services
                 "~/app/vendor/services/vendor-service.js",
-
                 "~/app/vendor/services/advtfactory.js",
 
                 //vendor controller
-                //"~/app/vendor/root-controller.js",
                 "~/app/vendor/advertisements/create-advt-controller.js",
                 "~/app/vendor/purchaseorders/purchase-order-controller.js",
                 "~/app/vendor/login/login-controller.js",
@@ -119,53 +122,11 @@ namespace TMKR
                 "~/app/vendor/activeAdvts/advts-controller.js",
                 "~/app/vendor/profile/profile-controller.js",
                 "~/app/vendor/profiledetail/profiledetail-controller.js",
-                "~/app/vendor/editadvt/editadvt-controller.js",
+                "~/app/vendor/editadvt/editadvt-controller.js"
 
-
-                "~/app/customer/image/controller.js",
-                "~/app/customer/image/directive.js",
-                "~/app/customer/image/services.js",
-
-
-
-                "~/app/customer/uploader/home/home.js",
-                "~/app/customer/uploader/services/fileService.js"
-
-
-                ,
-                "~/app/customer/pic/pic.js",
-                "~/app/customer/orders/orders-controller.js"
                 ));
 
-            bundles.Add(new ScriptBundle("~/bundles/customer").Include(
-                "~/app/customer/customer.js",
-                "~/app/customer/customer.config.js",
 
-                "~/app/customer/customer.constants.js",
-                "~/app/customer/services/Base64.js",
-                "~/app/customer/services/auth-service.js",
-                "~/app/customer/services/cart-service.js",
-                "~/app/customer/services/cart-item-factory.js",
-                "~/app/customer/services/store-service.js",
-                "~/app/customer/services/prod-advt-service.js",
-                // controller
-                "~/app/customer/root-controller.js",
-                "~/app/customer/login/login-controller.js",
-                "~/app/customer/register/register-controller.js",
-                "~/app/customer/logout/logout-controller.js",
-                "~/app/customer/cart/cart-controller.js",
-                "~/app/customer/cartdetail/cartdetail-controller.js",
-                "~/app/customer/profile/profile-controller.js",
-                "~/app/customer/profiledetail/profiledetail-controller.js"
-                ));
-
-            bundles.Add(new ScriptBundle("~/bundles/vendor").Include(
-                "~/app/vendor/vendor.js",
-                "~/app/vendor/vendor.config.js",
-                "~/app/vendor/vendor.constants.js",
-                "~/app/vendor/services/vendor-auth-service.js",
-                "~/app/vendor/root-controller.js"
-                ));
         }
     }
 }

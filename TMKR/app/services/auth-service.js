@@ -1,4 +1,5 @@
-﻿'use strict';
+﻿+
+'use strict';
 
 angular.module('app')
   .service('AuthenticationService',
@@ -9,13 +10,16 @@ angular.module('app')
 
               var credentialsCustomer = retrieveCredentials('cookiecustomer');
               var credentialsVendor = retrieveCredentials('cookievendor');
+              var credentialsAdmin = retrieveCredentials('cookieadmin');
 
-              if (credentialsCustomer === null && credentialsVendor === null) {
+              if (credentialsCustomer === null && credentialsVendor === null && credentialsAdmin === null) {
                   return null;
-              } else if (credentialsVendor === null) {
+              } else if (credentialsVendor === null && credentialsAdmin === null) {
                   return 'cookiecustomer';
-              } else if (credentialsCustomer === null) {
+              } else if (credentialsCustomer === null && credentialsAdmin === null) {
                   return 'cookievendor';
+              } else if (credentialsCustomer === null && credentialsVendor === null) {
+                  return 'cookieadmin';
               }
           }
 
@@ -34,7 +38,18 @@ angular.module('app')
           };
 
           this.login = function (cred, successCallback, errorCallback) {
-              var apiUrl = cred.isCustomer ? '/api/customer/Login' : '/api/vendor/Login';
+              var apiUrl;
+              if (cred.type == 'admin') {
+                  apiUrl = '/api/admin/Login';
+              }
+              else if (cred.type == 'customer') {
+                  apiUrl = '/api/customer/Login';
+              }
+              else if (cred.type == 'vendor') {
+                  apiUrl = '/api/vendor/Login';
+              }
+              else {
+              }
               $http.post(apiUrl, JSON.stringify(cred))
                 .success(function (response) {
                     if (typeof successCallback === 'function') {

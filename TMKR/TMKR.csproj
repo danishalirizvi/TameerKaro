@@ -139,9 +139,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\admin\advts\advts-controller.js" />
+    <Content Include="app\admin\advts\advts.html" />
+    <Content Include="app\admin\app.admin.config.js" />
+    <Content Include="app\admin\app.admin.constants.js" />
+    <Content Include="app\admin\app.admin.js" />
+    <Content Include="app\admin\admin.html" />
+    <Content Include="app\admin\customers\customers-controller.js" />
+    <Content Include="app\admin\customers\customers.html" />
+    <Content Include="app\admin\home\home.html" />
+    <Content Include="app\admin\login\error-alert.html" />
+    <Content Include="app\admin\login\login-controller.js" />
+    <Content Include="app\admin\login\login.html" />
+    <Content Include="app\admin\logout\logout-controller.js" />
+    <Content Include="app\admin\orders\orders-controller.js" />
+    <Content Include="app\admin\orders\orders.html" />
+    <Content Include="app\admin\vendors\vendors-controller.js" />
+    <Content Include="app\admin\vendors\vendors.html" />
     <Content Include="app\app.config.js" />
     <Content Include="app\app.constants.js" />
     <Content Include="app\app.js" />
+    <Content Include="app\cookieError.html" />
     <Content Include="app\customer\app.customer.config.js" />
     <Content Include="app\customer\app.customer.constants.js" />
     <Content Include="app\customer\app.customer.js" />
@@ -154,10 +172,6 @@
     <Content Include="app\customer\cost-estimate\cost-estimate.html" />
     <Content Include="app\customer\customer.html" />
     <Content Include="app\customer\home\home.html" />
-    <Content Include="app\customer\image\controller.js" />
-    <Content Include="app\customer\image\directive.js" />
-    <Content Include="app\customer\image\index.html" />
-    <Content Include="app\customer\image\services.js" />
     <Content Include="app\customer\login\login-controller.js" />
     <Content Include="app\customer\login\login.html" />
     <Content Include="app\customer\logout\logout-controller.js" />
@@ -181,17 +195,10 @@
     <Content Include="app\customer\services\prod-advt-service.js" />
     <Content Include="app\customer\services\store-service.js" />
     <Content Include="app\customer\login\error-alert.html" />
-    <Content Include="app\customer\uploader\directives\loading-spinner.css" />
-    <Content Include="app\customer\uploader\directives\loading-spinner.html" />
-    <Content Include="app\customer\uploader\directives\loading-spinner.js" />
-    <Content Include="app\customer\uploader\home\home.html" />
-    <Content Include="app\customer\uploader\home\home.js" />
-    <Content Include="app\customer\uploader\services\fileService.js" />
     <Content Include="app\popup\error-alert.html" />
     <Content Include="app\root-controller.js" />
     <Content Include="app\services\auth-service.js" />
     <Content Include="app\services\Base64.js" />
-    <Content Include="app\customer\uploader\app.js" />
     <Content Include="app\vendor\activeAdvts\advts-controller.js" />
     <Content Include="app\vendor\activeAdvts\advts.html" />
     <Content Include="app\vendor\advertisements\create-advt-controller.js" />
@@ -343,6 +350,7 @@
     <Content Include="Scripts\custom\custom.js" />
     <Content Include="Scripts\ini.isotope.js" />
     <Content Include="Scripts\isotope.js" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -371,12 +379,19 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Controllers\StartupController.cs" />
+    <Compile Include="Controllers\WebApi\AdminController.cs" />
     <Compile Include="Controllers\WebApi\CustomerController.cs" />
     <Compile Include="Controllers\WebApi\FilesController.cs" />
+    <Compile Include="DataAccess\AdminDao.cs" />
     <Compile Include="Helpers\CustomMultipartFormDataStreamProvider.cs" />
+    <Compile Include="Managers\AdminManager.cs" />
+    <Compile Include="Models\DataModel\AdminModel.cs" />
     <Compile Include="Models\DataModel\OrderChildModel.cs" />
     <Compile Include="Models\DataModel\OrderModel.cs" />
+    <Compile Include="Models\DataModel\OrdersChildModelAdmin.cs" />
+    <Compile Include="Models\DataModel\OrdersListModelAdmin.cs" />
     <Compile Include="Models\DataModel\OrderParentModel.cs" />
+    <Compile Include="Models\DataModel\OrdersParentModelAdmin.cs" />
     <Compile Include="Models\DataModel\OrderTypesModel.cs" />
     <Compile Include="Models\DataModel\ProfilePicModel.cs" />
     <Compile Include="Models\ViewModel\PhotoActionResult.cs" />
@@ -394,7 +409,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordHasher.cs" />
-    <Compile Include="Helpers\SessionExtensions.cs" />
     <Compile Include="Managers\CartManager.cs" />
     <Compile Include="Managers\CustomerManager.cs" />
     <Compile Include="Managers\Prod_AdvtManager.cs" />

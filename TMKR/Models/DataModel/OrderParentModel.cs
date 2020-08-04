@@ -8,16 +8,8 @@ namespace TMKR.Models.DataModel
     public class OrderParentModel
     {
         public int CART_ID { get; set; }
-
-        public string VendorName { get; set; }
-
-        public long VendorPhone { get; set; }
-
-        public string VendorEmail { get; set; }
-
+        
         public double Total { get; set; }
-
-        public string STATUS { get; set; }
 
         public string SHPNG_ADRS { get; set; }
 

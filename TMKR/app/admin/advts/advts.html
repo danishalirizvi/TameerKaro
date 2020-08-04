@@ -1,0 +1,43 @@
+﻿<section id="main-container" class="main-container">
+    <div data-ng-init="onInit()" class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Advertisements</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Product</th>
+                                <th>Description</th>
+                                <th>Vendor</th>
+                                <th>Unit Price</th>
+                                <th>Order Limit</th>
+                                <th>Delivery</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="advertisement in advertisements">
+                            <tr>
+                                <td>{{advertisement.Advt_Id}}</td>
+                                <td>{{advertisement.Prod_Type}}</td>
+                                <td style="max-width: 200px;">{{advertisement.Advt_Dscp}}</td>
+                                <td>{{advertisement.VNDR_Name}}</td>
+                                <td>{{advertisement.Unit_Price}}</td>
+                                <td>{{advertisement.Order_Limit}}</td>
+                                <td>{{advertisement.DLVRY_AVLB}}</td>
+                                <td>{{advertisement.STUS_NME}}</td>
+                                <td>
+                                    <button class="btn-primary btn-xs" ng-show="!advertisement.IsActive" style="padding-top:5px;padding-bottom:1px;width:90px" ng-click="unblock(advertisement.Advt_Id)">Unblock</button>
+                                    <button class="btn-danger btn-xs" ng-show="advertisement.IsActive" style="padding-top:5px;padding-bottom:1px;width:90px" ng-click="block(advertisement.Advt_Id)">Block</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

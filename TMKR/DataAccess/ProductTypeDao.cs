@@ -24,9 +24,9 @@ namespace TMKR.DataAccess
         {
             using (Conn)
             {
-                string sql = "SELECT * FROM Product_Type";
+                string sql = "SELECT * FROM Product_Type where IsActive = 1";
                 List<ProductTypeModel> productTypes = Conn.Query<ProductTypeModel>(sql).ToList();
-                return productTypes; //Conn.Execute(query);
+                return productTypes;
             }
         }
     }

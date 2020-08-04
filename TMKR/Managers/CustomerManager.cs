@@ -37,7 +37,7 @@ namespace TMKR.Managers
 
             photo.Id = user_id;
             photo.Path = "../../../images/a.png";
-            photo.Type = "Vendor";
+            photo.Type = "Customer";
             photo.Action = "Create";
 
             ProfilePic(photo);
@@ -52,6 +52,11 @@ namespace TMKR.Managers
 
             CustomerModel customer = customerDao.GetUser(customerVm.ID);
             return customer;
+        }
+
+        public List<CustomerModel> getCustomers()
+        {
+            return customerDao.getCustomers();
         }
 
         public bool ValidatePassword(CustomerProfileModel customerVm)
@@ -76,6 +81,16 @@ namespace TMKR.Managers
         public void ProfilePic(ProfilePicModel photo)
         {
             customerDao.profilePic(photo);
+        }
+
+        public void blockCustomer(int customerId)
+        {
+            customerDao.blockCustomer(customerId);
+        }
+
+        public void unblockCustomer(int customerId)
+        {
+            customerDao.unblockCustomer(customerId);
         }
     }
 }

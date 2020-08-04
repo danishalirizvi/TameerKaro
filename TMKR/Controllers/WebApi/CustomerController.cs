@@ -67,7 +67,7 @@ namespace TMKR.Controllers.WebApi
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "Password Incorrect");
         }
 
-        //Get Products WEB API Call
+        //Get Products WEB API Call***
         [HttpGet]
         public HttpResponseMessage GetProducts()
         {
@@ -83,7 +83,7 @@ namespace TMKR.Controllers.WebApi
 
         }
 
-
+        //get single product***
         [HttpGet]
         public HttpResponseMessage GetProduct(int advtid)
         {
@@ -161,7 +161,7 @@ namespace TMKR.Controllers.WebApi
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
         }
 
-
+        //get orders of customers***
         [HttpGet]
         public HttpResponseMessage GetOrders(int Id)
         {
@@ -184,10 +184,19 @@ namespace TMKR.Controllers.WebApi
         }
 
         [HttpPost]
-        public HttpResponseMessage CancelOrder(List<OrderChildModel> orders)
+        public HttpResponseMessage CancelOrder(int cartId)
         {
             
-            purchsaeordermanager.CancelOrder(orders);
+            purchsaeordermanager.CancelOrder(cartId);
+
+            return Request.CreateErrorResponse(HttpStatusCode.OK, "Order Cancelled Succcessfully");
+        }
+
+        [HttpPost]
+        public HttpResponseMessage CancelOrderItem(int itemId)
+        {
+
+            purchsaeordermanager.CancelOrderItem(itemId);
 
             return Request.CreateErrorResponse(HttpStatusCode.OK, "Order Cancelled Succcessfully");
         }
@@ -247,8 +256,13 @@ namespace TMKR.Controllers.WebApi
 
             config.Routes.MapHttpRoute(
                 "CancelOrder",
-                "api/customer/cancelorder",
+                "api/customer/cancelorder/{cartId}",
                 new { controller = "Customer", action = "CancelOrder" });
+
+            config.Routes.MapHttpRoute(
+                "CancelOrderItem",
+                "api/customer/cancelorderitem/{itemId}",
+                new { controller = "Customer", action = "CancelOrderItem" });
         }
 
     }

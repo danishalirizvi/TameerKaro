@@ -28,5 +28,11 @@ namespace TMKR.Models.DataModel
         public string IMG_PATH { get; set; }
 
         public string Unit { get; set; }
+
+        public string STUS_NME { get; set; }
+
+        public bool IsActive { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

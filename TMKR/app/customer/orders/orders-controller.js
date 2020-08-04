@@ -7,7 +7,7 @@
 
     OrderController.$inject = ['$scope', 'AuthenticationService', '$http'];
 
-    function OrderController($scope,  AuthenticationService, $http) {
+    function OrderController($scope, AuthenticationService, $http) {
 
         $scope.active = 'Pending';
 
@@ -39,9 +39,11 @@
               });
         }
 
-        $scope.cancelorder = function (orders,index) {
-            var order = orders[index].orderdetail;
-            $http.post('/api/customer/cancelorder', order)
+        //$scope.cancelorder = function (orders, index) {
+        $scope.cancelorder = function (cartId) {
+            //var order = orders[index].orderdetail;
+            //$http.post('/api/customer/cancelorder', order)
+            $http.post('/api/customer/cancelorder/'+cartId)
                 .success(function (response) {
                     $scope.onInit();
                 })
@@ -50,7 +52,17 @@
                 });
         }
 
-
+        $scope.cancelorderitem = function (itemId) {
+            //var order = orders[index].orderdetail;
+            //$http.post('/api/customer/cancelorder', order)
+            $http.post('/api/customer/cancelorderitem/' + itemId)
+                .success(function (response) {
+                    $scope.onInit();
+                })
+                .error(function (response) {
+                    alert('Error');
+                });
+        }
     }
 })();
 

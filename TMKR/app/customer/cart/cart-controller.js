@@ -3,17 +3,21 @@
 
     angular.module('app.customer')
 
-        .run(['$rootScope', '$window', 'ngCart', 'ngCartItem', 'store', function ($rootScope, $window, ngCart, ngCartItem, store) {
+        .run(['$rootScope', '$state', '$window', '$location', 'ngCart', 'ngCartItem', 'store', function ($rootScope, $state, $window, $location, ngCart, ngCartItem, store) {
             $rootScope.$on('ngCart:change', function () {
                 ngCart.$save();
             });
-            
-            if (angular.isObject(store.get('cart'))) {
-                ngCart.$restore(store.get('cart'));
-                //$window.localStorage.clear();
 
+            if (navigator.cookieEnabled) {
+                if (angular.isObject(store.get('cart'))) {
+                    ngCart.$restore(store.get('cart'));
+                    //$window.localStorage.clear();
+
+                } else {
+                    ngCart.init();
+                }
             } else {
-                ngCart.init();
+                $location.url('/error');
             }
 
         }])

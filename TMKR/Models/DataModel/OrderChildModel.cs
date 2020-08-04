@@ -16,6 +16,14 @@ namespace TMKR.Models.DataModel
         public double Unit_Price { get; set; }
 
         public double TotalAmount { get; set; }
-        
+
+        public string VendorName { get; set; }
+
+        public long VendorPhone { get; set; }
+
+        public string VendorEmail { get; set; }
+
+        public string STATUS { get; set; }
+
     }
 }

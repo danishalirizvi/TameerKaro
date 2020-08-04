@@ -4,8 +4,7 @@
         .module('app.customer', [
             'ui.router',
             'ngCookies',
-            'ui.bootstrap',
-            'loading-spinner',             
+            'ui.bootstrap',        
             'ngFileUpload'
         ]);
 })();

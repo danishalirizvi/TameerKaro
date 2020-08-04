@@ -1,0 +1,113 @@
+﻿<div id="top-bar" class="top-bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
+                <ul class="top-info">
+
+                    <li ng-if="!adminusername">
+                        <a ui-sref="admin.login" ui-sref-active="active">
+                            <i class="fa fa-sign-in">&nbsp;</i>
+                            Login
+                        </a>
+                    </li>
+
+                    <li ng-if="adminusername">
+                        <a ui-sref="admin.logout" ui-sref-active="active">
+                            <i class="fa fa-sign-out">&nbsp;</i>
+                            Logout
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<header id="header" class="header-one">
+    <div class="container">
+        <div class="row">
+            <div class="logo-area clearfix">
+                <div class="logo col-xs-12 col-md-3">
+                    <a href="#">
+                        <img height="50" src="../../images/Final.png" />
+                    </a>
+                </div>
+
+                <div class="col-xs-12 col-md-9 header-right">
+                    <ul class="top-info-box">
+                        <li>
+                            <div class="info-box">
+                                <div class="info-box-content">
+                                    <p style="font-size:30px">Admin Panel</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <nav class="site-navigation navigation navdown">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="site-nav-inner pull-left">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse navbar-responsive-collapse">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a ng-click="validateNav('Admin', 'admin.home', true)" ui-sref-active="active">
+                                        <!--<a ui-sref="admin.home" ui-sref-active="active">-->
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="validateNav('Admin', 'admin.customers', false)" ui-sref-active="active">
+                                        <!--<a ui-sref="admin.home" ui-sref-active="active">-->
+                                        Customers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="validateNav('Admin', 'admin.vendors', false)" ui-sref-active="active">
+                                        <!--<a ui-sref="admin.home" ui-sref-active="active">-->
+                                        Vendors
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="validateNav('Admin', 'admin.advertiesments', false)" ui-sref-active="active">
+                                        <!--<a ui-sref="admin.home" ui-sref-active="active">-->
+                                        Advertisements
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="validateNav('Admin', 'admin.orders', false)" ui-sref-active="active">
+                                        <!--<a ui-sref="admin.home" ui-sref-active="active">-->
+                                        Orders
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ui-sref="admin.profiledetails" ui-sref-active="active">
+                                        {{adminusername}}
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div ui-view></div>

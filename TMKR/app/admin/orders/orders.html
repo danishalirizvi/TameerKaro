@@ -1,0 +1,126 @@
+﻿<section id="main-container" class="main-container">
+    <div data-ng-init="onInit()" class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Orders</h3>
+                </div>
+                <div class="panel-body table-responsive">
+
+                    <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th>CId</th>
+                                <th>Customer</th>
+                                <th>CPhone</th>
+                                <th>Address</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="order in orders">
+                            <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+                                <td><button ng-click="show = !show" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                <td>{{order.CustomerId}}</td>
+                                <td>{{order.Customer}}</td>
+                                <td>{{order.CustomerPhone}}</td>
+                                <td style="max-width: 120px;">{{order.SHPNG_ADRS}}</td>
+                                <td>{{order.Total}}</td>
+                                <!--<td>
+                                    <button class="btn-danger btn-xs" ng-show="order.IsActive" style="padding-top:5px;padding-bottom:1px;width:90px" ng-click="suspend(order.CART_ID)">Suspend</button>
+                                    <button class="btn-primary btn-xs" ng-show="!order.IsActive" style="padding-top:5px;padding-bottom:1px;width:90px" ng-click="resume(order.CART_ID)">Resume</button>
+                                </td>-->
+                            </tr>
+                            <tr ng-show="show">
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Total</th>
+                                <th>VId</th>
+                                <th>Vendor</th>
+                                <th>VPhone</th>
+                                <th>Status</th>
+                            </tr>
+                            <tr ng-show="show" ng-repeat="orders in order.purchaseorderdetail">
+                                <td>{{orders.ProdName}}</td>
+                                <td>{{orders.Quantity}} {{orders.Unit}}(s)</td>
+                                <td>{{orders.Unit_Price}}</td>
+                                <td>{{orders.TotalAmount}}</td>
+                                <td>{{orders.VendorId}}</td>
+                                <td>{{orders.VendorName}}</td>
+                                <td>{{orders.VendorPhone}}</td>
+                                <td>{{orders.STATUS}}</td>
+                                <td>
+                                    <button class="btn-danger btn-xs" ng-show="orders.PActive" style="padding-top:5px;padding-bottom:1px;width:90px" ng-click="suspendsingle(orders.ID)">Suspend</button>
+                                    <button class="btn-primary btn-xs" ng-show="!orders.PActive" style="padding-top:5px;padding-bottom:1px;width:90px" ng-click="resumesingle(orders.ID)">Resume</button>
+                                </td>
+                            </tr>
+                            <tr ng-show="show">
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                            </tr>
+                    </table>
+
+
+                    <!--<table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th>Cart</th>
+                                <th>CId</th>
+                                <th>Customer</th>
+                                <th>CPhone</th>
+                                <th>Address</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                                <th>VId</th>
+                                <th>Vendor</th>
+                                <th>VPhone</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="order in orders">
+                            <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
+                                <td><button ng-click="show = !show" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                <td>{{order.CART_ID}}</td>
+                                <td>{{order.CustomerId}}</td>
+                                <td>{{order.Customer}}</td>
+                                <td>{{order.CustomerPhone}}</td>
+                                <td style="max-width: 120px;">{{order.SHPNG_ADRS}}</td>
+                                <td>{{order.STATUS}}</td>
+                                <td>{{order.Total}}</td>
+                                <td>{{order.VendorId}}</td>
+                                <td>{{order.VendorName}}</td>
+                                <td>{{order.VendorPhone}}</td>
+                            </tr>
+                            <tr ng-show="show">
+                                <th>&nbsp;</th>
+                                <th>&nbsp;</th>
+                                <th>ID</th>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Total</th>
+                            </tr>
+                            <tr ng-show="show" ng-repeat="orders in order.purchaseorderdetail">
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>{{orders.ID}}</td>
+                                <td>{{orders.ProdName}}</td>
+                                <td>{{orders.Quantity}} {{orders.Unit}}(s)</td>
+                                <td>{{orders.Unit_Price}}</td>
+                                <td>{{orders.TotalAmount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

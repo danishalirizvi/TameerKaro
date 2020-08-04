@@ -12,7 +12,7 @@ namespace TMKR.Models.DataModel
 
         public string EMAIL { get; set; }
 
-        public long PHNE { get; set; }
+        public string PHNE { get; set; }
 
         public string USR_NME { get; set; }
 
@@ -21,5 +21,7 @@ namespace TMKR.Models.DataModel
         public string Address { get; set; }
 
         public string CITY { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

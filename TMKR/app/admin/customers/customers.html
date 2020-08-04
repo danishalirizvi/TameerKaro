@@ -1,0 +1,41 @@
+﻿<section id="main-container" class="main-container">
+    <div data-ng-init="onInit()" class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>Customers</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Username</th>
+                                <th>Address</th>
+                                <th>City</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="customer in customers">
+                            <tr>
+                                <td>{{customer.ID}}</td>
+                                <td>{{customer.FRST_NME}} {{customer.LAST_NME}}</td>
+                                <td>{{customer.EMAIL}}</td>
+                                <td>{{customer.PHNE}}</td>
+                                <td>{{customer.USR_NME}}</td>
+                                <td>{{customer.Address}}</td>
+                                <td>{{customer.CITY}}</td>
+                                <td>
+                                    <button class="btn-primary btn-xs" ng-show="!customer.IsActive" style="padding-top:5px;padding-bottom:1px;width:90px" ng-click="unblock(customer.ID)">Unblock</button>
+                                    <button class="btn-danger btn-xs" ng-show="customer.IsActive" style="padding-top:5px;padding-bottom:1px;width:90px" ng-click="block(customer.ID)">Block</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

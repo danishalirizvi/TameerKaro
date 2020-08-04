@@ -1,7 +1,43 @@
 ﻿<section id="main-container" class="main-container">
-    
+
     <div class="container">
         <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+
+        <!--<div class="row">
+            <div>
+                Brick Area = {{brickArea}} sq.ft
+            </div>
+            <div>
+                Volume of Brick = {{brickVolume}} cu.ft
+            </div>
+            <div>
+                Volume of Bricks in Wall = {{bricksVolume}} cu.ft
+            </div>
+            <div>
+                Total Area Walls = {{totalAreaWalls}} sq.ft
+            </div>
+            <div>
+                Volume of Walls = {{volumeOfWall}} cu.ft
+            </div>
+            <div>
+                Total Number of Bricks = {{NoOfBricks}} Brick(s)
+            </div>
+            <div>
+                Volume of Mortar Wet = {{MortarVolumeWet}} cu.ft
+            </div>
+            <div>
+                Volume of Mortar Dry = {{MortarVolumeDry}} cu.ft
+            </div>
+            <div>
+                Cement = {{Cement}} cu.ft
+            </div>
+            <div>
+                Cement = {{CementBags}} Bags
+            </div>
+            <div>
+                Sand = {{Sand}} cu.ft
+            </div>
+        </div>-->
         
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -21,7 +57,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row" ng-repeat="wall in walls" style="min-height:80px;height:auto;padding:5px">
             <div class="row" style="margin:0px auto">
                 <h5 style="padding-left:30px;">Wall#{{$index+1}}</h5>
@@ -48,17 +84,17 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row" style="margin:0 auto;padding:10px;padding-top:30px">
             <button class="btn-primary" ng-click="addWall()">Add Wall</button>
             <button class="btn-primary" ng-click="reset()">Reset</button>
         </div>
 
         <div class="row">
-            <button class="btn-primary" ng-click="results = true" style="float:right">Caculate Estimate</button>
+            <button class="btn-primary" ng-click="calculate()" style="float:right">Caculate Estimate</button>
         </div>
 
-        <div class="row" ng-show="results">
+        <!--<div class="row" ng-show="results && walls.length != 0">
             <div class="panel-heading"><h3>Results</h3></div>
             <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
                 <thead>
@@ -78,7 +114,24 @@
                     </tr>
                 </tbody>
             </table>
-
+        </div>-->
+        
+        <div class="row" ng-show="results && walls.length != 0">
+            <div class="panel-heading" style="width: 50%;margin:0px auto"><h3>Walls</h3></div>
+            <table class="table table-condensed" style="border-collapse:collapse;width: 50%;margin:0px auto">
+                <tr>
+                    <td>Bricks</td>
+                    <td>{{NoOfBricks}} Brick(s)</td>
+                </tr>
+                <tr>
+                    <td>Cement</td>
+                    <td>{{CementBags}} Bag(s) (50kg/Bag)</td>
+                </tr>
+                <tr>
+                    <td>Sand</td>
+                    <td>{{Sand}} cu.ft</td>
+                </tr>
+            </table>
         </div>
     </div>
 </section>

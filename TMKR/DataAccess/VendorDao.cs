@@ -4,6 +4,7 @@ using System.Linq;
 using TKDR.Web.Helpers;
 using TMKR.Models.DataModel;
 using System;
+using System.Collections.Generic;
 
 namespace TMKR.DataAccess
 {
@@ -40,7 +41,7 @@ namespace TMKR.DataAccess
 
             using (Conn)
             {
-                string query = "INSERT INTO Vendor (FRST_NME,LAST_NME,EMAIL,PHNE,BSNS_NME,USR_NME,PSWD) VALUES (@FRST_NME, @LAST_NME, @EMAIL, @PHNE, @BSNS_NME, @USR_NME, @PSWD) SELECT CAST(SCOPE_IDENTITY() as int)";
+                string query = "INSERT INTO Vendor (FRST_NME,LAST_NME,EMAIL,PHNE,BSNS_NME,USR_NME,PSWD,IsActive) VALUES (@FRST_NME, @LAST_NME, @EMAIL, @PHNE, @BSNS_NME, @USR_NME, @PSWD,1) SELECT CAST(SCOPE_IDENTITY() as int)";
 
                 var id = Conn.Query<int>(query, new { vendorVm.FRST_NME, vendorVm.LAST_NME, vendorVm.EMAIL, vendorVm.PHNE, vendorVm.BSNS_NME, vendorVm.USR_NME, vendorVm.PSWD }).Single();
                 return id;
@@ -52,7 +53,7 @@ namespace TMKR.DataAccess
         {
             using (Conn)
             {
-                string query = "SELECT Vendor.ID,FRST_NME,LAST_NME,EMAIL,PHNE,BSNS_NME,USR_NME,PSWD,Address,CITY FROM Vendor left join Address on USER_ID = Vendor.ID where USR_NME = @USR_NME and Type ='Vendor'";
+                string query = "SELECT Vendor.ID,FRST_NME,LAST_NME,EMAIL,PHNE,BSNS_NME,USR_NME,PSWD,Address,CITY FROM Vendor left join Address on USER_ID = Vendor.ID where USR_NME = @USR_NME and Type ='Vendor'and Vendor.IsActive = 1";
 
                 return Conn.QueryFirstOrDefault<VendorModel>(query, new { USR_NME = loginVm.Username });
             }
@@ -76,6 +77,36 @@ namespace TMKR.DataAccess
             }
         }
 
+        public void blockVendor(int vendorId)
+        {
+            using (Conn)
+            {
+                string query = @"UPDATE Vendor SET IsACtive = 0 WHERE ID = @ID";
+
+                Conn.Execute(query, new { ID = vendorId });
+            }
+        }
+
+        internal void unblockVendor(int vendorId)
+        {
+            using (Conn)
+            {
+                string query = @"UPDATE Vendor SET IsACtive = 1 WHERE ID = @ID";
+
+                Conn.Execute(query, new { ID = vendorId });
+            }
+        }
+
+        public List<VendorModel> getVendors()
+        {
+            using (Conn)
+            {
+                string query = "select v.*,Address,City as CITY from Vendor v left join Address a on v.ID = a.USER_ID where Type = 'Vendor'";
+
+                return Conn.Query<VendorModel>(query).ToList();
+            }
+        }
+
         public string getpicpath(int id, string type)
         {
             using (Conn)
@@ -96,7 +127,7 @@ namespace TMKR.DataAccess
             }
             else if(photo.Action == "Create")
             {
-                string query = "INSERT INTO Images (Path, FId, Type) VALUES (@Path, @FId, @Type)";
+                string query = "INSERT INTO Images (Path, FId, Type, IsActive) VALUES (@Path, @FId, @Type, 1)";
 
                 Conn.Execute(query, new { Path = photo.Path, FId = photo.Id, Type = photo.Type });
             }
@@ -162,7 +193,7 @@ namespace TMKR.DataAccess
         {
             using (Conn)
             {
-                string query = "INSERT INTO Address (USER_ID, Address, CITY, Type) VALUES (@USER_ID, @Address, @CITY, @Type)";
+                string query = "INSERT INTO Address (USER_ID, Address, CITY, Type, IsActive) VALUES (@USER_ID, @Address, @CITY, @Type, 1)";
                 Conn.Execute(query, new { USER_ID = vendorVm.ID, vendorVm.Address, vendorVm.CITY, Type = "Vendor" });
             }
         }

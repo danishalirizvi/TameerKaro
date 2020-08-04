@@ -10,7 +10,6 @@
     function VendorService($http, API_URL) {
         var serviceurl = API_URL + '/vendor/getProdTypes';
         var createAdvtURL = API_URL + '/vendor/createAdvt';
-        //var purchaseOrdersURL = API_URL + '/vendor/getPurchaseOrders';
         var advtStatusURL = API_URL + '/vendor/getAdvtStatus';
         var updateAdvtURL = API_URL + '/vendor/updateAdvt';
         

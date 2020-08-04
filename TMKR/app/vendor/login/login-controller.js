@@ -10,7 +10,7 @@ angular.module('app.vendor')
           this.cred = null;
           $scope.login = function () {
               $scope.dataLoading = true;
-              this.cred = { Username: $scope.username, Password: $scope.password, isCustomer: false };
+              this.cred = { Username: $scope.username, Password: $scope.password, type: 'vendor' };
               AuthenticationService.login(this.cred, onSuccessfulLogin, onFailedLogin);
           };
 

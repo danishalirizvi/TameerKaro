@@ -11,11 +11,9 @@ namespace TMKR.Models.DataModel
 
         public string FirstName { get; set; }
 
-        public long Phone { get; set; }
+        public string Phone { get; set; }
 
         public double Total { get; set; }
-
-        public string STATUS { get; set; }
 
         public string SHPNG_ADRS { get; set; }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TKDR.Web.Helpers;
 using TMKR.DataAccess;
 using TMKR.Models.DataModel;
@@ -81,6 +82,11 @@ namespace TMKR.Managers
             return false;
         }
 
+        public List<VendorModel> getVendors()
+        {
+            return vendordao.getVendors();
+        }
+
         public VendorModel Update(VendorModel vendorVm)
         {
             vendordao.update(vendorVm);
@@ -99,6 +105,16 @@ namespace TMKR.Managers
         public string getPrfilePicPath(int id)
         {
             return vendordao.getpicpath(id,"Vendor");
+        }
+
+        public void blockVendor(int vendorId)
+        {
+            vendordao.blockVendor(vendorId);
+        }
+
+        public void unblockVendor(int vendorId)
+        {
+            vendordao.unblockVendor(vendorId);
         }
     }
 }

@@ -25,20 +25,20 @@ namespace TMKR.Managers
             return orders;
         }
 
-        public List<PurchaseOrderParentModel> GetPurchaseOrdersParent(int id)
-        {
-            List<PurchaseOrderParentModel> orders = purchaseOrderDao.GetPurchaseOrdersParent(id);
-            return orders;
-        }
+        //public List<PurchaseOrderParentModel> GetPurchaseOrdersParent(int id)
+        //{
+        //    List<PurchaseOrderParentModel> orders = purchaseOrderDao.GetPurchaseOrdersParent(id);
+        //    return orders;
+        //}
 
-        public void AcceptOrder(int id) {
-            purchaseOrderDao.UpdateOrderStatus(id,"Accepted");
-        }
+        //public void AcceptOrder(int id) {
+        //    purchaseOrderDao.UpdateOrderStatus(id,"Accepted");
+        //}
 
-        public void RejectOrder(int id)
-        {
-            purchaseOrderDao.UpdateOrderStatus(id,"Rejected");
-        }
+        //public void RejectOrder(int id)
+        //{
+        //    purchaseOrderDao.UpdateOrderStatus(id,"Rejected");
+        //}
 
         public void OrderStatus(ActionDataModel data)
         {
@@ -72,7 +72,6 @@ namespace TMKR.Managers
                 parentModel.Phone = group.FirstOrDefault().PHNE;
                 parentModel.SHPNG_ADRS = group.FirstOrDefault().SHPNG_ADRS;
                 parentModel.Total = group.Sum(t => t.ItemAmount);
-                parentModel.STATUS = group.FirstOrDefault().STATUS;
 
                 parentModel.purchaseorderdetail = new List<PurchaseOrderChildModel>();
                 foreach (var item in group)
@@ -85,6 +84,50 @@ namespace TMKR.Managers
                     child.TotalAmount = item.UnitPrice * item.Quantity;
                     child.ID = item.PurchaseOrderId;
                     child.Unit = item.Unit;
+                    child.Status = item.STATUS;
+
+                    parentModel.purchaseorderdetail.Add(child);
+                }
+
+                result.Add(parentModel);
+            }
+            return result;
+        }
+
+        public List<OrdersParentModelAdmin> GetOrdersAdmmin()
+        {
+            List<OrdersListModelAdmin> orders = purchaseOrderDao.getOrdersListAdmin();
+
+            List<OrdersParentModelAdmin> result = new List<OrdersParentModelAdmin>();
+            var groupedPO = orders.GroupBy(t => new { t.CART_ID, t.CustomerId});
+            foreach (var group in groupedPO)
+            {
+                OrdersParentModelAdmin parentModel = new OrdersParentModelAdmin();
+                parentModel.CART_ID = group.FirstOrDefault().CART_ID;
+                parentModel.CustomerId = group.FirstOrDefault().CustomerId;
+                parentModel.Customer = group.FirstOrDefault().Customer;
+                parentModel.CustomerPhone = group.FirstOrDefault().CustomerPhone;
+                parentModel.SHPNG_ADRS = group.FirstOrDefault().SHPNG_ADRS;
+                parentModel.Total = group.Sum(t => t.ItemAmount);
+
+                parentModel.purchaseorderdetail = new List<OrdersChildModelAdmin>();
+                foreach (var item in group)
+                {
+                    OrdersChildModelAdmin child = new OrdersChildModelAdmin();
+                    child.ProdName = item.ProductName;
+                    child.Quantity = item.Quantity;
+                    child.Status = item.STATUS;
+                    child.Unit_Price = item.UnitPrice;
+                    child.TotalAmount = item.UnitPrice * item.Quantity;
+                    child.ID = item.PurchaseOrderId;
+                    child.Unit = item.Unit;
+                    child.VendorId = item.VendorId;
+                    child.VendorName = item.VendorName;
+                    child.VendorPhone = item.VendorPhone;
+                    child.STATUS = item.STATUS;
+                    child.PActive = item.PActive;
+                    child.CIActive = item.CIActive;
+
                     parentModel.purchaseorderdetail.Add(child);
                 }
 
@@ -108,7 +151,6 @@ namespace TMKR.Managers
                 parentModel.Phone = group.FirstOrDefault().PHNE;
                 parentModel.SHPNG_ADRS = group.FirstOrDefault().SHPNG_ADRS;
                 parentModel.Total = group.Sum(t => t.ItemAmount);
-                parentModel.STATUS = group.FirstOrDefault().STATUS;
 
                 parentModel.purchaseorderdetail = new List<PurchaseOrderChildModel>();
                 foreach (var item in group)
@@ -121,6 +163,8 @@ namespace TMKR.Managers
                     child.TotalAmount = item.UnitPrice * item.Quantity;
                     child.ID = item.PurchaseOrderId;
                     child.Unit = item.Unit;
+                    child.Status = item.STATUS;
+
                     parentModel.purchaseorderdetail.Add(child);
                 }
 
@@ -129,18 +173,24 @@ namespace TMKR.Managers
             return result;
         }
 
+        public void CancelOrderItem(int itemId)
+        {
+            purchaseOrderDao.CancelOrderItem(itemId);
+        }
+
         public void updateStatus(int purchaseOrderId, string v)
         {
             purchaseOrderDao.UpdateOrderStatus(purchaseOrderId,v);
         }
 
-        public void CancelOrder(List<OrderChildModel> orders)
+        public void CancelOrder(int cartId)
         {
-            foreach (OrderChildModel order in orders) {
+            purchaseOrderDao.CancelOrder(cartId);
+        }
 
-                purchaseOrderDao.CancelOrder(order.ID);
-            }
-            
+        public void SingleOrderStatus(ActionDataModel data)
+        {
+            purchaseOrderDao.UpdateSingleOrderStatus(data);
         }
     }
 }

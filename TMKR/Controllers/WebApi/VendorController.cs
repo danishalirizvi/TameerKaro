@@ -123,29 +123,29 @@ namespace TMKR.Controllers.WebApi
             }
         }
 
-        [HttpGet]
-        public HttpResponseMessage GetPurchaseOrder(int vndrId)
-        {
-            try
-            {
-                List<PurchaseOrderParentModel> purchaseOrdersParent = purchaseOrderManager.GetPurchaseOrdersParent(vndrId);
+        //[HttpGet]
+        //public HttpResponseMessage GetPurchaseOrder(int vndrId)
+        //{
+        //    try
+        //    {
+        //        List<PurchaseOrderParentModel> purchaseOrdersParent = purchaseOrderManager.GetPurchaseOrdersParent(vndrId);
 
-                List<PurchaseOrderChildModel> purchaseOrdersChild = purchaseOrderManager.GetPurchaseOrdersChild(vndrId);
+        //        List<PurchaseOrderChildModel> purchaseOrdersChild = purchaseOrderManager.GetPurchaseOrdersChild(vndrId);
 
-                Purchase_OrderModel purchaseOrders = new Purchase_OrderModel();
+        //        Purchase_OrderModel purchaseOrders = new Purchase_OrderModel();
 
-                purchaseOrders.parent = purchaseOrdersParent;
+        //        purchaseOrders.parent = purchaseOrdersParent;
 
-                purchaseOrders.child = purchaseOrdersChild;
+        //        purchaseOrders.child = purchaseOrdersChild;
 
-                return Request.CreateResponse(HttpStatusCode.OK, purchaseOrders);
-            }
-            catch (Exception)
-            {
+        //        return Request.CreateResponse(HttpStatusCode.OK, purchaseOrders);
+        //    }
+        //    catch (Exception)
+        //    {
 
-                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
-            }
-        }
+        //        return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
+        //    }
+        //}
 
         [HttpGet]
         public HttpResponseMessage GetActiveAdvts(int vndrId)
@@ -207,6 +207,18 @@ namespace TMKR.Controllers.WebApi
             }
             return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
         }
+
+
+        public HttpResponseMessage SingleOrderAction(ActionDataModel data)
+        {
+            if (data != null)
+            {
+                purchaseOrderManager.SingleOrderStatus(data);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            return Request.CreateErrorResponse(HttpStatusCode.NotAcceptable, "invalid request");
+        }
+
 
         [HttpPost]
         public HttpResponseMessage UpdateAdvt([FromBody]ActiveAdvtModel advtVM)
@@ -352,6 +364,11 @@ namespace TMKR.Controllers.WebApi
                 "DeleteAdvertisement",
                 "api/vendor/deleteAdvt/{advtId}",
                 new { controller = "Vendor", action = "DeleteAdvt" });
+
+            config.Routes.MapHttpRoute(
+                "SingleOrderAction",
+                "api/vendor/singleorderaction",
+                new { controller = "Vendor", action = "SingleOrderAction" });
         }
     }
 }

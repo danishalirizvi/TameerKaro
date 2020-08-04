@@ -12,7 +12,7 @@ namespace TMKR.Managers
         StatusDao statusDao = new StatusDao();
         VendorDao vendorDao = new VendorDao();
 
-        //Get Product Advertisements
+        //Get Product Advertisements***
         public List<Prod_AdvtModel> getProd_Advts()
         {
             return prod_AdvtDao.GetProd_Advts();
@@ -74,6 +74,7 @@ namespace TMKR.Managers
             vendorDao.Pic(photo);
         }
 
+        //***
         public Prod_AdvtModel getProduct(int advtid)
         {
             return prod_AdvtDao.GetProdAdvt(advtid);
@@ -82,6 +83,21 @@ namespace TMKR.Managers
         public void deleteAdvt(int advtId)
         {
             prod_AdvtDao.DeleteAdvt(advtId);
+        }
+
+        public List<Prod_AdvtModel> getAdvertisements()
+        {
+            return prod_AdvtDao.GetAllProd_Advts();
+        }
+
+        public void blockAdvt(int advtId)
+        {
+            prod_AdvtDao.blockAdvt(advtId);
+        }
+
+        public void unblockAdvt(int advtId)
+        {
+            prod_AdvtDao.unblockAdvt(advtId);
         }
     }
 }

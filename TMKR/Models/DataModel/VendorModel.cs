@@ -28,5 +28,7 @@ namespace TMKR.Models.DataModel
         public string CITY { get; set; }
 
         public string CRNT_PSWD { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }

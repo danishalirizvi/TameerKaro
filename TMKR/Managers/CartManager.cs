@@ -85,31 +85,29 @@ namespace TMKR.Managers
             createPurchaseOrders(cartid, cart);
         }
 
+        //***
         public List<OrderModel> PurchaseOrderList(int Id, string type)
         {
             var orders = purchaseOrderDao.OrderList(Id, type);
             return orders;
         }
 
+        //***
         public List<OrderParentModel> GetOrders(int Id, string type)
         {
             List<OrderModel> ordersAll = PurchaseOrderList(Id, type);
 
             List<OrderParentModel> result = new List<OrderParentModel>();
 
-            var orders = ordersAll.GroupBy(t => new { t.CART_ID, t.VendorId });
+            var orders = ordersAll.GroupBy(t => new { t.CART_ID });
 
             foreach (var order in orders)
             {
                 OrderParentModel parentorder = new OrderParentModel()
                 {
                     CART_ID = order.FirstOrDefault().CART_ID,
-                    VendorName = order.FirstOrDefault().VendorName,
-                    VendorPhone = order.FirstOrDefault().VendorPhone,
                     SHPNG_ADRS = order.FirstOrDefault().SHPNG_ADRS,
-                    Total = order.Sum(t => t.ItemAmount),
-                    STATUS = order.FirstOrDefault().STATUS,
-                    VendorEmail = order.FirstOrDefault().VendorEmail,
+                    Total = order.Sum(t => t.ItemAmount)
 
                 };
                 parentorder.orderdetail = new List<OrderChildModel>();
@@ -122,13 +120,50 @@ namespace TMKR.Managers
                         Quantity = item.Quantity,
                         Unit_Price = item.UnitPrice,
                         TotalAmount = item.UnitPrice * item.Quantity,
-                        ID = item.PurchaseOrderId
+                        ID = item.PurchaseOrderId,
+                        VendorName = item.VendorName,
+                        VendorPhone = item.VendorPhone,
+                        STATUS = item.STATUS,
+                        VendorEmail = item.VendorEmail
                     };
                     parentorder.orderdetail.Add(child);
                 }
                 result.Add(parentorder);
             }
             return result;
+        }
+
+        public void suspendOrder(int cartId)
+        {
+            shopping_CartDao.suspendOrderCart(cartId);
+
+            shopping_CartDao.suspendOrderCartItems(cartId);
+
+            shopping_CartDao.suspendOrderPurchaseOrders(cartId);
+
+        }
+
+        public void resumeOrder(int cartId)
+        {
+            shopping_CartDao.resumeOrderCart(cartId);
+
+            shopping_CartDao.resumeOrderCartItems(cartId);
+
+            shopping_CartDao.resumeOrderPurchaseOrders(cartId);
+        }
+
+        public void suspendSingleOrder(int orderId)
+        {
+            shopping_CartDao.suspendSingleOrderCartItems(orderId);
+
+            shopping_CartDao.suspendSingleOrderPurchaseOrders(orderId);
+        }
+
+        public void resumeSingleOrder(int orderId)
+        {
+            shopping_CartDao.resumeSingleOrderCartItems(orderId);
+
+            shopping_CartDao.resumeSingleOrderPurchaseOrders(orderId);
         }
     }
 }

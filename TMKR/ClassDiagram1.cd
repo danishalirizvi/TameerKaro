@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TMKR.Models.DataModel.OrderModel">
+    <Position X="6.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>JAACAAAACAAAAAAAAAAAAAAAAAAAAGEgAgAAgAAIAAA=</HashCode>
+      <FileName>Models\DataModel\OrderModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Models.DataModel.CartItemModel">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAgAAAAAAAAAAAAAAAAIAhAAABAAAAAAA=</HashCode>
+      <FileName>Models\DataModel\CartItemModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Models.DataModel.CustomerProfileModel">
+    <Position X="2.5" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAIQIAAAAAAAAAAMAAAGAAAAgCAAAAA=</HashCode>
+      <FileName>Models\DataModel\CustomerProfileModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Models.DataModel.ProdAdvertisementModel">
+    <Position X="4.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAgAKQAAAACAAAAAAAAIAIAAAQAAAAAAA=</HashCode>
+      <FileName>Models\DataModel\ProdAdvertisementModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Models.DataModel.PurchaseOrder">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAkABAAAAAAAAAAAAAAMEAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DataModel\PurchaseOrder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Models.DataModel.PurchaseOrderParentModel">
+    <Position X="8.75" Y="2.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAACAAAAAAAAAQEEgAAAAIAAAAAA=</HashCode>
+      <FileName>Models\DataModel\PurchaseOrderParentModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Models.DataModel.ShoppingCartModel">
+    <Position X="0.75" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Models\DataModel\ShoppingCartModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Models.DataModel.VendorModel">
+    <Position X="0.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgCIQIAAAAAAAAAAMAAAGAAAAgCAAAAA=</HashCode>
+      <FileName>Models\DataModel\VendorModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Models.DataModel.ProductTypeModel">
+    <Position X="0.75" Y="2.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEgACAIAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DataModel\ProductTypeModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Models.DataModel.OrderTypesModel">
+    <Position X="4.75" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>Models\DataModel\OrderTypesModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Controllers.WebApi.CustomerController">
+    <Position X="0.75" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAITAAAAAhAAAAAAAAAAAAQggBAAAAQCAQCAIAAAA=</HashCode>
+      <FileName>Controllers\WebApi\CustomerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Controllers.WebApi.VendorController">
+    <Position X="2.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAgADAIAIAggAAAAEgEAAAAUgABAgggQCAQAAQAAAA=</HashCode>
+      <FileName>Controllers\WebApi\VendorController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Controllers.WebApi.AdminController">
+    <Position X="4.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAgAAAAAgAAAAAAQAAQAAABEAA=</HashCode>
+      <FileName>Controllers\WebApi\AdminController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TMKR.Controllers.WebApi.FilesController">
+    <Position X="6.25" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAIAAAAAAAAAAABABAAAAAAAAAEAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\WebApi\FilesController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TKDR.Web.Helpers.PasswordHasher">
+    <Position X="8" Y="8" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAEEQAEBAAIAAAAAAAAAAAAAAAgAAJAAAAA=</HashCode>
+      <FileName>Helpers\PasswordHasher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
