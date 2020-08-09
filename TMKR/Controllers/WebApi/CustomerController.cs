@@ -186,7 +186,7 @@ namespace TMKR.Controllers.WebApi
         [HttpPost]
         public HttpResponseMessage CancelOrder(int cartId)
         {
-            
+
             purchsaeordermanager.CancelOrder(cartId);
 
             return Request.CreateErrorResponse(HttpStatusCode.OK, "Order Cancelled Succcessfully");
@@ -199,6 +199,21 @@ namespace TMKR.Controllers.WebApi
             purchsaeordermanager.CancelOrderItem(itemId);
 
             return Request.CreateErrorResponse(HttpStatusCode.OK, "Order Cancelled Succcessfully");
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetRates()
+        {
+            try
+            {
+                List<RateModel> rates = customerManager.getRates();
+
+                return Request.CreateResponse(HttpStatusCode.OK, rates);
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
+            }
         }
 
         //WebApi Route Configuration
@@ -263,6 +278,11 @@ namespace TMKR.Controllers.WebApi
                 "CancelOrderItem",
                 "api/customer/cancelorderitem/{itemId}",
                 new { controller = "Customer", action = "CancelOrderItem" });
+
+            config.Routes.MapHttpRoute(
+                "GetRates",
+                "api/customer/getRates",
+                new { controller = "Customer", action = "GetRates" });
         }
 
     }

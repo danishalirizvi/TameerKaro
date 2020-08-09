@@ -5,12 +5,16 @@ angular.module('app.admin')
     ['$scope', '$rootScope', '$state', 'AuthenticationService', '$window', '$location',
 function ($scope, $rootScope, $state, AuthenticationService, $window, $location) {
         var parentController = $scope.$parent;
-
-        AuthenticationService.clearCredentials('cookieadmin');
-
+        AuthenticationService.clearCredentialsOnLogout();
         parentController.adminusername = null;
-        $window.localStorage.clear();
-        //$state.go("admin.login");
-        $location.path('/admin/login');
+        $window.location.href = '#/admin';//
+        //$location.path('/admin/login');
+
+        ///AuthenticationService.clearCredentials('cookieadmin');   
+        //$window.localStorage.clear();
+        //parentController.adminusername = null;
+        ////$state.go("admin.login");
+        //$window.location.href = '/admin/login';
+        ////$location.path('/admin/login');
     }]
   );

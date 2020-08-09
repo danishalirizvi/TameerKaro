@@ -12,13 +12,11 @@
                     </li>
 
                     <li ng-if="adminusername">
-                        <a ui-sref="admin.logout" ui-sref-active="active">
+                        <a href="" ng-click="AdminLoggingOut()">
                             <i class="fa fa-sign-out">&nbsp;</i>
                             Logout
-                        </a>
+                        </a>                        
                     </li>
-
-
                 </ul>
             </div>
         </div>
@@ -93,6 +91,12 @@
                                     <a ng-click="validateNav('Admin', 'admin.orders', false)" ui-sref-active="active">
                                         <!--<a ui-sref="admin.home" ui-sref-active="active">-->
                                         Orders
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="validateNav('Admin', 'admin.updaterates', false)" ui-sref-active="active">
+                                        <!--<a ui-sref="admin.home" ui-sref-active="active">-->
+                                        Update Rates
                                     </a>
                                 </li>
                                 <li>

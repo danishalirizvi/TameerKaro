@@ -11,8 +11,7 @@
                     controller: "AdminLoginController",
                     portal: "admin",
                     resolve: {
-                        cookie: cookie,
-                        portalcheck: portalcheck
+                        cookie: cookie
                     }
                 })
                 .state("admin.home", {
@@ -62,6 +61,16 @@
                     url: "/orders",
                     templateUrl: "app/admin/orders/orders.html",
                     controller: "OrdersController",
+                    portal: "admin",
+                    resolve: {
+                        authentication: authentication,
+                        cookie: cookie
+                    }
+                })
+                .state("admin.updaterates", {
+                    url: "/updaterates",
+                    templateUrl: "app/admin/update-rates/update-rates.html",
+                    controller: "UpdateRatesController",
                     portal: "admin",
                     resolve: {
                         authentication: authentication,

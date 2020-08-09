@@ -83,6 +83,16 @@ namespace TMKR.DataAccess
             }
         }
 
+        public List<RateModel> getRates()
+        {
+            using (Conn)
+            {
+                string query = "select * from Rates where IsActive = 1";
+
+                return Conn.Query<RateModel>(query).ToList();
+            }
+        }
+
         public void blockCustomer(int customerId)
         {
             using (Conn)

@@ -196,12 +196,21 @@ namespace TMKR.Controllers.WebApi
         [HttpPost]
         public HttpResponseMessage ResumeSingleOrder(int orderId)
         {
+            
 
             cartManager.resumeSingleOrder(orderId);
 
             return Request.CreateErrorResponse(HttpStatusCode.OK, "Advertisement Deleted Successfully");
         }
 
+
+        [HttpPost]
+        public HttpResponseMessage UpdateRate(RateDataModel data)
+        {
+            adminManager.updateRate(data);
+
+            return Request.CreateErrorResponse(HttpStatusCode.OK, "Rate Updated Successfully");
+        }
 
 
         //WebApi Route Configuration
@@ -281,6 +290,11 @@ namespace TMKR.Controllers.WebApi
                 "ResumeSingleOrder",
                 "api/admin/resumeSingleOrder/{orderId}",
                 new { controller = "Admin", action = "ResumeSingleOrder" });
+
+            config.Routes.MapHttpRoute(
+                "UpdateRate",
+                "api/admin/updateRate",
+                new { controller = "Admin", action = "UpdateRate" });
         }
     }
 }

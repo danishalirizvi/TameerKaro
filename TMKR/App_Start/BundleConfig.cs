@@ -27,9 +27,9 @@ namespace TMKR
                       "~/Content/iconstyle.css",
                       "~/Content/responsive.css",
                       "~/Content/font-awesome.min.css",
-                      "~/Content/animate.css"                 
+                      "~/Content/animate.css"             
                       ));
-
+ 
            
             bundles.Add(new ScriptBundle("~/bundles/default").Include(
                 "~/Scripts/jquery-{version}.js",
@@ -79,6 +79,7 @@ namespace TMKR
                 "~/app/admin/vendors/vendors-controller.js",
                 "~/app/admin/advts/advts-controller.js",
                 "~/app/admin/orders/orders-controller.js",
+                "~/app/admin/update-rates/update-rates-controller.js",
 
                 //customer
                 "~/app/customer/app.customer.js",

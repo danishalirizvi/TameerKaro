@@ -26,5 +26,19 @@ namespace TMKR.Managers
             }
             return null;
         }
+
+        public void updateRate(RateDataModel ratedata)
+        {
+            RateModel rate = new RateModel();
+
+            adminDao.unsetOldRate(ratedata);
+
+            rate.Prod_Type_ID = ratedata.Prod_Type_ID;
+            rate.Rate = ratedata.Rate;
+            rate.EntryDate = DateTime.Now;
+            rate.IsActive = true;
+
+            adminDao.setRate(rate);
+        }
     }
 }

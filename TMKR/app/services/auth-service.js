@@ -1,5 +1,4 @@
-﻿+
-'use strict';
+﻿'use strict';
 
 angular.module('app')
   .service('AuthenticationService',
@@ -75,6 +74,12 @@ angular.module('app')
 
           this.clearCredentials = function (cookieName) {
               removeCredentials(cookieName);
+          };
+
+          this.clearCredentialsOnLogout = function () {
+              $cookies.remove('cookieadmin');
+              $cookies.remove('cookievendor');
+              $cookies.remove('cookiecustomer');                         
           };
 
           this.getUsername = function (cookieName) {

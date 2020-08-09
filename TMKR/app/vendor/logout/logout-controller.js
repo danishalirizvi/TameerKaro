@@ -5,12 +5,11 @@ angular.module('app.vendor')
     ['$scope', '$rootScope', '$state', 'AuthenticationService', '$window', '$location',
     function ($scope, $rootScope, $state, AuthenticationService, $window, $location) {
         var parentController = $scope.$parent;
-   
-        AuthenticationService.clearCredentials('cookievendor');
-
+        AuthenticationService.clearCredentialsOnLogout();
         parentController.vendorusername = null;
-        $window.localStorage.clear();
-        //$state.go("vendor.home");
-        $location.path('/vendor/login');
+        $window.reload();      $window.location.href = '/#/vendor';
+        //$location.path('/vendor/login');
+
+        ////$location.path('/admin/login');
     }]
   );

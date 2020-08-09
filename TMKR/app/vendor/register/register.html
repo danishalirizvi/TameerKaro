@@ -1,154 +1,122 @@
-﻿<section id="ts-features" class="ts-features">
-    <div class="container" style="margin-left:15%;margin-right:15%;">
-        <div class="row" >
-            <div class="col-xs-12">
-                <div class="ts-intro">
-                    <div id="registerbox" style="margin-top: 10px;" class="mainbox col-md-12">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <div class="panel-title"> Sign Up </div>
+﻿
+<section id="ts-features" class="ts-features">
+    <div class="container register">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="register-heading">Register To Proceed</h3>
+
+                <form name="signupForm" method="post" ng-submit="submit()" role="form">
+
+                    <div class="row register-form">
+
+                        <div class="col-md-6">
+                            <!--Username-->
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="USR_NME" ng-model="credentials.USR_NME" placeholder="Username" maxlength="40" required />
                             </div>
-                            <div class="panel-body">
-                                <form name="signupForm" class="form-horizontal" method="post" ng-submit="submit()" role="form">
-
-                                    <!--USR_NME-->
-                                    <div style="margin-top: 10px" class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-user"></i>
-                                        </span>
-                                        <input type="text" class="form-control" name="USR_NME" ng-model="credentials.USR_NME" placeholder="Username" required />
-                                    </div>
-                                    <div class="error" ng-show="(submitted || signupForm.USR_NME.$dirty)  && signupForm.USR_NME.$invalid">
-                                        <p class="error" ng-show="signupForm.USR_NME.$error.required">
-                                            *Username is mandatory
-                                        </p>
-                                    </div>
-
-                                    <!--PSWD-->
-                                    <div style="margin-top: 25px" class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-lock"></i>
-                                        </span>
-                                        <input type="password" class="form-control" name="PSWD" ng-model="credentials.PSWD" placeholder="Password" required />
-                                    </div>
-                                    <div class="error" ng-show="(submitted  || signupForm.PSWD.$dirty)  && signupForm.PSWD.$invalid">
-                                        <p class="error" ng-show="signupForm.PSWD.$error.required">
-                                            *Password is mandatory
-                                        </p>
-                                    </div>
-
-                                    <!--confirmpassword-->
-                                    <div style="margin-top: 25px" class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-lock"></i>
-                                        </span>
-                                        <input type="password" class="form-control" name="confirmpassword" ng-model="credentials.confirmpassword" placeholder="Confirm Password" required />
-                                    </div>
-                                    <div class="error" ng-show="(submitted  || signupForm.confirmpassword.$dirty)  && signupForm.confirmpassword.$invalid">
-                                        <p class="error" ng-show="signupForm.confirmpassword.$error.required">
-                                            *Confirm Password is mandatory
-                                        </p>
-                                    </div>
-
-                                    <!--FRST_NME-->
-                                    <div style="margin-top: 25px" class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-user"></i>
-                                        </span>
-                                        <input type="text" class="form-control" name="FRST_NME" ng-model="credentials.FRST_NME" placeholder="Enter First Name" required />
-                                    </div>
-                                    <div class="error" ng-show="(submitted  || signupForm.FRST_NME.$dirty)  && signupForm.FRST_NME.$invalid">
-                                        <p class="error" ng-show="signupForm.FRST_NME.$error.required">
-                                            *First Name is mandatory
-                                        </p>
-                                    </div>
-
-                                    <!--LAST_NME-->
-                                    <div style="margin-top: 25px" class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-user"></i>
-                                        </span>
-                                        <input type="text" class="form-control" name="LAST_NME" ng-model="credentials.LAST_NME" placeholder="Enter Last Name" required />
-                                    </div>
-                                    <div class="error" ng-show="(submitted  || signupForm.LAST_NME.$dirty)  && signupForm.LAST_NME.$invalid">
-                                        <p class="error" ng-show="signupForm.LAST_NME.$error.required">
-                                            *Last Name is mandatory
-                                        </p>
-                                    </div>
-
-                                    <!--PHNE-->
-                                    <div style="margin-top: 25px" class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-earphone"></i>
-                                        </span>
-                                        <input type="number" class="form-control" name="PHNE" ng-model="credentials.PHNE" placeholder="Phone" required />
-                                    </div>
-                                    <div class="error" ng-show="(submitted  || signupForm.PHNE.$dirty)  && signupForm.PHNE.$invalid">
-                                        <p class="error" ng-show="signupForm.PHNE.$error.required">
-                                            *Phone is mandatory
-                                        </p>
-                                    </div>
-
-                                    <!--EMAIL-->
-                                    <div style="margin-top: 25px" class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-envelope"></i>
-                                        </span>
-                                        <input type="email" class="form-control" name="EMAIL" ng-model="credentials.EMAIL" placeholder="Email" required />
-                                    </div>
-                                    <div class="error" ng-show="(submitted  || signupForm.EMAIL.$dirty)  && signupForm.EMAIL.$invalid">
-                                        <p class="error" ng-show="signupForm.EMAIL.$error.required">
-                                            *Email is mandatory
-                                        </p>
-                                    </div>
-
-                                    <!--BSNS_NME-->
-                                    <div style="margin-top: 25px" class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-briefcase"></i>
-                                        </span>
-                                        <input type="text" class="form-control" name="BSNS_NME" ng-model="credentials.BSNS_NME" placeholder="Bussiness Name" required />
-                                    </div>
-                                    <div class="error" ng-show="(submitted  || signupForm.BSNS_NME.$dirty)  && signupForm.BSNS_NME.$invalid">
-                                        <p class="error" ng-show="signupForm.BSNS_NME.$error.required">
-                                            *Bussiness Name is mandatory
-                                        </p>
-                                    </div>
-
-                                    <!--Address-->
-                                    <div style="margin-top: 25px" class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-map-marker"></i>
-                                        </span> <input type="text" class="form-control" name="Address" ng-model="credentials.Address" placeholder="Enter Address" required />
-                                    </div>
-                                    <div class="error" ng-show="(submitted  || signupForm.Address.$dirty)  && signupForm.Address.$invalid">
-                                        <p class="error" ng-show="signupForm.Address.$error.required">
-                                            *Address is mandatory
-                                        </p>
-                                    </div>
-
-                                    <!--CITY-->
-                                    <div style="margin-top: 25px" class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-map-marker"></i>
-                                        </span> <input type="text" class="form-control" name="CITY" ng-model="credentials.CITY" placeholder="Enter City Name" required />
-                                    </div>
-                                    <div class="error" ng-show="(submitted  || signupForm.CITY.$dirty)  && signupForm.CITY.$invalid">
-                                        <p class="error" ng-show="signupForm.CITY.$error.required">
-                                            *City is mandatory
-                                        </p>
-                                    </div>
-
-                                    <div style="margin-top: 20px" class="form-group">
-                                        <div class="col-sm-12 controls">
-                                            <input type="submit" id="btn-login" class="btn btn-success" value="Register!" style="float:right" />
-                                        </div>
-                                    </div>
-                                </form>
+                            <div class="error" ng-show="(submitted || signupForm.USR_NME.$dirty)  && signupForm.USR_NME.$invalid">
+                                <p class="error validation-color" ng-show="signupForm.USR_NME.$error.required">
+                                    *Username is mandatory
+                                </p>
                             </div>
+
+                            <!--Password-->
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="PSWD" ng-model="credentials.PSWD" placeholder="Password" maxlength="40" minlength="8" required />
+                            </div>
+                            <div class="error" ng-show="(submitted  || signupForm.PSWD.$dirty)  && signupForm.PSWD.$invalid">
+                                <p class="error validation-color" ng-show="signupForm.PSWD.$error.required">
+                                    *Password is mandatory
+                                </p>
+                            </div>
+
+                            <!--First Name-->
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="FRST_NME" ng-model="credentials.FRST_NME" placeholder="Enter First Name" maxlength="80" required />
+                            </div>
+                            <div class="error" ng-show="(submitted  || signupForm.FRST_NME.$dirty)  && signupForm.FRST_NME.$invalid">
+                                <p class="error validation-color" ng-show="signupForm.FRST_NME.$error.required">
+                                    *First Name is mandatory
+                                </p>
+                            </div>
+
+                            <!--BSNS Name-->
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="BSNS_NME" ng-model="credentials.BSNS_NME" placeholder="Bussiness Name" maxlength="80" required />
+                            </div>
+                            <div class="error" ng-show="(submitted  || signupForm.BSNS_NME.$dirty)  && signupForm.BSNS_NME.$invalid">
+                                <p class="error validation-color" ng-show="signupForm.BSNS_NME.$error.required">
+                                    *Bussiness Name is mandatory
+                                </p>
+                            </div>
+
+
+                            <!--Address-->
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Address" ng-model="credentials.Address" placeholder="Enter Address" maxlength="150" required />
+                            </div>
+                            <div class="error" ng-show="(submitted  || signupForm.Address.$dirty)  && signupForm.Address.$invalid">
+                                <p class="error validation-color" ng-show="signupForm.Address.$error.required">
+                                    *Address is mandatory
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <!--Email-->
+                            <div class="form-group">
+                                <input type="email" class="form-control" name="EMAIL" ng-model="credentials.EMAIL" placeholder="Email" maxlength="120" required />
+                            </div>
+                            <div class="error" ng-show="(submitted  || signupForm.EMAIL.$dirty)  && signupForm.EMAIL.$invalid">
+                                <p class="error validation-color" ng-show="signupForm.EMAIL.$error.required">
+                                    *Email is mandatory
+                                </p>
+                            </div>
+
+                            <!--Confirm Password-->
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="confirmpassword" ng-model="credentials.confirmpassword" placeholder="Confirm Password" maxlength="40" minlength="8" required />
+                            </div>
+                            <div class="error" ng-show="(submitted  || signupForm.confirmpassword.$dirty)  && signupForm.confirmpassword.$invalid">
+                                <p class="error validation-color" ng-show="signupForm.confirmpassword.$error.required">
+                                    *Confirm Password is mandatory
+                                </p>
+                            </div>
+
+                            <!--Last Name-->
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="LAST_NME" ng-model="credentials.LAST_NME" placeholder="Enter Last Name" maxlength="80" required />
+                            </div>
+                            <div class="error" ng-show="(submitted  || signupForm.LAST_NME.$dirty)  && signupForm.LAST_NME.$invalid">
+                                <p class="error validation-color" ng-show="signupForm.LAST_NME.$error.required">
+                                    *Last Name is mandatory
+                                </p>
+                            </div>
+
+                            <!--Phone-->
+                            <div class="form-group">
+                                <input type="number" class="form-control" name="PHNE" ng-model="credentials.PHNE" placeholder="Phone" maxlength="50" required />
+                            </div>
+                            <div class="error" ng-show="(submitted  || signupForm.PHNE.$dirty)  && signupForm.PHNE.$invalid">
+                                <p class="error validation-color" ng-show="signupForm.PHNE.$error.required">
+                                    *Phone is mandatory
+                                </p>
+                            </div>
+
+                            <!--City-->
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="CITY" ng-model="credentials.CITY" placeholder="Enter City Name" maxlength="60" required />
+                            </div>
+                            <div class="error" ng-show="(submitted  || signupForm.CITY.$dirty)  && signupForm.CITY.$invalid">
+                                <p class="error validation-colors" ng-show="signupForm.CITY.$error.required">
+                                    *City is mandatory
+                                </p>
+                            </div>
+                            <input type="submit" id="btn-login" class="btn btn-primary" value="Register!" style="float:right" />
+                            <!--<input type="submit" class="btnRegister" value="Register">-->
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

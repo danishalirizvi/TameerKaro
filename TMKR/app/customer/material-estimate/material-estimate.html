@@ -2,44 +2,8 @@
 
     <div class="container">
         <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-
-        <!--<div class="row">
-            <div>
-                Brick Area = {{brickArea}} sq.ft
-            </div>
-            <div>
-                Volume of Brick = {{brickVolume}} cu.ft
-            </div>
-            <div>
-                Volume of Bricks in Wall = {{bricksVolume}} cu.ft
-            </div>
-            <div>
-                Total Area Walls = {{totalAreaWalls}} sq.ft
-            </div>
-            <div>
-                Volume of Walls = {{volumeOfWall}} cu.ft
-            </div>
-            <div>
-                Total Number of Bricks = {{NoOfBricks}} Brick(s)
-            </div>
-            <div>
-                Volume of Mortar Wet = {{MortarVolumeWet}} cu.ft
-            </div>
-            <div>
-                Volume of Mortar Dry = {{MortarVolumeDry}} cu.ft
-            </div>
-            <div>
-                Cement = {{Cement}} cu.ft
-            </div>
-            <div>
-                Cement = {{CementBags}} Bags
-            </div>
-            <div>
-                Sand = {{Sand}} cu.ft
-            </div>
-        </div>-->
         
-        <div class="row">
+        <div class="row" ng-show="!results">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="col-xs-5 col-sm-5" style="padding-top:15px">
                     Covered Area (sq.ft):
@@ -58,7 +22,7 @@
             </div>
         </div>
 
-        <div class="row" ng-repeat="wall in walls" style="min-height:80px;height:auto;padding:5px">
+        <div class="row" ng-repeat="wall in walls" style="min-height:80px;height:auto;padding:5px"  ng-show="!results">
             <div class="row" style="margin:0px auto">
                 <h5 style="padding-left:30px;">Wall#{{$index+1}}</h5>
             </div>
@@ -85,12 +49,12 @@
             </div>
         </div>
 
-        <div class="row" style="margin:0 auto;padding:10px;padding-top:30px">
+        <div class="row" style="margin:0 auto;padding:10px;padding-top:30px"  ng-show="!results">
             <button class="btn-primary" ng-click="addWall()">Add Wall</button>
             <button class="btn-primary" ng-click="reset()">Reset</button>
         </div>
 
-        <div class="row">
+        <div class="row"  ng-show="!results">
             <button class="btn-primary" ng-click="calculate()" style="float:right">Caculate Estimate</button>
         </div>
 
@@ -122,16 +86,68 @@
                 <tr>
                     <td>Bricks</td>
                     <td>{{NoOfBricks}} Brick(s)</td>
+                    <td ng-show="cost">{{NoOfBricks * brickPrice}} Rs.</td>
                 </tr>
                 <tr>
                     <td>Cement</td>
                     <td>{{CementBags}} Bag(s) (50kg/Bag)</td>
+                    <td ng-show="cost">{{CementBags * cementPrice}} Rs.</td>
                 </tr>
                 <tr>
                     <td>Sand</td>
                     <td>{{Sand}} cu.ft</td>
+                    <td ng-show="cost">{{Sand * sandPrice}} Rs.</td>
                 </tr>
             </table>
+        </div>
+
+        <div class="row" ng-show="results && walls.length != 0">
+            <div class="panel-heading" style="width: 50%;margin:0px auto"><h3>Roof</h3></div>
+            <table class="table table-condensed" style="border-collapse:collapse;width: 50%;margin:0px auto">
+                <tr>
+                    <td>Steel</td>
+                    <td>{{steel}} kg</td>
+                    <td ng-show="cost">{{steel * steelPrice}} Rs.</td>
+                </tr>
+                <tr>
+                    <td>Cement</td>
+                    <td>{{cementRoof}} Bag(s) (50kg/Bag)</td>
+                    <td ng-show="cost">{{cementRoof * cementPrice}} Rs.</td>
+                </tr>
+                <tr>
+                    <td>Sand</td>
+                    <td>{{sandRoof}} cu.ft</td>
+                    <td ng-show="cost">{{sandRoof * sandPrice}} Rs.</td>
+                </tr>
+                <tr>
+                    <td>Gravel</td>
+                    <td>{{gravelRoof}} cu.ft</td>
+                    <td ng-show="cost">{{gravelRoof * gravelPrice}} Rs.</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="row" ng-show="results && walls.length != 0">
+            <div class="panel-heading" style="width: 50%;margin:0px auto"><h3>Floor</h3></div>
+            <table class="table table-condensed" style="border-collapse:collapse;width: 50%;margin:0px auto">
+                <tr>
+                    <td>Cement</td>
+                    <td>{{cementFloor}} Bag(s) (50kg/Bag)</td>
+                    <td ng-show="cost">{{cementFloor * cementPrice}} Rs.</td>
+                </tr>
+                <tr>
+                    <td>Sand</td>
+                    <td>{{sandFloor}} cu.ft</td>
+                    <td ng-show="cost">{{sandFloor * sandPrice}} Rs.</td>
+                </tr>
+                <tr>
+                    <td>Gravel</td>
+                    <td>{{gravelFloor}} cu.ft</td>
+                    <td ng-show="cost">{{gravelFloor * gravelPrice}} Rs.</td>
+                </tr>
+            </table>
+            <button class="btn-primary" ng-click="reset()" style="float:right">Caculate Again</button>
+            <button class="btn-primary" ng-click="cost = true" style="float:right">Caculate Price</button>
         </div>
     </div>
 </section>

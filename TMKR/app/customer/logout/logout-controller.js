@@ -4,13 +4,16 @@ angular.module('app.customer')
   .controller('LogoutController',
     ['$scope', '$rootScope', '$state', 'AuthenticationService', '$window', '$location',
     function ($scope, $rootScope, $state, AuthenticationService, $window, $location) {
-        var parentController = $scope.$parent;
+        //$scope.showLoading = false;
 
-        AuthenticationService.clearCredentials('cookiecustomer');
-
-        parentController.customerusername = null;
-        $window.localStorage.clear();
-        //$state.go("customer.home");
-        $location.path('/customer/login')
+        //$scope.CustomerLoggingOut = function () {
+        //    $scope.showLoading = true;
+        //    var parentController = $scope.$parent;
+        //    AuthenticationService.clearCredentialsOnLogout();
+        //    parentController.customerusernamess = null;
+        //    $window.location.href = '/';
+        //    $scope.showLoading = false;
+        //};
+        
     }]
   );

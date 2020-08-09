@@ -154,6 +154,8 @@
     <Content Include="app\admin\logout\logout-controller.js" />
     <Content Include="app\admin\orders\orders-controller.js" />
     <Content Include="app\admin\orders\orders.html" />
+    <Content Include="app\admin\update-rates\update-rates-controller.js" />
+    <Content Include="app\admin\update-rates\update-rates.html" />
     <Content Include="app\admin\vendors\vendors-controller.js" />
     <Content Include="app\admin\vendors\vendors.html" />
     <Content Include="app\app.config.js" />
@@ -238,6 +240,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\owl.carousel.min.css" />
     <Content Include="Content\owl.theme.default.min.css" />
+    <Content Include="Content\registerform.css" />
     <Content Include="Content\responsive.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
@@ -394,6 +397,8 @@
     <Compile Include="Models\DataModel\OrdersParentModelAdmin.cs" />
     <Compile Include="Models\DataModel\OrderTypesModel.cs" />
     <Compile Include="Models\DataModel\ProfilePicModel.cs" />
+    <Compile Include="Models\DataModel\RateDataModel.cs" />
+    <Compile Include="Models\DataModel\RateModel.cs" />
     <Compile Include="Models\ViewModel\PhotoActionResult.cs" />
     <Compile Include="Models\ViewModel\PhotoViewModel.cs" />
     <Compile Include="Controllers\WebApi\VendorController.cs" />

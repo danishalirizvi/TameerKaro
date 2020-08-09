@@ -13,8 +13,14 @@
 
 <body>
     <div class="body-inner" ng-controller="RootController">
-        <div ui-view></div>
-        <footer id="footer" class="footer bg-overlay">
+        <div data-ng-init="onInit()" ui-view ng-show="!showLoading"></div>
+
+        <div class="plunker-loading" ng-show="showLoading">
+            <h3><i class="fa fa-spinner fa-pulse fa-fw"></i> Site is loading…</h3>
+            <h4>Please wait for few seconds ... </h4>
+        </div>
+
+        <footer ng-show="!showLoading" id="footer" class="footer bg-overlay">
             <div class="footer-main">
                 <div class="container">
                     <div class="row">

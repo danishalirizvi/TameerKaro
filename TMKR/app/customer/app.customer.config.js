@@ -11,6 +11,8 @@
                     portal: "customer",
                     resolve: {
                         cookie: cookie
+                        //,
+                        //portalcheck: portalcheck  
                     }
                 })
 
@@ -193,14 +195,18 @@
     portalcheck.$inject = ['$scope'];
 
     function portalcheck($scope) {
-        //var parentController = $scope.$parent;
-        if ($scope.customerusername == null && $scope.vendorusername == null) {
-            alert('Admin');
-        } else if ($scope.vendorusername == null && $scope.adminusername == null) {
-            alert('Customer');
-        } else if ($scope.adminusername == null && $scope.customerusername == null) {
-            alert('Vendor');
-        }
+        //var parentController = $parent.$scope.adminusername;
+        
+        alert(':(');
+        //if ($parent.$scope.customerusername == null && $parent.$scope.vendorusername == null) {
+        //    alert('Admin');
+        //} else if ($parent.$scope.vendorusername == null && $parent.$scope.adminusername == null) {
+        //    alert('Customer');
+        //} else if ($parent.$scope.adminusername == null && $parent.$scope.customerusername == null) {
+        //    alert('Vendor');
+        //} else {
+        //    alert(':D');
+        //}
     }
 })();
 

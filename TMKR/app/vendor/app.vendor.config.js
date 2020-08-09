@@ -11,8 +11,7 @@
                 templateUrl: "app/vendor/home/home.html",
                 portal: "vendor",
                 resolve: {
-                    cookie: cookie,
-                    portalcheck: portalcheck
+                    cookie: cookie
                 }
             })
             .state("vendor.register", {

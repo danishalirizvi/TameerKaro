@@ -92,5 +92,10 @@ namespace TMKR.Managers
         {
             customerDao.unblockCustomer(customerId);
         }
+
+        public List<RateModel> getRates()
+        {
+            return customerDao.getRates();
+        }
     }
 }

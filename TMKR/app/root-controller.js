@@ -1,22 +1,81 @@
 ﻿(function () {
     'use strict';
     angular.module('app')
-      .controller('RootController', ['$scope', '$location', 'AuthenticationService', '$state', '$modal', '$cookies', '$window',
-    function ($scope, $location, AuthenticationService, $state, $modal, $cookies, $window) {
+      .controller('RootController', ['$scope', '$location', 'AuthenticationService', '$state', '$modal', '$cookies', '$window', '$timeout',
+    function ($scope, $location, AuthenticationService, $state, $modal, $cookies, $window, $timeout) {
 
         $scope.customerusername = null;
         $scope.vendorusername = null;
         $scope.adminusername = null;
 
+        $scope.showLoading = false;
+
+        $scope.onInit = function () {
+            $scope.showLoading = true;
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
+        }
+        
+        $scope.CustomerLoggingOut = function () {
+            $scope.showLoading = true;             
+            AuthenticationService.clearCredentialsOnLogout();
+            $scope.customerusername = null;            
+            $state.go('customer.login', {}, { reload: true });
+
+            $timeout(function () {
+                $scope.showLoading = false;                
+            }, 1000);
+        };
+
+        $scope.VendorLoggingOut = function () {
+            $scope.showLoading = true;            
+            AuthenticationService.clearCredentialsOnLogout();
+            $scope.vendorusername = null;
+            $state.go('vendor.login', {}, { reload: true });
+
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
+        };
+
+
+        $scope.AdminLoggingOut = function () {
+            $scope.showLoading = true;
+            AuthenticationService.clearCredentialsOnLogout();
+            $scope.adminusername = null;
+            $state.go('admin.login', {}, { reload: true });
+
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
+        };
+
+        
         var cookieName = AuthenticationService.checkUserType();
         if (cookieName === 'cookiecustomer') {
-            $scope.customerusername = AuthenticationService.getUsername(cookieName);            
+            $scope.customerusername = AuthenticationService.getUsername(cookieName);
+            if (($location.path().indexOf('/vendor') > -1) || ($location.path() === "") || ($location.path().indexOf('/admin') > -1)) {
+                $location.url('customer/home');
+                ///$state.go('customer.home');
+                //alert('different location - customer cookie');
+            }
         }
         else if (cookieName === 'cookievendor') {
             $scope.vendorusername = AuthenticationService.getUsername(cookieName);
+            if (($location.path().indexOf('/customer') > -1) || ($location.path() === "") || ($location.path().indexOf('/admin') > -1)) {
+                $location.url('vendor/home');
+                ///$state.go('vendor.home');
+                //alert('different location - vendor cookie');
+            }
         }
         else if (cookieName === 'cookieadmin') {
             $scope.adminusername = AuthenticationService.getUsername(cookieName);
+            if (($location.path().indexOf('/customer') > -1) || ($location.path() === "") || ($location.path().indexOf('/vendor') > -1)) {
+                $location.url('admin/home');
+                //$state.go('admin.home');
+                //alert('different location - admin cookie');
+            }
         }
         else {
             $scope.adminusername = null;

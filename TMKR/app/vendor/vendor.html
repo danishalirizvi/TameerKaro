@@ -19,11 +19,12 @@
                     </li>
 
                     <li ng-if="vendorusername">
-                        <a ui-sref="vendor.logout" ui-sref-active="active">
+                        <a href="" ng-click="VendorLoggingOut()">
                             <i class="fa fa-sign-out">&nbsp;</i>
                             Logout
                         </a>
-                    </li>
+                    </li> 
+
                     <li ng-if="!vendorusername">
                         <a ui-sref="customer.home" ui-sref-active="active">
                             <i class="fa fa-refresh">&nbsp;</i>
