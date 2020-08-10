@@ -1,146 +1,217 @@
 ﻿<section id="main-container" class="main-container">
     <div data-ng-init="onInit()" class="container">
-        <h1>Orders</h1>
-        <div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
-            No Order Yet!
+        <div class='common-heading-style'>
+            <h3>Orders</h3>
         </div>
         <div class="col-lg-12" data-toggle="tooltip" data-placement="top" title="Click on Eye To Expand">
             <div class="panel panel-default">
-                <!--<div class="panel-heading"><h3>Object Store</h3></div>-->
-                <div class="panel-body">
-                    <!--<ul class="nav nav-pills" style="font-size:25px">
-                        <li><a href ng-click="setactive('New')">New</a></li>
-                        <li><a href ng-click="setactive('Accepted')">Accepted</a></li>
-                        <li><a href ng-click="setactive('Rejected')">Rejected</a></li>
-                    </ul>-->
-                    <button class="btn-primary" ng-click="setactive('Pending')" style="padding-top:3px;padding-bottom:3px;">Pending</button>
-                    <button class="btn-primary" ng-click="setactive('Accepted')" style="padding-top:3px;padding-bottom:3px;">Accepted</button>
-                    <button class="btn-primary" ng-click="setactive('Rejected')" style="padding-top:3px;padding-bottom:3px;">Rejected</button>
-                    <div ng-show="active == 'Pending'">
-                        <div class="panel-heading"><h3>Pending</h3></div>
-                        <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>&nbsp;</th>
-                                    <th>Cart ID</th>
-                                    <th>Address</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody ng-repeat="order in ordersparent.Pending">
-                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle" >
-                                    <td><button class="btn btn-default btn-xs" ng-click="show = !show"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-                                    <td>{{order.CART_ID}}</td>
-                                    <td style="max-width: 120px;">{{order.SHPNG_ADRS}}</td>
-                                    <td>{{order.Total}}</td>
-                                    <td style="width:60px"><button class="btn-danger" ng-click="cancelorder(order.CART_ID)" style="padding-top:3px;padding-bottom:3px;" >Cancel</button></td>
-                                    <!--<td style="width:60px"><button class="btn-danger" ng-click="cancelorder(ordersparent.Pending,$index)" style="padding-top:3px;padding-bottom:3px;" >Cancel</button></td>-->
-                                </tr>
-                                <tr ng-show="show">
-                                    <th>Vendor</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Unit Price</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                </tr>
-                                <tr ng-show="show" ng-repeat="orders in order.orderdetail">
-                                    <td>{{orders.VendorName}}</td>
-                                    <td>{{orders.VendorPhone}}</td>
-                                    <td>{{orders.VendorEmail}}</td>
-                                    <td>{{orders.ProdName}}</td>
-                                    <td>{{orders.Quantity}}</td>
-                                    <td>{{orders.Unit_Price}}</td>
-                                    <td>{{orders.TotalAmount}}</td>
-                                    <td>{{orders.STATUS}}</td>
-                                    <td style="width:60px"><button class="btn-danger" ng-click="cancelorderitem(orders.ID)" style="padding-top:3px;padding-bottom:3px;">Cancel</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div ng-show="active == 'Accepted'">
-                        <div class="panel-heading"><h3>Accepted</h3></div>
-                        <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>&nbsp;</th>
-                                    <th>Cart ID</th>
-                                    <th>Address</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody ng-repeat="order in ordersparent.Accepted">
-                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
-                                    <td><button class="btn btn-default btn-xs" ng-click="show = !show"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-                                    <td>{{order.CART_ID}}</td>
-                                    <td style="max-width: 120px;">{{order.SHPNG_ADRS}}</td>
-                                    <td>{{order.Total}}</td>
-                                </tr>
-                                <tr ng-show="show">
-                                    <th>Vendor</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Unit Price</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                </tr>
-                                <tr ng-show="show" ng-repeat="orders in order.orderdetail">
-                                    <td>{{orders.VendorName}}</td>
-                                    <td>{{orders.VendorPhone}}</td>
-                                    <td>{{orders.VendorEmail}}</td>
-                                    <td>{{orders.ProdName}}</td>
-                                    <td>{{orders.Quantity}}</td>
-                                    <td>{{orders.Unit_Price}}</td>
-                                    <td>{{orders.TotalAmount}}</td>
-                                    <td>{{orders.STATUS}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div ng-show="active == 'Rejected'">
-                        <div class="panel-heading"><h3>Rejected</h3></div>
-                        <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
-                            <thead>
-                                <tr>
-                                    <th>&nbsp;</th>
-                                    <th>Cart ID</th>
-                                    <th>Address</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody ng-repeat="order in ordersparent.Rejected">
-                                <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
-                                    <td><button class="btn btn-default btn-xs" ng-click="show = !show"><span class="glyphicon glyphicon-eye-open"></span></button></td>
-                                    <td>{{order.CART_ID}}</td>
-                                    <td style="max-width: 120px;">{{order.SHPNG_ADRS}}</td>
-                                    <td>{{order.Total}}</td>
-                                </tr>
-                                <tr ng-show="show">
-                                    <th>Vendor</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Unit Price</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                </tr>
-                                <tr ng-show="show" ng-repeat="orders in order.orderdetail">
-                                    <td>{{orders.VendorName}}</td>
-                                    <td>{{orders.VendorPhone}}</td>
-                                    <td>{{orders.VendorEmail}}</td>
-                                    <td>{{orders.ProdName}}</td>
-                                    <td>{{orders.Quantity}}</td>
-                                    <td>{{orders.Unit_Price}}</td>
-                                    <td>{{orders.TotalAmount}}</td>
-                                    <td>{{orders.STATUS}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="panel-body table-responsive">
+                    <div class="tabbable-panel">
+                        <div class="tabbable-line">
+                            <ul class="nav nav-tabs">
+                                <li class="active">
+                                    <a ng-click="setactive('Pending')" data-toggle="tab">
+                                        Pending
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="setactive('Accepted')" data-toggle="tab">
+                                        Accepted
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="setactive('Rejected')" data-toggle="tab">
+                                        Rejected
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" ng-show="active == 'Pending'">
+                                    <div>
+                                        <div class="panel-heading"><h4>Pending</h4></div>
+                                        <div ng-show="!ordersparent.Pending.length">
+                                            <p style="font-weight:bold;text-align:center;background-color:#ffb600">No Pending Orders</p>
+                                        </div>
+                                        <table class="display dataTable" style="width: 100%;" ng-show="ordersparent.Pending.length">
+                                            <thead>
+                                                <tr>
+                                                    <th>&nbsp;</th>
+                                                    <th>Cart ID</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>Address</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="order in ordersparent.Pending">
+                                                <tr role="row" class="odd">
+                                                    <td><button class="btn btn-default btn-xs" ng-click="show = !show"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                    <td class="sorting_1">{{order.CART_ID}}</td>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
+                                                    <td>{{order.SHPNG_ADRS}}</td>
+                                                    <th>&nbsp;</th>
+                                                    <td>{{order.Total}}</td>
+                                                    <td style="width:60px"><button class="btn-danger" ng-click="cancelorder(order.CART_ID)" style="padding-top:3px;padding-bottom:3px;">Cancel</button></td>
+                                                </tr>
+                                                <tr ng-show="show">
+                                                    <th>Vendor</th>
+                                                    <th>Phone</th>
+                                                    <th>Email</th>
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Total</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                                <tr ng-show="show" ng-repeat="orders in order.orderdetail">
+                                                    <td>{{orders.VendorName}}</td>
+                                                    <td>{{orders.VendorPhone}}</td>
+                                                    <td>{{orders.VendorEmail}}</td>
+                                                    <td>{{orders.ProdName}}</td>
+                                                    <td>{{orders.Quantity}}</td>
+                                                    <td>{{orders.Unit_Price}}</td>
+                                                    <td>{{orders.TotalAmount}}</td>
+                                                    <td>{{orders.STATUS}}</td>
+                                                    <td style="width:60px"><button class="btn-danger" ng-click="cancelorderitem(orders.ID)" style="padding-top:3px;padding-bottom:3px;">Cancel</button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane active" ng-show="active == 'Accepted'">
+                                    <div>
+                                        <div class="panel-heading"><h4>Accepted</h4></div>
+                                        <div ng-show="!ordersparent.Accepted.length">
+                                            <p style="font-weight:bold;text-align:center;background-color:#ffb600">No Accepted Orders</p>
+                                        </div>
+                                        <table class="display dataTable" style="width: 100%;" ng-show="ordersparent.Accepted.length">
+                                            <thead>
+                                                <tr>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>Cart ID</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>Address</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="order in ordersparent.Accepted">
+                                                <tr role="row" class="odd">
+                                                    <td><button ng-click="show = !show" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                    <th>&nbsp;</th>
+                                                    <td class="sorting_1">{{order.CART_ID}}</td>
+                                                    <th>&nbsp;</th>
+                                                    <td>{{order.SHPNG_ADRS}}</td>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
+                                                    <td>{{order.Total}}</td>
+                                                </tr>
+
+                                                <tr ng-show="show">
+                                                    <th>Vendor</th>
+                                                    <th>Phone</th>
+                                                    <th>Email</th>
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Total</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                                <tr ng-show="show" ng-repeat="orders in order.orderdetail">
+                                                    <td>{{orders.VendorName}}</td>
+                                                    <td>{{orders.VendorPhone}}</td>
+                                                    <td>{{orders.VendorEmail}}</td>
+                                                    <td>{{orders.ProdName}}</td>
+                                                    <td>{{orders.Quantity}}</td>
+                                                    <td>{{orders.Unit_Price}}</td>
+                                                    <td>{{orders.TotalAmount}}</td>
+                                                    <td>{{orders.STATUS}}</td>
+                                                </tr>
+                                                <tr ng-show="show">
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane active" ng-show="active == 'Rejected'">
+                                    <div>
+                                        <div class="panel-heading"><h4>Rejected</h4></div>
+                                        <div ng-show="!ordersparent.Rejected.length">
+                                            <p style="font-weight:bold;text-align:center;background-color:#ffb600">No Rejected Orders</p>
+                                        </div>
+                                        <table class="display dataTable" style="width: 100%;" ng-show="ordersparent.Rejected.length">
+                                            <thead>
+                                                <tr>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>Cart ID</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>Address</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="order in ordersparent.Rejected">
+                                                <tr role="row" class="odd">
+                                                    <td><button ng-click="show = !show" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></button></td>
+                                                    <th>&nbsp;</th>
+                                                    <td class="sorting_1">{{order.CART_ID}}</td>
+                                                    <th>&nbsp;</th>
+                                                    <td>{{order.SHPNG_ADRS}}</td>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
+                                                    <td>{{order.Total}}</td>
+                                                </tr>
+                                                <tr ng-show="show">
+                                                    <th>Vendor</th>
+                                                    <th>Phone</th>
+                                                    <th>Email</th>
+                                                    <th>Product</th>
+                                                    <th>Quantity</th>
+                                                    <th>Unit Price</th>
+                                                    <th>Total</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                                <tr ng-show="show" ng-repeat="orders in order.orderdetail">
+                                                    <td>{{orders.VendorName}}</td>
+                                                    <td>{{orders.VendorPhone}}</td>
+                                                    <td>{{orders.VendorEmail}}</td>
+                                                    <td>{{orders.ProdName}}</td>
+                                                    <td>{{orders.Quantity}}</td>
+                                                    <td>{{orders.Unit_Price}}</td>
+                                                    <td>{{orders.TotalAmount}}</td>
+                                                    <td>{{orders.STATUS}}</td>
+                                                </tr>
+                                                <tr ng-show="show">
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

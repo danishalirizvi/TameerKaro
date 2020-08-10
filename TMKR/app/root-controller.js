@@ -1,35 +1,55 @@
 ﻿(function () {
     'use strict';
     angular.module('app')
-      .controller('RootController', ['$scope', '$location', 'AuthenticationService', '$state', '$modal', '$cookies', '$window', '$timeout',
-    function ($scope, $location, AuthenticationService, $state, $modal, $cookies, $window, $timeout) {
+      .controller('RootController', ['$rootScope', '$scope', '$location', 'AuthenticationService', '$state', '$modal', '$cookies', '$window', '$timeout', 'ngCart',
+    function ($rootScope, $scope, $location, AuthenticationService, $state, $modal, $cookies, $window, $timeout, ngCart) {
 
         $scope.customerusername = null;
         $scope.vendorusername = null;
         $scope.adminusername = null;
 
+        $scope.itemsCart = 0;
+
+
+
         $scope.showLoading = false;
 
         $scope.onInit = function () {
+            $scope.itemsCart = ngCart.getCount();
+            
             $scope.showLoading = true;
             $timeout(function () {
                 $scope.showLoading = false;
             }, 1000);
         }
-        
+
+        $rootScope.$on('ngCart:itemRemoved', function (event, data) {
+            $scope.itemsCart = ngCart.getCount();
+        });
+
+        $rootScope.$on('ngCart:checkout', function (event, data) {
+            $scope.itemsCart = 0;
+        });
+
+        $rootScope.$on('ngCart:itemAdded', function (event, data) {
+            $scope.itemsCart = ngCart.getCount();
+        });
+
         $scope.CustomerLoggingOut = function () {
-            $scope.showLoading = true;             
+            $scope.showLoading = true;
+            $scope.itemsCart = 0;
+            $window.localStorage.removeItem('cart');
             AuthenticationService.clearCredentialsOnLogout();
-            $scope.customerusername = null;            
+            $scope.customerusername = null;
             $state.go('customer.login', {}, { reload: true });
 
             $timeout(function () {
-                $scope.showLoading = false;                
+                $scope.showLoading = false;
             }, 1000);
         };
 
         $scope.VendorLoggingOut = function () {
-            $scope.showLoading = true;            
+            $scope.showLoading = true;
             AuthenticationService.clearCredentialsOnLogout();
             $scope.vendorusername = null;
             $state.go('vendor.login', {}, { reload: true });
@@ -51,7 +71,7 @@
             }, 1000);
         };
 
-        
+
         var cookieName = AuthenticationService.checkUserType();
         if (cookieName === 'cookiecustomer') {
             $scope.customerusername = AuthenticationService.getUsername(cookieName);

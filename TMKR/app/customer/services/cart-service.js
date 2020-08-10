@@ -3,12 +3,20 @@
 
     angular
         .module('app.customer')
-        .service('ngCart', ['$rootScope', '$window', 'ngCartItem', 'store', '$cookies', '$http', '$state', '$modal', 
+        .service('ngCart', ['$rootScope', '$window', 'ngCartItem', 'store', '$cookies', '$http', '$state', '$modal',
             function ($rootScope, $window, ngCartItem, store, $cookies, $http, $state, $modal) {
 
-                this.init = function () {
+                this.initCart = function () {
                     this.$cart = {
                         items: [],
+                        user: {},
+                        ShippingAddress: null
+                    };
+                    this.$cart.user = this.retrieveCredential();
+                };
+
+                this.initCartPartially = function () {
+                    this.$cart = {
                         user: {},
                         ShippingAddress: null
                     };
@@ -26,6 +34,7 @@
                     $http.post('/api/customer/savecart', JSON.stringify(this.$cart))
                     .success(function (response) {
                         $window.localStorage.removeItem('cart');
+                        $rootScope.$broadcast('ngCart:checkout', {});
                         $modal.open({
                             templateUrl: 'app/customer/cartdetail/success-alert.html',
                             controller: function ($scope, $modalInstance) {
@@ -81,7 +90,15 @@
                             var prod = JSON.stringify(product);
                             if (!(product.Quantity) || !(product.Unit_Price)) { alert("Enter Product Quantity or Unit Price Not Available"); return; }
                             var newItem = new ngCartItem(product.Advt_Id, product.Prod_Type, product.Unit_Price, product.Quantity, product.VNDR_ID, prod);
-                            this.$cart.items.push(newItem);
+
+                            if (this.$cart.items.length === 0) {
+                                this.$cart.items.push(newItem)
+                                this.$saveDefault(this.$cart);
+                            }
+                            else {
+                                this.$cart.items.push(newItem);
+                            }
+
                             $rootScope.$broadcast('ngCart:itemAdded', newItem);
                         }
                     }
@@ -106,7 +123,7 @@
                 };
 
                 this.ClearCart = function () {
-                    this.init();
+                    this.initCart();
                     $window.localStorage.clear();
                 }
 
@@ -115,10 +132,20 @@
                     return this.getCart();
                 };
 
+                this.getCount = function () {
+                    var storedItems = this.getCart().items;
+
+                    if (!storedItems) {
+                        return 0;
+                    }
+                    else
+                        return storedItems.length;
+                }
+
                 this.getCart = function () {
                     var storedItems = $window.localStorage.getItem('cart');
                     if (!storedItems) {
-                        this.init();
+                        this.initCart();
                         return this.$cart;
                     }
                     else
@@ -186,7 +213,7 @@
 
                 this.$restore = function (storedCart) {
                     var _self = this;
-                    _self.init();
+                    _self.initCart();
                     _self.$cart.shipping = storedCart.shipping;
                     _self.$cart.tax = storedCart.tax;
 
@@ -202,6 +229,10 @@
 
                 this.$save = function () {
                     return store.set('cart', JSON.stringify(this.getCart()));
+                }
+
+                this.$saveDefault = function (cart) {
+                    return store.set('cart', JSON.stringify(cart));
                 }
 
             }])

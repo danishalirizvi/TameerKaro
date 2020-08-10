@@ -10,11 +10,9 @@
 
             if (navigator.cookieEnabled) {
                 if (angular.isObject(store.get('cart'))) {
-                    ngCart.$restore(store.get('cart'));
-                    //$window.localStorage.clear();
-
+                    ngCart.$restore(store.get('cart'));                
                 } else {
-                    ngCart.init();
+                    ngCart.initCart();
                 }
             } else {
                 $location.url('/error');
@@ -28,6 +26,10 @@
                 $scope.ngCart = ngCart;
                 $scope.isLoadingCategories = true;
                 $scope.products = [];
+
+                $scope.oninit = function () {
+                    ngCart.initCart();
+                };
 
                 $scope.viewProduct = function (advt) {
                     Advertisement.advt = advt;

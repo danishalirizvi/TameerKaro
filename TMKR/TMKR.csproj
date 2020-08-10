@@ -270,6 +270,8 @@
     <Content Include="images\Advts\7.jpg" />
     <Content Include="images\Advts\8.jpg" />
     <Content Include="images\Advts\9.jpg" />
+    <Content Include="images\avatar.png" />
+    <Content Include="images\avatars.png" />
     <Content Include="images\banner\banner1.jpg" />
     <Content Include="images\banner\banner2.jpg" />
     <Content Include="images\banner\banner3.jpg" />

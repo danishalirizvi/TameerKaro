@@ -27,34 +27,31 @@
 
                 $scope.coveredarea = null;
                 $scope.height = null;
+
                 $scope.walls = [];
+
                 $scope.results = false;
                 $scope.cost = false;
-
+                $scope.showerror = false;
 
                 $scope.addWall = function () {
                     $scope.walls.push({ length: null, multiplier: null });
-                    $scope.results = false;
                 }
 
                 $scope.removeWall = function (index) {
                     $scope.walls.splice(index, 1);
-                    if ($scope.walls.length == 0) {
-                        $scope.results = false;
-                    } else {
-                        $scope.calculate();
-                    }
                 }
 
                 $scope.calculate = function () {
                     if ($scope.coveredarea != null && $scope.height != null) {
+                        $scope.showerror = true;
                         calculateWall();
                         calculateRoof();
                         calculateFloor();
 
                         getRates();
                     } else {
-                        alert("Enter Valid Values");
+                        $scope.showerror = true;
                     }
 
                 }
@@ -111,7 +108,7 @@
                     var concreteVolumeDry = concreteVolumeWet * 1.54;
 
 
-                    $scope.steel = $scope.coveredarea * steelPerSqft;
+                    $scope.steel = ($scope.coveredarea * steelPerSqft).toFixed(2);
 
                     $scope.cementRoof = Math.round(((1 / 7) * concreteVolumeDry) * 0.8156);
                     if ($scope.cementRoof < 1) {
@@ -179,6 +176,7 @@
                     $scope.height = null;
                     $scope.walls = [];
                     $scope.results = false;
+                    $scope.showerror = false;
                     $scope.cost = false;
                 }
 

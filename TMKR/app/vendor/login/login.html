@@ -7,21 +7,18 @@
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <div class="panel-title">Login</div>
-                            <!--<div style="float: right; font-size: 80%; position: relative; top: -25px">
-                                <a href="#">Forgot your password?</a>
-                            </div>-->
                         </div>
                         <div style="padding-top: 30px" class="panel-body">
                             <form name="form" ng-submit="login()" role="form">
                                 <div class="form-group">
                                     <label for="username">Username</label>
-                                    <i class="glyphicon glyphicon-user"></i>
+                                    <i class="fa fa-user"></i>
                                     <input type="text" name="username" id="username" class="form-control" ng-model="username" required />
                                     <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block validation-color">Username is required</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <i class="glyphicon glyphicon-lock"></i>
+                                    <i class="fa fa-lock"></i>
                                     <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
                                     <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block validation-color">Password is required</span>
                                 </div>

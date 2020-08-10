@@ -1,12 +1,15 @@
 ﻿<section id="main-container" class="main-container">
     <div data-ng-init="onInit()" class="container">
-        <div class="row">
+        <div class='common-heading-style'>
+            <h3>Advertisements</h3>
+        </div>
+        <div class="col-lg-12" data-toggle="tooltip" data-placement="top" title="Click on Eye To Expand">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3>Advertisements</h3>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
+                <div class="panel-body table-responsive">
+                    <div ng-show="!advertisements.length">
+                        <p style="font-weight:bold;text-align:center;background-color:#ffb600">No Advertisement Posted Yet</p>
+                    </div>
+                    <table class="display dataTable" style="width: 100%;" ng-show="advertisements.length">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -17,12 +20,13 @@
                                 <th>Order Limit</th>
                                 <th>Delivery</th>
                                 <th>Status</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="advertisement in advertisements">
-                            <tr>
+                            <tr role="row" class="odd">
                                 <td>{{advertisement.Advt_Id}}</td>
-                                <td>{{advertisement.Prod_Type}}</td>
+                                <td class="sorting_1">{{advertisement.Prod_Type}}</td>
                                 <td style="max-width: 200px;">{{advertisement.Advt_Dscp}}</td>
                                 <td>{{advertisement.VNDR_Name}}</td>
                                 <td>{{advertisement.Unit_Price}}</td>

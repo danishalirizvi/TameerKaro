@@ -1,12 +1,15 @@
 ﻿<section id="main-container" class="main-container">
     <div data-ng-init="onInit()" class="container">
-        <div class="row">
+        <div class='common-heading-style'>
+            <h3>Customers</h3>
+        </div>
+        <div class="col-lg-12" data-toggle="tooltip" data-placement="top" title="Click on Eye To Expand">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3>Customers</h3>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-condensed" style="border-collapse:collapse;width: 100%;">
+                <div class="panel-body table-responsive">
+                    <div ng-show="!customers.length">
+                        <p style="font-weight:bold;text-align:center;background-color:#ffb600">No Customers Registered Yet</p>
+                    </div>
+                    <table class="display dataTable" style="width: 100%;" ng-show="customers.length">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -16,12 +19,13 @@
                                 <th>Username</th>
                                 <th>Address</th>
                                 <th>City</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody ng-repeat="customer in customers">
-                            <tr>
+                            <tr role="row" class="odd">
                                 <td>{{customer.ID}}</td>
-                                <td>{{customer.FRST_NME}} {{customer.LAST_NME}}</td>
+                                <td class="sorting_1">{{customer.FRST_NME}} {{customer.LAST_NME}}</td>
                                 <td>{{customer.EMAIL}}</td>
                                 <td>{{customer.PHNE}}</td>
                                 <td>{{customer.USR_NME}}</td>

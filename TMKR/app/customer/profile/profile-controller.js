@@ -13,9 +13,12 @@
         $scope.error = false;
         $scope.submitted = false;
 
-        $scope.user = AuthenticationService.getUserObject('cookiecustomer');
-        $scope.user.PSWD = null;
-        $scope.credentials = $scope.user;
+        $scope.credentials = AuthenticationService.getUserObject('cookiecustomer');
+
+        $scope.credentials.PHNE = parseInt($scope.credentials.PHNE);
+
+
+        $scope.credentials.PSWD = null;
         $scope.credentials.confirmpassword = null;
         $scope.credentials.CRNT_PSWD = null;
 
