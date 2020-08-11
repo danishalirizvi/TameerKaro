@@ -20,12 +20,18 @@
 
         }])
 
-        .controller('CartController', ['$scope', 'ngCart', '$state', 'productadvts', '$window',
-            function ($scope, ngCart, $state, productadvts, $window) {
-
+        .controller('CartController', ['$scope', 'ngCart', '$state', 'productadvts', '$window', '$timeout',
+            function ($scope, ngCart, $state, productadvts, $window, $timeout) {
                 $scope.ngCart = ngCart;
                 $scope.products = [];
+                $scope.showLoading = false;
 
+                $scope.onInit = function () {
+                    $scope.showLoading = true;
+                    $timeout(function () {
+                        $scope.showLoading = false;
+                    }, 1000);
+                }
 
                 $scope.search = function (item) {
                     if ($scope.searchText === undefined) {
@@ -60,7 +66,7 @@
                     $scope.isLoadingCategories = false;
                     $scope.products = data;
                 }, function (errorMessage) {
-                    alert(errorMessage);
+                    alert('Server not Responding. Try Again Later');
                 });
             }])
 })();

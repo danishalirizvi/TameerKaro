@@ -4106,6 +4106,9 @@ table.dataTable, table.dataTable th, table.dataTable td {
 @media only screen and (max-width:990px){.product-grid4{margin-bottom:30px}
 }
 
+.bottom-margin-single {
+    margin-bottom: 7px;
+}
 /********************* Shopping Demo-5 **********************/
 
 @media screen and (max-width: 767px) {

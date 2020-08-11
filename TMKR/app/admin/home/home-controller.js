@@ -5,13 +5,16 @@
         .module('app.admin')
         .controller('AdminHomeController', AdminHomeController);
 
-    AdminHomeController.$inject = ['$scope', '$http'];
+    AdminHomeController.$inject = ['$scope', '$http', '$timeout'];
 
-    function AdminHomeController($scope, $http) {
+    function AdminHomeController($scope, $http, $timeout) {
 
         $scope.messages = [];
+        $scope.showLoading = false;
 
         $scope.onInit = function () {
+
+            $scope.showLoading = true;
             var config = {
                 method: 'GET',
                 url: '/api/admin/getMessages'
@@ -21,8 +24,11 @@
                   $scope.messages = response;
               })
               .error(function (response) {
-                  alert('No Messages Found');
+                  alert('Server not Responding. Try Again Later');
               });
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
         }
     }
 })();

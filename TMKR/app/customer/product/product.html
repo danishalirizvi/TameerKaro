@@ -1,88 +1,84 @@
-﻿<style>
-    .cntrvert {
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-    }
-</style>
-<section class="page-section light product-detal-main-wrapper">
-    <div data-ng-init="onInit()" class="container">
-        <div class="col-sm-5">
-            <img src={{advt.IMG_PATH}} style="max-height:600px;" class="cntrvert">
-            <div class="add-buy-wrapper no-padding">
-                <span ng-click="ngCart.addItem(advt)" class="btn btn-add-to cart btn-purchase-custom cntrvert" style="width:50%; font-size:20px">
-                    <i class="fa fa-shopping-cart"></i>
-                    Add To Cart
-                </span>
-            </div>
-        </div>
-        <div class="col-sm-7" style="padding:5px">
-            <div class="col-sm-12" style="padding:0px;padding-bottom:10px">
-                <h2 class="product-title"><span>{{advt.Prod_Type}}</span></h2>
-            </div>
-            <div class="col-sm-12" style="padding:10px">
-                Description: {{advt.Advt_Dscp}}
-            </div>
-            <div class="col-sm-6" style="padding:10px">
-                Unit Price: {{advt.Unit_Price}} per {{advt.Unit}}
-            </div>
-            <div class="col-sm-6" style="padding:10px">
-                Quantity: <input type="number" ng-model="advt.Quantity" ng-init="advt.Quantity = null" class="quantity" ng-min="1" placeholder="Enter Quantity">
-            </div>
-            <div class="col-sm-6" style="padding:10px">
-                Seller: {{advt.VNDR_Name}}
-            </div>
-            <div class="col-sm-6" style="padding:10px">
-                Contact: +92-300-1234567
-            </div>
-            <div class="col-sm-6" style="padding:10px">
-                Max Order Limit: {{advt.Order_Limit}}
-            </div>
-            <div class="col-sm-6" style="padding:10px">
-                Delivery: {{advt.DLVRY_AVLB}}
-            </div>
-        </div>
-        <!--<div class="container-fluid padding-50">
-            <div class="row product-single">
-                <div class="col-md-5 col-sm-12 col-xs-12 img-section-custom">
-                    <div class="row">
-                        <div class="col-md-10 col-sm-10 col-xs-10 zoom main-image-show no-padding">
-                            <div class="col-sm-12 main-image-big">
-                                <div class="main-image-big-inner zoom">
-                                    <div class="zm-wrap"><img class="img-responsive main-img zoom main-image-zoom-custom" id="set_image" src={{advt.IMG_PATH}} style="max-height:500px" alt=""></div>
-                                </div>
-                            </div>
-
-                            <div class="add-buy-wrapper no-padding">
-                                <span class="btn btn-add-to cart btn-purchase-custom" style="width:100%; font-size:20px">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    Add To Cart
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+﻿<div class="container" data-ng-init="onInit()" style="padding:20px">
+    <div class="col-md-3">
+        <div class="row">
+            <div class="product-grid4">
+                <div class="product-image4">
+                    <a>
+                        <img class="pic-1" style="height:260px;" src="{{advt.IMG_PATH}}">
+                        <img class="pic-2" style="height:260px;" src="{{advt.IMG_PATH}}">
+                    </a>
+                    <ul class="social">
+                        <li><a ng-click="ngCart.addItem(advt)" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                    </ul>
                 </div>
-                <div class="col-md-7 col-sm-12 col-xs-12 product-detail-custom no-padding">
-                    <div>
-                        <h2 class="product-title"><span>{{advt.Prod_Type}}</span></h2>
+                <div class="product-content">
+                    <a class="add-to-cart" ng-click="ngCart.addItem(advt)">ADD TO CART</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="panel panel-info">
+            <div class="panel-heading" style="text-align:left; font-weight:bold">
+                <h4 class="product-title"><span>{{advt.Prod_Type}}</span></h4>
+            </div>
+
+            <div class="panel-body">
+                <div class="container bcontent">
+                    <dl class="row">
+                        <dt class="col-sm-3 bottom-margin-single">Description</dt>
+                        <dd class="col-sm-9 bottom-margin-single">{{ !advt.Advt_Dscp ? 'N/A' : advt.Advt_Dscp }}</dd>
+
+                        <dt class="col-sm-3 bottom-margin-single">Unit Price: </dt>
+                        <dd class="col-sm-9 bottom-margin-single">{{advt.Unit_Price}} per {{advt.Unit}}</dd>                      
+
+                        <dt class="col-sm-3 bottom-margin-single">Vendor Name: </dt>
+                        <dd class="col-sm-9 bottom-margin-single">{{advt.VNDR_Name}}</dd>
+
+                        <dt class="col-sm-3 bottom-margin-single">Contact: </dt>
+                        <dd class="col-sm-9 bottom-margin-single"> {{ !advt.PHNE ? 'N/A' : advt.PHNE }}</dd>
+
+                        <dt class="col-sm-3 bottom-margin-single">Max Order Limit: </dt>
+                        <dd class="col-sm-9 bottom-margin-single">{{ !advt.Order_Limit ? 0 : advt.Order_Limit}}</dd>
+
+                        <dt class="col-sm-3 bottom-margin-single">Delivery: </dt>
+                        <dd class="col-sm-9 bottom-margin-single">{{advt.DLVRY_AVLB}}</dd>
+
+                        <dt class="col-sm-3 bottom-margin-single">City: </dt>
+                        <dd class="col-sm-9 bottom-margin-single">{{ !advt.City ? 'N/A' : advt.City }}</dd>
+
+                        <dt class="col-sm-3 bottom-margin-single">Quantity:</dt>
+                        <dd class="col-sm-9 bottom-margin-single" style="width:300px;"><input type="number" min="1" class="form-control" ng-model="advt.Quantity" ng-init="advt.Quantity = null" class="quantity" ng-min="1" placeholder="Enter Quantity"></dd>
+
+                    </dl>
+                </div>
+                <!--<div class="col-sm-7" style="padding:5px">
+                    <div class="col-sm-12" style="padding:0px;padding-bottom:10px">
+
                     </div>
-                    <div style="padding-top:30px">
+                    <div class="col-sm-12" style="padding:10px">
                         Description: {{advt.Advt_Dscp}}
                     </div>
-                    <div style="padding-top:30px">
+                    <div class="col-sm-6" style="padding:10px">
+                        Unit Price: {{advt.Unit_Price}} per {{advt.Unit}}
+                    </div>
+                    <div class="col-sm-6" style="padding:10px">
+                        Quantity: <input type="number" ng-model="advt.Quantity" ng-init="advt.Quantity = null" class="quantity" ng-min="1" placeholder="Enter Quantity">
+                    </div>
+                    <div class="col-sm-6" style="padding:10px">
                         Seller: {{advt.VNDR_Name}}
                     </div>
-                    <div style="padding-top:30px">
-                        Unit Price: {{advt.Unit_Price}}
+                    <div class="col-sm-6" style="padding:10px">
+                        Contact: +92-300-1234567
                     </div>
-                    <div style="padding-top:30px">
+                    <div class="col-sm-6" style="padding:10px">
                         Max Order Limit: {{advt.Order_Limit}}
                     </div>
-                    <div style="padding-top:30px">
+                    <div class="col-sm-6" style="padding:10px">
                         Delivery: {{advt.DLVRY_AVLB}}
                     </div>
-                </div>
+                </div>-->
             </div>
-        </div>-->
+        </div>
     </div>
-</section>
+</div>

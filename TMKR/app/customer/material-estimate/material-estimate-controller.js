@@ -3,8 +3,8 @@
 
     angular.module('app.customer')
 
-        .controller('MaterialEstimate', ['$scope', '$http',
-            function ($scope, $http) {
+        .controller('MaterialEstimate', ['$scope', '$http', '$timeout',
+            function ($scope, $http, $timeout) {
 
                 $scope.brickPrice = 0;
                 $scope.cementPrice = 0;
@@ -38,6 +38,16 @@
                     $scope.walls.push({ length: null, multiplier: null });
                 }
 
+                $scope.showLoading = false;
+
+                $scope.onInit = function () {
+                    $scope.showLoading = true;
+                    getRates();
+                    $timeout(function () {
+                        $scope.showLoading = false;
+                    }, 1000);
+                }
+
                 $scope.removeWall = function (index) {
                     $scope.walls.splice(index, 1);
                 }
@@ -48,8 +58,6 @@
                         calculateWall();
                         calculateRoof();
                         calculateFloor();
-
-                        getRates();
                     } else {
                         $scope.showerror = true;
                     }
@@ -165,7 +173,7 @@
                             });
                         })
                         .error(function (response) {
-                            alert('Rate not Updated!');
+                            alert('Server not Responding. Try Again Later');
                         });
                 }
 

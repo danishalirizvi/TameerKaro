@@ -20,7 +20,7 @@
                         })
                         .error(function (response) {
                             if (typeof errorCallback === 'function') {
-                                alert('Failure DropDown Fill');
+                                alert('Server not Responding. Try Again Later');
                             }
                         });
                     

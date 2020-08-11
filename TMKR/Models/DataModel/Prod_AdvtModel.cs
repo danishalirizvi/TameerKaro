@@ -36,5 +36,7 @@ namespace TMKR.Models.DataModel
         public bool IsDeleted { get; set; }
 
         public string City{ get; set; }
+
+        public string PHNE { get; set; }
     }
 }

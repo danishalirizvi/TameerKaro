@@ -1,6 +1,6 @@
-﻿<section id="main-container" class="main-container">
+﻿<section class="main-container"  ng-show="!showLoading" data-ng-init="onInit()">
 
-    <div class="container" data-ng-init="onInit()">
+    <div class="container">
         <div class="panel panel-info">
             <div class="panel-heading" style="text-align:left; font-weight:bold">
                 Welcome to Admin Portal
@@ -37,3 +37,8 @@
     </div>
 
 </section>
+
+<div class="plunker-loading" ng-show="showLoading">
+    <h3><i class="fa fa-spinner fa-pulse fa-fw"></i> Site is loading…</h3>
+    <h4>Please wait for few seconds ... </h4>
+</div>

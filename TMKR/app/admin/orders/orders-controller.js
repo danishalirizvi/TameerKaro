@@ -5,13 +5,16 @@
         .module('app.admin')
         .controller('OrdersController', OrdersController);
 
-    OrdersController.$inject = ['$scope', '$http'];
+    OrdersController.$inject = ['$scope', '$http', '$timeout'];
 
-    function OrdersController($scope, $http) {
+    function OrdersController($scope, $http, $timeout) {
 
         $scope.orders = [];
 
+        $scope.showLoading = false;
+
         $scope.onInit = function () {
+            $scope.showLoading = true;
             var config = {
                 method: 'GET',
                 url: '/api/admin/getOrders'
@@ -21,8 +24,11 @@
                   $scope.orders = response;
               })
               .error(function (response) {
-                  alert('No Orders Found');
+                  alert('Server not Responding. Try Again Later');
               });
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
         }
 
         $scope.suspend = function (cartid) {
@@ -43,7 +49,7 @@
                   $scope.onInit();
               })
               .error(function (response) {
-                  alert('Error');
+                  alert('Server not Responding. Try Again Later');
               });
         }
 
@@ -66,7 +72,7 @@
                   $scope.onInit();
               })
               .error(function (response) {
-                  alert('Error');
+                  alert('Server not Responding. Try Again Later');
               });
         }
     }

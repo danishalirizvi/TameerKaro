@@ -1,5 +1,5 @@
-﻿<section id="main-container" class="main-container">
-    <div data-ng-init="onInit()" class="container">
+﻿<section class="container"  ng-show="!showLoading" data-ng-init="onInit()">
+    <div class="container">
         <div class='common-heading-style'>
             <h3>Vendors</h3>
         </div>
@@ -45,3 +45,8 @@
         </div>
     </div>
 </section>
+
+<div class="plunker-loading" ng-show="showLoading">
+    <h3><i class="fa fa-spinner fa-pulse fa-fw"></i> Site is loading…</h3>
+    <h4>Please wait for few seconds ... </h4>
+</div>

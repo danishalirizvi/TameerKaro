@@ -5,9 +5,9 @@
         .module('app.customer')
         .controller('OrderController', OrderController);
 
-    OrderController.$inject = ['$scope', 'AuthenticationService', '$http'];
+    OrderController.$inject = ['$scope', 'AuthenticationService', '$http', '$timeout'];
 
-    function OrderController($scope, AuthenticationService, $http) {
+    function OrderController($scope, AuthenticationService, $http, $timeout) {
 
         $scope.active = 'Pending';
 
@@ -21,9 +21,12 @@
 
         $scope.childShow = true;
 
+        $scope.showLoading = false;
+
         var data = {};
 
         $scope.onInit = function () {
+            $scope.showLoading = true;
             var Id = AuthenticationService.getLoginUserId('cookiecustomer');
 
             var config = {
@@ -35,20 +38,23 @@
                   $scope.ordersparent = response;
               })
               .error(function (response) {
-                  alert('Failure DropDown Fill');
+                  alert('Server not Responding. Try Again Later');
               });
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
         }
 
         //$scope.cancelorder = function (orders, index) {
         $scope.cancelorder = function (cartId) {
             //var order = orders[index].orderdetail;
             //$http.post('/api/customer/cancelorder', order)
-            $http.post('/api/customer/cancelorder/'+cartId)
+            $http.post('/api/customer/cancelorder/' + cartId)
                 .success(function (response) {
                     $scope.onInit();
                 })
                 .error(function (response) {
-                    alert('Error');
+                    alert('Server not Responding. Try Again Later');
                 });
         }
 
@@ -60,7 +66,7 @@
                     $scope.onInit();
                 })
                 .error(function (response) {
-                    alert('Error');
+                    alert('Server not Responding. Try Again Later');
                 });
         }
     }

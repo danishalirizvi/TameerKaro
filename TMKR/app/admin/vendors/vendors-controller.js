@@ -5,13 +5,16 @@
         .module('app.admin')
         .controller('VendorsController', VendorsController);
 
-    VendorsController.$inject = ['$scope', 'AuthenticationService', '$http'];
+    VendorsController.$inject = ['$scope', 'AuthenticationService', '$http', '$timeout'];
 
-    function VendorsController($scope, AuthenticationService, $http) {
+    function VendorsController($scope, AuthenticationService, $http, $timeout) {
 
         $scope.vendors = [];
 
+        $scope.showLoading = false;
+
         $scope.onInit = function () {
+            $scope.showLoading = true;
             var config = {
                 method: 'GET',
                 url: '/api/admin/getVendors'
@@ -21,8 +24,11 @@
                   $scope.vendors = response;
               })
               .error(function (response) {
-                  alert('No Vendors Found');
+                  alert('Server not Responding. Try Again Later');
               });
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
         }
 
         $scope.block = function (vendorid) {
@@ -43,7 +49,7 @@
                   $scope.onInit();
               })
               .error(function (response) {
-                  alert('Error');
+                  alert('Server not Responding. Try Again Later');
               });
         }
     }

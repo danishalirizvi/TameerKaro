@@ -24,7 +24,7 @@
         }
 
         function onFailed(response) {
-            alert('Failure DropDown Fill');
+            alert('Server not Responding. Try Again Later');
         }
 
         function onSuccessRes(response) {
@@ -32,7 +32,7 @@
         }
 
         function onFailedRes(response) {
-            alert('Failure DropDown Fill 2');
+            alert('Server not Responding. Try Again Later');
         }
 
         var getAdvtDetails = function () {
@@ -63,7 +63,7 @@
         }
 
         function errorSubmit(response) {
-            alert('Error');
+            alert('Server not Responding. Try Again Later');
         }
 
         $scope.showSuccessAlert = function () {
@@ -110,7 +110,6 @@
 
         $scope.uploadpic = function (file) {
             if (file === undefined || file === null) {
-                alert('old pic');
                 $scope.submit();
             }
             else {

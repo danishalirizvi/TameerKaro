@@ -1,4 +1,4 @@
-﻿<section id="main-container" class="main-container">
+﻿<section class="main-container" ng-show="!showLoading" data-ng-init="onInit()">
     <form name="estimateform">
         <div class="container">
             <div class="row" ng-show="!results">
@@ -30,18 +30,52 @@
                         </div>
 
                         <div class="col-md-9">
-                            <div class="row form-group" ng-repeat="wall in walls" ng-show="!results">
-                                <div class="col-md-6 input-group">
-                                    <span class="input-group-addon">Wall # {{$index+1}}</span>
-                                    <input type="number" ng-model="wall.length" name="length" class="form-control" min="1" placeholder="Length (ft)"  ng-required="true">
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="number" ng-model="wall.multiplier" name="multiplier" class="form-control" min="1" placeholder="Number of Similar Walls"  ng-required="true">
-                                </div>
-                                <div class="col-md-2">
-                                    <button class="btn-primary" ng-show="$index > 0" ng-click="removeWall($index)">Remove</button>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="panel-body table-responsive" style="padding:0px 20px">
+                                        <table class="table table-hover table-bordered table-striped">
+                                            <thead>
+                                                <tr class="active">
+                                                    <th colspan="5" style="font-weight:bold; text-align:center">
+                                                        Current Rates(Used for Estimation)
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tr>
+                                                <th>Bricks</th>
+                                                <th>Cement</th>
+                                                <th>Steel</th>
+                                                <th>Sand</th>
+                                                <th>Gravel</th>
+                                            </tr>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{brickPrice}} per Brick</td>
+                                                    <td>{{cementPrice}} per Bag (50kg/Bag)</td>
+                                                    <td>{{steelPrice}} per Kg</td>
+                                                    <td>{{sandPrice}} per cu.ft</td>
+                                                    <td>{{gravelPrice}} per cu.ft</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="row>">
+                                <div class="row form-group" ng-repeat="wall in walls" ng-show="!results">
+                                    <div class="col-md-6 input-group">
+                                        <span class="input-group-addon">Wall # {{$index+1}}</span>
+                                        <input type="number" ng-model="wall.length" name="length" class="form-control" min="1" placeholder="Length (ft)" ng-required="true">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="number" ng-model="wall.multiplier" name="multiplier" class="form-control" min="1" placeholder="Number of Similar Walls" ng-required="true">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button class="btn-primary" ng-show="$index > 0" ng-click="removeWall($index)">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
 
@@ -145,5 +179,10 @@
                 </div>
             </div>
         </div>
-    </form>
+    </form>    
 </section>
+
+<div class="plunker-loading" ng-show="showLoading">
+    <h3><i class="fa fa-spinner fa-pulse fa-fw"></i> Site is loading…</h3>
+    <h4>Please wait for few seconds ... </h4>
+</div>

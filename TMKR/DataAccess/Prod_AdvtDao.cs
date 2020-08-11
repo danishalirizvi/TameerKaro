@@ -211,13 +211,16 @@ namespace TMKR.DataAccess
 	                                pa.MAX_ORDR_LIMT as Order_Limit,
 	                                pa.DLVRY_AVLB,
 	                                i.Path as IMG_PATH,
-                                    pt.Unit
+                                    pt.Unit,
+									v.PHNE as PHNE,
+									a.CITY
 
 	                                from Prod_Advt pa
 	                                left join Product_Type pt on pt.ID = pa.PROD_TYPE_ID
 	                                left join Vendor v on v.ID = pa.VNDR_ID
 	                                left join Images i on i.FId = pa.ID and i.Type = 'Advertisement'
-	                                where pa.ID = "+ advtId + "AND pa.IsDeleted = 0 AND pa.IsActive = 'True' ";
+									left join Address a on a.USER_ID = v.ID and a.Type = 'Vendor'
+	                                where pa.ID = " + advtId + "AND pa.IsDeleted = 0 AND pa.IsActive = 'True' ";
 
                 return Conn.QueryFirstOrDefault<Prod_AdvtModel>(query);
             }

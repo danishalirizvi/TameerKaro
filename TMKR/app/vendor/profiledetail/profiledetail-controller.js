@@ -50,7 +50,7 @@
                   $scope.picpath = response;
               })
               .error(function (response) {
-                  alert('Image Fetch Error');
+                  alert('Server not Responding. Try Again Later');
               });
         }
 
@@ -69,7 +69,7 @@
                   //alert('Path updated Successfully');
               })
               .error(function (response) {
-                  alert('Path updated Error');
+                  alert('Server not Responding. Try Again Later');
               });
         }
     }

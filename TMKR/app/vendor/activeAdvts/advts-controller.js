@@ -3,13 +3,16 @@
     angular
         .module('app.vendor')
         .controller('ActiveAdvtsContoller', ActiveAdvtsContoller)
-    ActiveAdvtsContoller.$inject = ['$scope', '$state', '$http', 'AuthenticationService', 'Advertisement'];
+    ActiveAdvtsContoller.$inject = ['$scope', '$state', '$http', 'AuthenticationService', 'Advertisement', '$timeout'];
 
-    function ActiveAdvtsContoller($scope, $state, $http, AuthenticationService, Advertisement) {
+    function ActiveAdvtsContoller($scope, $state, $http, AuthenticationService, Advertisement, $timeout) {
 
         $scope.advts = [];
 
+        $scope.showLoading = false;
+
         $scope.onInit = function () {
+            $scope.showLoading = true;
             var vndrId = AuthenticationService.getLoginUserId('cookievendor');
             var config = {
                 method: 'GET',
@@ -23,6 +26,9 @@
             .error(function (response) {
                 
             });
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
         }
 
         //$scope.editadvt = function (advt) {
@@ -41,11 +47,10 @@
 
             $http(config)
             .success(function (response) {
-                alert(JSON.stringify(response));
                 $scope.onInit();
             })
             .error(function (response) {
-                alert('Error');
+                alert('Server not Responding. Try Again Later');
             });
         }
     }

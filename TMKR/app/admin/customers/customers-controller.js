@@ -5,13 +5,16 @@
         .module('app.admin')
         .controller('CustomersController', CustomersController);
 
-    CustomersController.$inject = ['$scope', '$http'];
+    CustomersController.$inject = ['$scope', '$http', '$timeout'];
 
-    function CustomersController($scope, $http) {
+    function CustomersController($scope, $http, $timeout) {
 
         $scope.customers = [];
 
+        $scope.showLoading = false;
+
         $scope.onInit = function () {
+            $scope.showLoading = true;
             var config = {
                 method: 'GET',
                 url: '/api/admin/getCustomers'
@@ -21,8 +24,12 @@
                   $scope.customers = response;
               })
               .error(function (response) {
-                  alert('No Customers Found');
+                  alert('Server not Responding. Try Again Later');
               });
+
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
         }
 
         $scope.block = function (customerid) {
@@ -43,7 +50,7 @@
                   $scope.onInit();
               })
               .error(function (response) {
-                  alert('Error');
+                  alert('Server not Responding. Try Again Later');
               });
         }
     }

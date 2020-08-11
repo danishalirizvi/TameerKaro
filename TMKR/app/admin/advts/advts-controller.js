@@ -5,13 +5,16 @@
         .module('app.admin')
         .controller('AdvertisementsController', AdvertisementsController);
 
-    AdvertisementsController.$inject = ['$scope', '$http'];
+    AdvertisementsController.$inject = ['$scope', '$http', '$timeout'];
 
-    function AdvertisementsController($scope, $http) {
+    function AdvertisementsController($scope, $http, $timeout) {
 
         $scope.advertisements = [];
+        $scope.showLoading = false;
 
         $scope.onInit = function () {
+            $scope.showLoading = true;
+
             var config = {
                 method: 'GET',
                 url: '/api/admin/getAdvertisements'
@@ -28,8 +31,12 @@
                   });
               })
               .error(function (response) {
-                  alert('No Advertisements Found');
+                  alert('Server not Responding. Try Again Later');
               });
+
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
         }
 
         $scope.block = function (advtid) {
@@ -50,7 +57,7 @@
                   $scope.onInit();
               })
               .error(function (response) {
-                  alert('Error');
+                  alert('Server not Responding. Try Again Later');
               });
         }
     }

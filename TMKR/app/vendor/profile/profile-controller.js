@@ -34,7 +34,7 @@
                 })
                 .error(function (response) {
                     $scope.submitted = false;
-                    alert(JSON.stringify(response));
+                    alert('Server not Responding. Try Again Later');
                 });
             } else {
                 $scope.submitted = false;

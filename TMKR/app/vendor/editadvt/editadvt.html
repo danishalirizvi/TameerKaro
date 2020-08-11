@@ -16,14 +16,20 @@
 
                                 <!--Image-->
                                 
-                                <div style="margin-top: 25px" class="input-group">
-                                    <img ng-show="!picFile" src={{advt.ImagePath}} alt="stack photo" class="img" style="width:250px;height:250px">
-                                    <img ng-show="picFile" ngf-thumbnail="picFile" class="thumb" style="width:250px;height:250px">
-                                    <label ng-show="!picFile" style="width:250px;text-align:center;" class="btn btn-primary">
-                                        Update Picture
-                                        <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" style="display: none;">
-                                    </label>
-                                    <button ng-click="picFile=null" ng-show="picFile" class="btn btn-primary" style="width:250px">Cancel</button>
+                                <div style="padding:20px" class="input-group">
+                                    <div class="row">
+                                        <img ng-show="!picFile" src={{advt.ImagePath}} alt="stack photo" class="img" style="width:250px;height:250px">
+                                        <img ng-show="picFile" ngf-thumbnail="picFile" class="thumb" style="width:250px;height:250px">
+                                    </div>
+                                    <div class="row">
+                                        <label ng-show="!picFile" style="width:250px;text-align:center;" class="btn btn-primary">
+                                            Update Picture
+                                            <input type="file" ngf-select ng-model="picFile" name="file" accept="image/*" ngf-max-size="2MB" style="display: none;">
+                                        </label>
+                                        <button ng-click="picFile=null" ng-show="picFile" class="btn btn-primary" style="width:250px">Cancel</button>
+                                    </div>
+                                    
+                                    
                                 </div>
 
                                 <!--Product Type Dropdow-->

@@ -20,10 +20,16 @@
 
         $scope.unit = [];
 
+        $scope.showLoading = false;
+
 
         $scope.onInit = function () {
+            $scope.showLoading = true;
             VendorService.getProductTypes(onSuccess, onFailed);
             VendorService.getAdvtStatus(onSuccessRes, onFailedRes);
+            $timeout(function () {
+                $scope.showLoading = false;
+            }, 1000);
         }
 
         function onSuccess(response) {
@@ -34,7 +40,7 @@
         }
 
         function onFailed(response) {
-            alert('Failure DropDown Fill');
+            alert('Server not Responding. Try Again Later');
         }
 
         function onSuccessRes(response) {
@@ -42,14 +48,14 @@
         }
 
         function onFailedRes(response) {
-            alert('Failure DropDown Fill 2');
+            alert('Server not Responding. Try Again Later');
         }
 
         $scope.submit = function (photo) {
             var venderid = AuthenticationService.getLoginUserId('cookievendor');
             if (!venderid) {
                 $scope.showErrorLoginAlert();
-                alert("Kindly Login To Proceed!!");
+                alert("Server not Responding. Try Again Later");
                 return;
             } else {
                 $scope.advt.VNDR_ID = venderid;
@@ -68,7 +74,7 @@
         }
 
         function errorSubmit(response) {
-            alert('Error');
+            alert('Server not Responding. Try Again Later');
         }
 
         $scope.showSuccessAlert = function () {
@@ -115,7 +121,6 @@
 
         $scope.uploadPic = function (file) {
             if (file === undefined || file === null) {
-                alert('File undefined');
                 $scope.submit();
             }
             else {

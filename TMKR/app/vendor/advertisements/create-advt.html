@@ -1,6 +1,6 @@
 ﻿
-<section id="main-container" class="main-container">
-    <div data-ng-init="onInit()" class="container" style="margin-left:15%;margin-right:15%;">
+<section class="container" ng-show="!showLoading" data-ng-init="onInit()">
+    <div class="container" style="margin-left:15%;margin-right:15%;">
         <div>
             <div class="ts-intro">
                 <div id="registerbox" style="margin-top: 10px;"
@@ -128,3 +128,8 @@
         </div>
     </div>
 </section>
+
+<div class="plunker-loading" ng-show="showLoading">
+    <h3><i class="fa fa-spinner fa-pulse fa-fw"></i> Site is loading…</h3>
+    <h4>Please wait for few seconds ... </h4>
+</div>

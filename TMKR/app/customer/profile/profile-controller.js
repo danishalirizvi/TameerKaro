@@ -29,18 +29,16 @@
                 $http.post('/api/customer/updatecustomerprofile', JSON.stringify($scope.credentials))
                 .success(function (response) {
                     AuthenticationService.setCredentials(response.USR_NME, response.PSWD, response, 'cookiecustomer');
-                    alert('Success');
                     $scope.submitted = false;
                     $state.go('customer.profiledetails');
                 })
                 .error(function (response) {
                     $scope.submitted = false;
-                    alert(JSON.stringify(response));
+                    alert('Server not Responding. Try Again Later');
                 });
             } else {
                 $scope.submitted = false;
                 $scope.error = true;
-                alert('Passwords don not match');
                 return;
             }
         };

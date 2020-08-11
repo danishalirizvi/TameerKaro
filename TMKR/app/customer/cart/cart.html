@@ -1,9 +1,4 @@
-﻿
-<div class="plunker-loading" ng-show="showLoading">
-    <h3><i class="fa fa-spinner fa-pulse fa-fw"></i> Site is loading…</h3>
-    <h4>Please wait for few seconds ... </h4>
-</div>
-<div class="container">
+﻿<div class="container" ng-show="!showLoading" data-ng-init="onInit()">
     <div class="row">
         <div class="col-md-12">
             <div class="form-group col-md-2" style="margin-top:35px;padding:6px;padding-left: 30px;">
@@ -52,4 +47,9 @@
             <strong>No matching result Found!</strong>
         </div>
     </div>
+</div>
+
+<div class="plunker-loading" ng-show="showLoading">
+    <h3><i class="fa fa-spinner fa-pulse fa-fw"></i> Site is loading…</h3>
+    <h4>Please wait for few seconds ... </h4>
 </div>

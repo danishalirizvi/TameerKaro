@@ -29,7 +29,7 @@
                 }
             })
             .error(function (response) {
-                alert(response);
+                alert('Server not Responding. Try Again Later');
             });
         }
 

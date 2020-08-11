@@ -34,7 +34,7 @@
         }
 
         function onFailed(response) {
-            alert('Failure DropDown Fill');
+            alert('Server not Responding. Try Again Later');
         }
 
         $scope.updateRate = function () {
@@ -44,7 +44,7 @@
                   $scope.onInit();
               })
               .error(function (response) {
-                  alert('Rate not Updated!');
+                  alert('Server not Responding. Try Again Later');
               });
         }
 
@@ -67,7 +67,7 @@
                     });
                 })
                 .error(function (response) {
-                    alert('Rate not Updated!');
+                    alert('Server not Responding. Try Again Later');
                 });
         }
     }
