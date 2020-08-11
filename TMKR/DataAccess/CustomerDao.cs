@@ -83,6 +83,17 @@ namespace TMKR.DataAccess
             }
         }
 
+        public void sendMessage(MessageModel message)
+        {
+            using (Conn)
+            {
+                string query = @"INSERT INTO Messages
+                                            (Name, Email, Message, IsActive) VALUES
+                                            (@Name, @Email, @Message, @IsActive)";
+                var id = Conn.Execute(query, new { Name = message.Name, Email = message.Email, Message = message.Message, IsActive = true });
+            }
+        }
+
         public List<RateModel> getRates()
         {
             using (Conn)

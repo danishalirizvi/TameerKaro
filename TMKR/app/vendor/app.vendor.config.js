@@ -96,6 +96,15 @@
                     authentication: authentication,
                     cookie: cookie
                 }
+            })
+            .state("vendor.contactus", {
+                url: "/contactus",
+                templateUrl: "app/vendor/contactus/contactus.html",
+                controller: "VendorContactUsController",
+                portal: "vendor",
+                resolve: {
+                    cookie: cookie
+                }
             });
 
         }]);

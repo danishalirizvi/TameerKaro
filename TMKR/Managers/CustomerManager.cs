@@ -97,5 +97,10 @@ namespace TMKR.Managers
         {
             return customerDao.getRates();
         }
+
+        public void sendMessage(MessageModel message)
+        {
+            customerDao.sendMessage(message);
+        }
     }
 }

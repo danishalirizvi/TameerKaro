@@ -11,8 +11,6 @@
                     portal: "customer",
                     resolve: {
                         cookie: cookie
-                        //,
-                        //portalcheck: portalcheck  
                     }
                 })
 
@@ -104,26 +102,6 @@
                         cookie: cookie
                     }
                 })
-
-                //.state("customer.placeOrder", {
-                //    url: "/order",
-                //    templateUrl: "app/place-order/place-order.html",
-                //    controller: "PlaceOrderController",
-                //    portal: "customer"
-                //})
-
-                //.state("customer.checkout", {
-                //    url: "/checkout",
-                //    templateUrl: "app/cart/summary.html",
-                //    controller: "CheckOutController",
-                //    portal: "customer"
-                //})
-                //.state("customer.uploader", {
-                //    url: "/uploader",
-                //    templateUrl: "app/customer/uploader/home/home.html",
-                //    controller: "HomeCtrl",
-                //    portal: "customer"
-                //})
                 .state("customer.orders", {
                     url: "/orders",
                     templateUrl: "app/customer/orders/orders.html",
@@ -141,6 +119,15 @@
                     portal: "customer",
                     resolve: {
                         authentication: authentication,
+                        cookie: cookie
+                    }
+                })
+                .state("customer.contactus", {
+                    url: "/contactus",
+                    templateUrl: "app/customer/contactus/contactus.html",
+                    controller: "CustomerContactUsController",
+                    portal: "customer",
+                    resolve: {
                         cookie: cookie
                     }
                 });
@@ -196,7 +183,7 @@
 
     function portalcheck($scope) {
         //var parentController = $parent.$scope.adminusername;
-        
+
         alert(':(');
         //if ($parent.$scope.customerusername == null && $parent.$scope.vendorusername == null) {
         //    alert('Admin');

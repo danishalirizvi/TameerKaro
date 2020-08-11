@@ -18,7 +18,9 @@
                     url: "/home",
                     templateUrl: "app/admin/home/home.html",
                     portal: "admin",
+                    controller: 'AdminHomeController',
                     resolve: {
+                        authentication: authentication,
                         cookie: cookie
                     }
                 })

@@ -216,6 +216,21 @@ namespace TMKR.Controllers.WebApi
             }
         }
 
+        [HttpPost]
+        public HttpResponseMessage SendMessage(MessageModel message)
+        {
+            try
+            {
+                customerManager.sendMessage(message);
+                return Request.CreateResponse(HttpStatusCode.OK, "Order Cancelled Succcessfully");
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Operation Failed this time .. ");
+            }
+        }
+
+
         //WebApi Route Configuration
         public static void ConfigureRoutes(HttpConfiguration config)
         {
@@ -283,6 +298,11 @@ namespace TMKR.Controllers.WebApi
                 "GetRates",
                 "api/customer/getRates",
                 new { controller = "Customer", action = "GetRates" });
+
+            config.Routes.MapHttpRoute(
+                "SendMessage",
+                "api/customer/sendmessage",
+                new { controller = "Customer", action = "SendMessage" });
         }
 
     }

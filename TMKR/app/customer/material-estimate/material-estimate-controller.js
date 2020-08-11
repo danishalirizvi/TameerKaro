@@ -28,7 +28,7 @@
                 $scope.coveredarea = null;
                 $scope.height = null;
 
-                $scope.walls = [];
+                $scope.walls = [{ length: null, multiplier: null }];
 
                 $scope.results = false;
                 $scope.cost = false;
@@ -174,7 +174,7 @@
                     $scope.totalAreaWalls = 0;
                     $scope.coveredarea = null;
                     $scope.height = null;
-                    $scope.walls = [];
+                    $scope.walls = [{ length: null, multiplier: null }];
                     $scope.results = false;
                     $scope.showerror = false;
                     $scope.cost = false;

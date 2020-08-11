@@ -1,11 +1,11 @@
 ﻿<section data-ng-init="onInit()" id="ts-features" class="ts-features">
     <div class="container">
         <div class="jumbotron">
-            <div>
+            <div class="row">
                 <button ng-click="editprofile()" class="btn btn-primary" style="float:right">Edit</button>
             </div>
             <div class="row">
-                <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                <div class="col-md-4">
                     <img ng-show="!picFile" src={{picpath}} alt="stack photo" class="img" style="width:250px;height:250px">
                     <img ng-show="picFile" ngf-thumbnail="picFile" class="thumb" style="width:250px;height:250px">
                     <label ng-show="!picFile" style="width:250px;text-align:center;" class="btn btn-primary">
@@ -15,7 +15,7 @@
                     <button ng-click="uploadPic(picFile)" ng-show="picFile" class="btn btn-primary" style="width:250px">Save</button>
                     <button ng-click="picFile=null" ng-show="picFile" class="btn btn-primary" style="width:250px">Cancel</button>
                 </div>
-                <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                <div class="col-md-5" style="margin: 75px;margin-left:0px">
                     <div class="container" style="border-bottom:2px solid #ffb600">
                         <h2>{{user.FRST_NME}} {{user.LAST_NME}}</h2>
                     </div>

@@ -40,6 +40,8 @@
                                                     <th>Phone</th>
                                                     <th>Address</th>
                                                     <th>Total</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody ng-repeat="order in ordersparent.New">
@@ -58,6 +60,8 @@
                                                     <th>Unit Price</th>
                                                     <th>Total</th>
                                                     <th>Status</th>
+                                                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>
                                                 </tr>
                                                 <tr ng-show="show" ng-repeat="orders in order.purchaseorderdetail">
                                                     <td>{{orders.ProdName}}</td>
@@ -67,6 +71,15 @@
                                                     <td>{{orders.Status}}</td>
                                                     <td style="width:60px"><button class="btn-primary" style="padding-top:3px;padding-bottom:3px;" ng-click="singleorderAction(orders.ID,'Accepted')">Accept</button></td>
                                                     <td style="width:60px"><button class="btn-danger" style="padding-top:3px;padding-bottom:3px;" ng-click="singleorderAction(orders.ID,'Rejected')">Reject</button></td>
+                                                </tr>
+                                                <tr ng-show="show">
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -111,7 +124,7 @@
                                                     <td>{{orders.TotalAmount}}</td>
                                                     <td>{{orders.Status}}</td>
                                                 </tr>
-                                                <tr ng-show="show" ng-repeat="orders in order.purchaseorderdetail">
+                                                <tr ng-show="show">
                                                     <td>----</td>
                                                     <td>----</td>
                                                     <td>----</td>
@@ -160,6 +173,13 @@
                                                     <td>{{orders.Unit_Price}}</td>
                                                     <td>{{orders.TotalAmount}}</td>
                                                     <td>{{orders.Status}}</td>
+                                                </tr>
+                                                <tr ng-show="show">
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
+                                                    <td>----</td>
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -40,5 +40,10 @@ namespace TMKR.Managers
 
             adminDao.setRate(rate);
         }
+
+        public List<MessageModel> GetMessages()
+        {
+            return adminDao.getMessages();
+        }
     }
 }

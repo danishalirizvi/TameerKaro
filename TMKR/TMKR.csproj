@@ -147,6 +147,7 @@
     <Content Include="app\admin\admin.html" />
     <Content Include="app\admin\customers\customers-controller.js" />
     <Content Include="app\admin\customers\customers.html" />
+    <Content Include="app\admin\home\home-controller.js" />
     <Content Include="app\admin\home\home.html" />
     <Content Include="app\admin\login\error-alert.html" />
     <Content Include="app\admin\login\login-controller.js" />
@@ -161,6 +162,8 @@
     <Content Include="app\app.config.js" />
     <Content Include="app\app.constants.js" />
     <Content Include="app\app.js" />
+    <Content Include="app\customer\contactus\contactus.html" />
+    <Content Include="app\customer\contactus\contactus-controller.js" />
     <Content Include="app\cookieError.html" />
     <Content Include="app\customer\app.customer.config.js" />
     <Content Include="app\customer\app.customer.constants.js" />
@@ -210,6 +213,8 @@
     <Content Include="app\vendor\app.vendor.config.js" />
     <Content Include="app\vendor\app.vendor.constants.js" />
     <Content Include="app\vendor\app.vendor.js" />
+    <Content Include="app\vendor\contactus\contactus.html" />
+    <Content Include="app\vendor\contactus\contactus-controller.js" />
     <Content Include="app\vendor\editadvt\editadvt-controller.js" />
     <Content Include="app\vendor\editadvt\editadvt.html" />
     <Content Include="app\vendor\editadvt\success-alert.html" />
@@ -391,6 +396,7 @@
     <Compile Include="Helpers\CustomMultipartFormDataStreamProvider.cs" />
     <Compile Include="Managers\AdminManager.cs" />
     <Compile Include="Models\DataModel\AdminModel.cs" />
+    <Compile Include="Models\DataModel\MessageModel.cs" />
     <Compile Include="Models\DataModel\OrderChildModel.cs" />
     <Compile Include="Models\DataModel\OrderModel.cs" />
     <Compile Include="Models\DataModel\OrdersChildModelAdmin.cs" />

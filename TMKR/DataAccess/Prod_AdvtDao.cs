@@ -39,13 +39,15 @@ namespace TMKR.DataAccess
 	                                p.DLVRY_AVLB,
 	                                i.Path as IMG_PATH,
                                     pt.Unit,
-                                    p.STUS_NME
+                                    p.STUS_NME,
+									a.CITY as City
 	                                from Prod_Advt p
 
                                     left join Product_Type pt on p.PROD_TYPE_ID = pt.ID
                                     left join Vendor v on p.VNDR_ID = v.ID
                                     left join Images i on p.ID = i.FId
-                                    where p.STUS_NME = 'Visible' AND p.IsDeleted = 0 AND p.IsActive = 'True' AND Type = 'Advertisement' ";
+									left join Address a on a.USER_ID = v.ID
+                                    where p.STUS_NME = 'Visible' AND p.IsDeleted = 0 AND p.IsActive = 'True' AND i.Type = 'Advertisement' AND a.Type ='Vendor'";
 
                 return Conn.Query<Prod_AdvtModel>(query).ToList();
             }

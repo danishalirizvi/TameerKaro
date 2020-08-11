@@ -123,7 +123,7 @@ namespace TMKR.DataAccess
             {
                 string query = @"UPDATE Images SET Path = @Path WHERE FId = @FId AND Type = @Type";
 
-                Conn.Execute(query, new { Path = photo.Path, FId = photo.Id, Type = photo.Type });
+                Conn.Execute(query, new { Path = photo.Path, FId = photo.Id, Type = "Vendor" });
             }
             else if(photo.Action == "Create")
             {

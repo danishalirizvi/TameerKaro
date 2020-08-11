@@ -213,6 +213,24 @@ namespace TMKR.Controllers.WebApi
         }
 
 
+        [HttpGet]
+        public HttpResponseMessage GetMesseges()
+        {
+            try
+            {
+                List<MessageModel> result = new List<MessageModel>();
+
+                result = adminManager.GetMessages();
+
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            catch (Exception)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.ExpectationFailed, "Exception Occoured in reading data.");
+            }
+        }
+
+
         //WebApi Route Configuration
         public static void ConfigureRoutes(HttpConfiguration config)
         {
@@ -295,6 +313,11 @@ namespace TMKR.Controllers.WebApi
                 "UpdateRate",
                 "api/admin/updateRate",
                 new { controller = "Admin", action = "UpdateRate" });
+
+            config.Routes.MapHttpRoute(
+                "GetMesseges",
+                "api/admin/getMessages",
+                new { controller = "Admin", action = "GetMesseges" });
         }
     }
 }

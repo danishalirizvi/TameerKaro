@@ -7,7 +7,7 @@
     ProfileDetailController.$inject = ['$scope', '$state', 'AuthenticationService', '$http', 'Upload', '$timeout'];
 
     function ProfileDetailController($scope, $state, AuthenticationService, $http, Upload, $timeout) {
-        
+
         $scope.user = AuthenticationService.getUserObject('cookiecustomer');
 
         $scope.image = { Id: null, Path: null };
@@ -71,7 +71,6 @@
                   alert('Path updated Error');
               });
         }
-
 
     }
 })();

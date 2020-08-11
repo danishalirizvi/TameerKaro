@@ -72,7 +72,8 @@ namespace TMKR
 
                 //admin services
 
-                //customer controllers
+                //admin controllers
+                "~/app/admin/home/home-controller.js",
                 "~/app/admin/login/login-controller.js",
                 "~/app/admin/logout/logout-controller.js",
                 "~/app/admin/customers/customers-controller.js",
@@ -103,6 +104,7 @@ namespace TMKR
                 "~/app/customer/product/product-controller.js",
                 "~/app/customer/material-estimate/material-estimate-controller.js",
                 "~/app/customer/orders/orders-controller.js",
+                "~/app/customer/contactus/contactus-controller.js",
 
 
                 //vendor
@@ -123,7 +125,8 @@ namespace TMKR
                 "~/app/vendor/activeAdvts/advts-controller.js",
                 "~/app/vendor/profile/profile-controller.js",
                 "~/app/vendor/profiledetail/profiledetail-controller.js",
-                "~/app/vendor/editadvt/editadvt-controller.js"
+                "~/app/vendor/editadvt/editadvt-controller.js",
+                "~/app/vendor/contactus/contactus-controller.js"
 
                 ));
 

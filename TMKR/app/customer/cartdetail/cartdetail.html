@@ -1,17 +1,17 @@
 ﻿
 <section id="main-container" class="main-container">
     <div class="container">
-        <div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
-            Your cart is empty
+        <div class="alert alert-danger" role="alert" ng-show="ngCart.getTotalItems() === 0"  style="text-align:center">
+            <strong>Your cart is empty</strong>
         </div>
-        <div class="table-responsive col-lg-12" ng-show="ngCart.getTotalItems() > 0">
-            <table class="display dataTable" style="width: 100%;">
+        <div class="table-responsive col-lg-12">
+            <table class="display dataTable" style="width: 100%;" ng-show="ngCart.getTotalItems() > 0">
                 <thead>
                     <tr>
                         <th></th>
                         <th></th>
                         <th>Quantity</th>
-                        <th>Amount</th>
+                        <th>Unit Price</th>
                         <th>Total</th>
                     </tr>
                 </thead>
@@ -21,7 +21,7 @@
                         <td></td>
                         <td></td>
                         <td>Total:</td>
-                        <td>{{ ngCart.totalCost() | currency }}</td>
+                        <td>{{ ngCart.totalCost() | currency : "Rs" : 0}}</td>
                     </tr>
                 </tfoot>
                 <tbody>
@@ -34,8 +34,8 @@
                             {{ item.getQuantity() | number }}&nbsp;&nbsp;
                             <span class="glyphicon glyphicon-plus" ng-click="item.setQuantity(1, true)"></span>
                         </td>
-                        <td>{{ item.getPrice() | currency}}</td>
-                        <td>{{ item.getTotal() | currency }}</td>
+                        <td>{{ item.getPrice() | currency : "Rs" : 0}}</td>
+                        <td>{{ item.getTotal() | currency : "Rs" : 0}}</td>
 
                     </tr>
                 </tbody>
@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-primary" ng-click="ngCart.checkout(addressNew)"> Check Out </button>
+            <button class="btn-primary" ng-disabled="ngCart.getTotalItems() === 0" ng-click="ngCart.checkout(addressNew)"> Check Out </button>
 
 
             <style>

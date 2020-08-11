@@ -2,6 +2,8 @@
 using System.Data;
 using TMKR.Models.DataModel;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace TMKR.DataAccess
 {
@@ -45,6 +47,16 @@ namespace TMKR.DataAccess
                 string query = @"INSERT INTO Rates (Prod_Type_ID, EntryDate, Rate, IsActive) VALUES (@Prod_Type_ID, @EntryDate, @Rate, @IsActive)";
 
                 Conn.Execute(query, new { Prod_Type_ID = rate.Prod_Type_ID, EntryDate = rate.EntryDate, Rate = rate.Rate, IsActive = true});
+            }
+        }
+
+        internal List<MessageModel> getMessages()
+        {
+            using (Conn)
+            {
+                string query = @"SELECT * FROM Messages where IsActive = 1";
+                
+                return Conn.Query<MessageModel>(query).ToList();
             }
         }
     }

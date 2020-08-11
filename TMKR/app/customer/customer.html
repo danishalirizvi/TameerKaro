@@ -3,7 +3,6 @@
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                 <ul class="top-info">
-
                     <li ng-if="!customerusername">
                         <a ui-sref="customer.login" ui-sref-active="active">
                             <i class="fa fa-sign-in">&nbsp;</i>
@@ -88,7 +87,7 @@
                         </li>
 
                         <li class="header-get-a-quote">
-                            <a class="btn btn-primary" href="#">Get A Quote</a>
+                            <a class="btn btn-primary" ui-sref="customer.contactus">Contact Admin</a>
                         </li>
                     </ul>
                 </div>
@@ -96,6 +95,7 @@
 
         </div>
     </div>
+    
     <nav class="site-navigation navigation navdown">
         <div class="container">
             <div class="row">
@@ -140,7 +140,7 @@
                                 </li>                                                   
                             </ul>
 
-                            <ul class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav navbar-right" ng-show="customerusername">
                                 <li>
 
                                     <a ui-sref="customer.profiledetails" ui-sref-active="active">

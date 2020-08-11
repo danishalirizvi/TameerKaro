@@ -1,146 +1,149 @@
 ﻿<section id="main-container" class="main-container">
+    <form name="estimateform">
+        <div class="container">
+            <div class="row" ng-show="!results">
+                <div class="panel panel-info">
+                    <div class="panel-heading" style="text-align:left; font-weight:bold">
+                        Material Estimation
+                    </div>
 
-    <div class="container">
-        <div class="row" ng-show="!results">
-            <div class="panel panel-info">
+                    <div class="panel-body">
+                        <div class="alert alert-danger" style="text-align:center" ng-show="showerror">
+                            <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>Enter Valid Values.</strong>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row form-group">
+                                <div class="col-md-12 input-group">
+                                    <input type="number" class="form-control" name="coveredarea" ng-model="coveredarea" min="1" placeholder="Enter Covered Area" ng-required="true">
+                                    <span class="input-group-addon">SQ. FT</span>
+                                </div>
+
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-12 input-group">
+                                    <input type="number" class="form-control" name="structureheight" ng-model="height" min="1" placeholder="Enter Structure Height"  ng-required="true">
+                                    <span class="input-group-addon"> FT</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-9">
+                            <div class="row form-group" ng-repeat="wall in walls" ng-show="!results">
+                                <div class="col-md-6 input-group">
+                                    <span class="input-group-addon">Wall # {{$index+1}}</span>
+                                    <input type="number" ng-model="wall.length" name="length" class="form-control" min="1" placeholder="Length (ft)"  ng-required="true">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="number" ng-model="wall.multiplier" name="multiplier" class="form-control" min="1" placeholder="Number of Similar Walls"  ng-required="true">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn-primary" ng-show="$index > 0" ng-click="removeWall($index)">Remove</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="row" style="margin:0 auto;padding:10px;padding-top:30px" ng-show="!results">
+                <button class="btn-primary" ng-click="addWall()">Add Wall</button>
+                <button class="btn-primary" ng-click="reset()">Reset</button>
+            </div>
+
+            <div class="row" ng-show="!results">
+                <button class="btn-primary" ng-click="estimateform.$valid && calculate()" style="float:right">Caculate Estimate</button>
+            </div>
+
+            <div class="panel panel-info" ng-show="results && walls.length != 0">
                 <div class="panel-heading" style="text-align:left; font-weight:bold">
                     Material Estimation
                 </div>
-                <div class="panel-body">
-                    <div class="alert alert-danger" style="text-align:center" ng-show="showerror">
-                        <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        <strong>Enter Valid Values.</strong>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="row form-group">
-                            <div class="col-md-12 input-group">
-                                <input type="number" class="form-control" ng-model="coveredarea" ng-min="1" placeholder="Enter Covered Area">
-                                <span class="input-group-addon">SQ. FT</span>
-                            </div>
 
-                        </div>
-                        <div class="row form-group">
-                            <div class="col-md-12 input-group">
-                                <input type="number" class="form-control" ng-model="height" ng-min="1" placeholder="Enter Structure Height">
-                                <span class="input-group-addon"> FT</span>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-md-9">
-                        <div class="row form-group" ng-repeat="wall in walls" ng-show="!results">
-                            <div class="col-md-6 input-group">
-                                <span class="input-group-addon">Wall # {{$index+1}}</span>
-                                <input type="number" ng-model="wall.length" class="form-control" ng-min="1" placeholder="Length (ft)">
-                            </div>
-                            <div class="col-md-4">
-                                <input type="number" ng-model="wall.multiplier" class="form-control" ng-min="1" placeholder="Number of Similar Walls">
-                            </div>
-                            <div class="col-md-2">
-                                <button class="btn-primary" ng-click="removeWall($index)">Remove</button>
-                            </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel-body">
+                            <table class="table table-hover table-bordered table-striped">
+                                <thead><tr class="active"><th colspan="3" style="font-weight:bold; text-align:center">Walls</th></tr></thead>
+                                <tr>
+                                    <td style="font-weight:bold">Bricks</td>
+                                    <td>{{NoOfBricks}} Brick(s)</td>
+                                    <td ng-show="cost">{{NoOfBricks * brickPrice}} Rs.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold">Cement</td>
+                                    <td>{{CementBags}} Bag(s) (50kg/Bag)</td>
+                                    <td ng-show="cost">{{CementBags * cementPrice}} Rs.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold">Sand</td>
+                                    <td>{{Sand}} cu.ft</td>
+                                    <td ng-show="cost">{{Sand * sandPrice}} Rs.</td>
+                                </tr>
+                            </table>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="row" style="margin:0 auto;padding:10px;padding-top:30px" ng-show="!results">
-            <button class="btn-primary" ng-click="addWall()">Add Wall</button>
-            <button class="btn-primary" ng-click="reset()">Reset</button>
-        </div>
+                    <div class="col-md-4">
+                        <div class="panel-body">
+                            <table class="table table-hover table-bordered table-striped">
+                                <thead><tr class="active"><th colspan="3" style="font-weight:bold; text-align:center">Roof</th></tr></thead>
+                                <tr>
+                                    <td style="font-weight:bold">Steel</td>
+                                    <td>{{steel}} kg</td>
+                                    <td ng-show="cost">{{steel * steelPrice}} Rs.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold">Cement</td>
+                                    <td>{{cementRoof}} Bag(s) (50kg/Bag)</td>
+                                    <td ng-show="cost">{{cementRoof * cementPrice}} Rs.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold">Sand</tdstyle="font-weight:bold">
+                                    <td>{{sandRoof}} cu.ft</td>
+                                    <td ng-show="cost">{{sandRoof * sandPrice}} Rs.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold">Gravel</td>
+                                    <td>{{gravelRoof}} cu.ft</td>
+                                    <td ng-show="cost">{{gravelRoof * gravelPrice}} Rs.</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
 
-        <div class="row" ng-show="!results">
-            <button class="btn-primary" ng-click="calculate()" style="float:right">Caculate Estimate</button>
-        </div>
-
-        <div class="panel panel-info" ng-show="results && walls.length != 0">
-            <div class="panel-heading" style="text-align:left; font-weight:bold">
-                Material Estimation
-            </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="panel-body">
-                        <table class="table table-hover table-bordered table-striped">
-                            <thead><tr class="active"><th colspan="3" style="font-weight:bold; text-align:center">Walls</th></tr></thead>
-                            <tr>
-                                <td style="font-weight:bold">Bricks</td>
-                                <td>{{NoOfBricks}} Brick(s)</td>
-                                <td ng-show="cost">{{NoOfBricks * brickPrice}} Rs.</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:bold">Cement</td>
-                                <td>{{CementBags}} Bag(s) (50kg/Bag)</td>
-                                <td ng-show="cost">{{CementBags * cementPrice}} Rs.</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:bold">Sand</td>
-                                <td>{{Sand}} cu.ft</td>
-                                <td ng-show="cost">{{Sand * sandPrice}} Rs.</td>
-                            </tr>
-                        </table>
+                    <div class="col-md-4">
+                        <div class="panel-body">
+                            <table class="table table-hover table-bordered table-striped">
+                                <thead><tr class="active"><th colspan="3" style="font-weight:bold; text-align:center">Floor</th></tr></thead>
+                                <tr>
+                                    <td style="font-weight:bold">Cement</td>
+                                    <td>{{cementFloor}} Bag(s) (50kg/Bag)</td>
+                                    <td ng-show="cost">{{cementFloor * cementPrice}} Rs.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold">Sand</td>
+                                    <td>{{sandFloor}} cu.ft</td>
+                                    <td ng-show="cost">{{sandFloor * sandPrice}} Rs.</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight:bold">Gravel</td>
+                                    <td>{{gravelFloor}} cu.ft</td>
+                                    <td ng-show="cost">{{gravelFloor * gravelPrice}} Rs.</td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-md-4">
-                    <div class="panel-body">
-                        <table class="table table-hover table-bordered table-striped">
-                            <thead><tr class="active"><th colspan="3" style="font-weight:bold; text-align:center">Roof</th></tr></thead>
-                            <tr>
-                                <td style="font-weight:bold">Steel</td>
-                                <td>{{steel}} kg</td>
-                                <td ng-show="cost">{{steel * steelPrice}} Rs.</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:bold">Cement</td>
-                                <td>{{cementRoof}} Bag(s) (50kg/Bag)</td>
-                                <td ng-show="cost">{{cementRoof * cementPrice}} Rs.</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:bold">Sand</tdstyle="font-weight:bold">
-                                <td>{{sandRoof}} cu.ft</td>
-                                <td ng-show="cost">{{sandRoof * sandPrice}} Rs.</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:bold">Gravel</td>
-                                <td>{{gravelRoof}} cu.ft</td>
-                                <td ng-show="cost">{{gravelRoof * gravelPrice}} Rs.</td>
-                            </tr>
-                        </table>
-                    </div>
+                <div style="padding:10px">
+                    <button class="btn-primary  btn-sm" ng-click="reset()">Caculate Again</button>
+                    <button class="btn-primary  btn-sm" ng-click="cost = true">Caculate Price</button>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="panel-body">
-                        <table class="table table-hover table-bordered table-striped">
-                            <thead><tr class="active"><th colspan="3" style="font-weight:bold; text-align:center">Floor</th></tr></thead>
-                            <tr>
-                                <td style="font-weight:bold">Cement</td>
-                                <td>{{cementFloor}} Bag(s) (50kg/Bag)</td>
-                                <td ng-show="cost">{{cementFloor * cementPrice}} Rs.</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:bold">Sand</td>
-                                <td>{{sandFloor}} cu.ft</td>
-                                <td ng-show="cost">{{sandFloor * sandPrice}} Rs.</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight:bold">Gravel</td>
-                                <td>{{gravelFloor}} cu.ft</td>
-                                <td ng-show="cost">{{gravelFloor * gravelPrice}} Rs.</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div style="padding:10px">
-                <button class="btn-primary  btn-sm" ng-click="reset()">Caculate Again</button>
-                <button class="btn-primary  btn-sm" ng-click="cost = true">Caculate Price</button>
             </div>
         </div>
-    </div>
-
+    </form>
 </section>

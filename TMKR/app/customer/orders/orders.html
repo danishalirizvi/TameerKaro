@@ -43,6 +43,7 @@
                                                     <th>&nbsp;</th>
                                                     <th>&nbsp;</th>
                                                     <th>Total</th>
+                                                    <th>&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody ng-repeat="order in ordersparent.Pending">
@@ -52,6 +53,7 @@
                                                     <th>&nbsp;</th>
                                                     <th>&nbsp;</th>
                                                     <td>{{order.SHPNG_ADRS}}</td>
+                                                    <th>&nbsp;</th>
                                                     <th>&nbsp;</th>
                                                     <td>{{order.Total}}</td>
                                                     <td style="width:60px"><button class="btn-danger" ng-click="cancelorder(order.CART_ID)" style="padding-top:3px;padding-bottom:3px;">Cancel</button></td>

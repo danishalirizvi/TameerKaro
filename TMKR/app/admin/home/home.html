@@ -1,7 +1,39 @@
-﻿<section>
-    <div class="container">
-        <div class="row">
-            <h1>Welcome to Admin Portal</h1>
+﻿<section id="main-container" class="main-container">
+
+    <div class="container" data-ng-init="onInit()">
+        <div class="panel panel-info">
+            <div class="panel-heading" style="text-align:left; font-weight:bold">
+                Welcome to Admin Portal
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-body">
+                        <div class='common-heading-style'>
+                            <h3>Messages</h3>
+                        </div>
+                        <table class="display dataTable" style="width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th style="width:20%;">Name</th>
+                                    <th style="width:20%;">Email</th>
+                                    <th style="width:60%;">Message</th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="message in messages">
+                                <tr role="row" class="odd">
+                                    <td style="width:20%;">{{message.Name}}</td>
+                                    <td class="sorting_1" style="width:20%;">{{message.Email}}</td>
+                                    <td style="width:60%;">{{message.Message}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+       
         </div>
     </div>
+
 </section>

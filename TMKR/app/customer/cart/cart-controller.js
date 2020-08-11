@@ -10,7 +10,7 @@
 
             if (navigator.cookieEnabled) {
                 if (angular.isObject(store.get('cart'))) {
-                    ngCart.$restore(store.get('cart'));                
+                    ngCart.$restore(store.get('cart'));
                 } else {
                     ngCart.initCart();
                 }
@@ -24,8 +24,26 @@
             function ($scope, ngCart, $state, productadvts, $window) {
 
                 $scope.ngCart = ngCart;
-                $scope.isLoadingCategories = true;
                 $scope.products = [];
+
+
+                $scope.search = function (item) {
+                    if ($scope.searchText === undefined) {
+                        return true;
+                    } else {
+                        var productType = item.Prod_Type.toLocaleLowerCase();
+                        var vendorName = item.VNDR_Name.toLocaleLowerCase();
+                        var city = item.City.toLocaleLowerCase();
+
+                        var searchText = $scope.searchText.toLocaleLowerCase();
+
+                        if (productType.indexOf(searchText) != -1 || vendorName.indexOf(searchText) != -1 || city.indexOf(searchText) != -1) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+
 
                 $scope.oninit = function () {
                     ngCart.initCart();
