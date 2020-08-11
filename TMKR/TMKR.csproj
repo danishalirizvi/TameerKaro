@@ -226,6 +226,7 @@
     <Content Include="app\vendor\profiledetail\profiledetail-controller.js" />
     <Content Include="app\vendor\profiledetail\profiledetails.html" />
     <Content Include="app\vendor\profile\error-alert.html" />
+    <Content Include="app\vendor\profile\passincorect-alert.html" />
     <Content Include="app\vendor\profile\profile-controller.js" />
     <Content Include="app\vendor\profile\profile.html" />
     <Content Include="app\vendor\profile\success-alert.html" />

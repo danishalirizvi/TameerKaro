@@ -67,7 +67,7 @@ namespace TMKR.DataAccess
         {
             using (Conn)
             {
-                string query = @"UPDATE Address SET Address = @Address, CITY = @CITY WHERE ID = @ID";
+                string query = @"UPDATE Address SET Address = @Address, CITY = @CITY WHERE USER_ID = @ID and Type = 'Customer'";
 
                 Conn.Execute(query, new { customerVm.Address, customerVm.CITY, customerVm.ID });
             }

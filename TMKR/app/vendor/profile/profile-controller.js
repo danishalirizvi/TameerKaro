@@ -34,7 +34,8 @@
                 })
                 .error(function (response) {
                     $scope.submitted = false;
-                    alert('Server not Responding. Try Again Later');
+                    $scope.passincorrectAlert();
+                    //alert('Server not Responding. Try Again Later');
                 });
             } else {
                 $scope.submitted = false;
@@ -44,6 +45,26 @@
             }
         };
 
+        $scope.passincorrectAlert = function () {
+            $modal.open({
+                templateUrl: 'app/vendor/profile/passincorect-alert.html',
+                controller: function ($scope, $modalInstance) {
+                    $scope.submit = function () {
+                        $log.log('Submiting user info.');
+                        $log.log($scope.selected);
+                        $modalInstance.dismiss('cancel');
+                    }
+                    $scope.cancel = function () {
+                        $modalInstance.dismiss('cancel');
+                    };
+                },
+                resolve: {
+                    //user: function () {
+                    //    return $scope.selected;
+                    //}
+                }
+            });
+        }
 
         $scope.showSuccessAlert = function () {
             $modal.open({
